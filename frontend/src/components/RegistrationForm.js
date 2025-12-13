@@ -142,18 +142,20 @@ const RegistrationForm = () => {
   const setBool = (field, e) => {
     formik.setFieldValue(field, e.target.value === "yes");
   };
- 
+
   return (
-    <form className="registrationForm" onSubmit={formik.handleSubmit}>
-      <h2>Clinical Trial Registration Form</h2>
- 
-      {/* TWO-PANE layout — aligned equally */}
-      <div className="formBody">
-        {/* LEFT PANE — Details + Passwords */}
-        <div className="pane leftPane">
+    <section className="registration">
+      <form className="registrationForm" onSubmit={formik.handleSubmit} noValidate>
+        <h2>Clinical Trial Registration Form</h2>
+
+        {/* TWO-PANE layout — aligned equally */}
+        <div className="formBody">
+          {/* LEFT PANE — Details + Passwords */}
+          <div className="pane leftPane">
           <div className="formRow">
-            <label>First Name</label>
+            <label htmlFor="firstName">First Name</label>
             <input
+              id="firstName"
               type="text"
               name="firstName"
               className="formInput"
@@ -164,10 +166,11 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.firstName}</span>
             )}
           </div>
- 
+
           <div className="formRow">
-            <label>Last Name</label>
+            <label htmlFor="lastName">Last Name</label>
             <input
+              id="lastName"
               type="text"
               name="lastName"
               className="formInput"
@@ -178,24 +181,27 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.lastName}</span>
             )}
           </div>
- 
+
           <div className="formRow">
-            <label>Email</label>
+            <label htmlFor="email">Email</label>
             <input
+              id="email"
               type="text"
               name="email"
               className="formInput"
               value={formik.values.email}
               onChange={formik.handleChange}
+              autoComplete="email"
             />
             {formik.errors.email && (
               <span className="error">{formik.errors.email}</span>
             )}
           </div>
- 
+
           <div className="formRow">
-            <label>Mobile Number</label>
+            <label htmlFor="mobile">Mobile Number</label>
             <input
+              id="mobile"
               type="text"
               name="mobile"
               className="formInput"
@@ -208,10 +214,11 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.mobile}</span>
             )}
           </div>
- 
+
           <div className="formRow">
-            <label>Date of Birth</label>
+            <label htmlFor="dateOfBirth">Date of Birth</label>
             <input
+              id="dateOfBirth"
               type="date"
               name="dateOfBirth"
               className="formInput"
@@ -222,21 +229,27 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.dateOfBirth}</span>
             )}
           </div>
- 
+
           {/* Passwords moved to LEFT (eye icons unchanged) */}
           <div className="formRow">
-            <label>Enter Password</label>
+            <label htmlFor="password">Enter Password</label>
             <div className="passwordField">
               <input
+                id="password"
                 type={showPassword ? "text" : "password"}
                 name="password"
                 className="formInput"
                 value={formik.values.password}
                 onChange={formik.handleChange}
+                autoComplete="new-password"
               />
               <span
                 className="eyeIcon"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setShowPassword(!showPassword)}
               >
                 👁
               </span>
@@ -245,20 +258,26 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.password}</span>
             )}
           </div>
- 
+
           <div className="formRow">
-            <label>Confirm Password</label>
+            <label htmlFor="confirmPassword">Confirm Password</label>
             <div className="passwordField">
               <input
+                id="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 className="formInput"
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
+                autoComplete="new-password"
               />
               <span
                 className="eyeIcon"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setShowConfirmPassword(!showConfirmPassword)}
               >
                 👁
               </span>
@@ -268,7 +287,7 @@ const RegistrationForm = () => {
             )}
           </div>
         </div>
- 
+
         {/* RIGHT PANE — Medical History + Acknowledgment at end */}
         <div className="pane rightPane">
           {/* Read-only instruction using <p> */}
@@ -278,11 +297,12 @@ const RegistrationForm = () => {
               Give response to the below ones whether you are having that issue or not...
             </p>
           </div>
- 
+
           {/* NEW Dropdown: Type of trial */}
           <div className="formRow">
-            <label>Type of trial</label>
+            <label htmlFor="trialType">Type of trial</label>
             <select
+              id="trialType"
               name="trialType"
               className="formInput"
               value={formik.values.trialType}
@@ -298,11 +318,12 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.trialType}</span>
             )}
           </div>
- 
+
           {/* REPLACED: Hypertension category (instead of Sugar level) */}
           <div className="formRow">
-            <label>Hypertension category</label>
+            <label htmlFor="hypertensionCategory">Hypertension category</label>
             <select
+              id="hypertensionCategory"
               name="hypertensionCategory"
               className="formInput"
               value={formik.values.hypertensionCategory}
@@ -318,11 +339,12 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.hypertensionCategory}</span>
             )}
           </div>
- 
+
           {/* Dropdown: BP category */}
           <div className="formRow">
-            <label>BP category</label>
+            <label htmlFor="bpCategory">BP category</label>
             <select
+              id="bpCategory"
               name="bpCategory"
               className="formInput"
               value={formik.values.bpCategory}
@@ -338,11 +360,12 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.bpCategory}</span>
             )}
           </div>
- 
+
           {/* Dropdown: Diabetes status */}
           <div className="formRow">
-            <label>Diabetes status</label>
+            <label htmlFor="diabetesStatus">Diabetes status</label>
             <select
+              id="diabetesStatus"
               name="diabetesStatus"
               className="formInput"
               value={formik.values.diabetesStatus}
@@ -358,7 +381,18 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.diabetesStatus}</span>
             )}
           </div>
- 
+
+          {/* (Optional) Acknowledgment at the end of right pane */}
+          {/* <div className="formRow acknowledgment acknowledgment-right">
+            <input
+              id="acknowledge"
+              type="checkbox"
+              name="acknowledge"
+              checked={formik.values.acknowledge}
+              onChange={formik.handleChange}
+            />
+            <label htmlFor="acknowledge">The above information is true</label>
+          </div> */}
           {/* Radio: Asthma */}
           <div className="formRow">
             <label>Asthma</label>
@@ -388,7 +422,7 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.hasAsthma}</span>
             )}
           </div>
- 
+
           {/* Radio: Chronic illnesses */}
           <div className="formRow">
             <label>Chronic illnesses</label>
@@ -418,7 +452,7 @@ const RegistrationForm = () => {
               <span className="error">{formik.errors.hasChronicIllnesses}</span>
             )}
           </div>
- 
+
           {/* Acknowledgment checkbox moved to RIGHT and placed at the end */}
           <div className="formRow acknowledgment acknowledgment-right">
             <input
@@ -435,7 +469,7 @@ const RegistrationForm = () => {
           )}
         </div>
       </div>
- 
+
       {/* Centered submit button */}
       <div className="submitRow">
         <button
@@ -447,7 +481,8 @@ const RegistrationForm = () => {
         </button>
       </div>
     </form>
-  );
+  </section>
+);
 };
- 
+
 export default RegistrationForm;
