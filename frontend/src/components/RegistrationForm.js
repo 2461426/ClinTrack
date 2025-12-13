@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useState } from "react";
-import "./RegistrationForm.css"
+import "../styles/RegistrationForm.css";
  
 /**
  * Controlled dropdown vocabularies (short, DB-friendly codes).
