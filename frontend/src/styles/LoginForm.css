@@ -1,0 +1,320 @@
+/*css for the login-form*/
+ 
+ 
+/* Layout */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: #eef2f7;
+  font-family: Arial, sans-serif;
+}
+ 
+/* Card */
+.login-form {
+  width: 100%;
+  max-width: 400px; /* responsive */
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+ 
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 24px;
+  color: #333;
+}
+ 
+/* Segmented control (User/Admin) */
+.segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 8px 0 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #cfcfcf;
+  background: #e6e6e6; /* grey backdrop */
+}
+ 
+.segmented .segment {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 12px 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+ 
+.segmented .segment.active {
+  background: #6f6f6f; /* active dark grey */
+  color: #fff;
+}
+ 
+.segmented .segment:not(.active):hover {
+  background: #d9d9d9;
+}
+ 
+/* Inputs */
+.form-control {
+  margin-bottom: 20px;
+}
+ 
+.form-control label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #444;
+}
+ 
+.form-control input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+}
+ 
+.form-control input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+  outline: none;
+}
+ 
+/* Actions row: Remember me & Forgot password */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0 18px;
+}
+ 
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  font-size: 14px;
+  user-select: none;
+}
+ 
+/* Links */
+.link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+ 
+.link:hover {
+  text-decoration: underline;
+}
+ 
+/* Primary submit button */
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+ 
+button[type="submit"]:hover {
+  background: #0056b3;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+ 
+button[type="submit"]:focus-visible {
+  outline: 2px solid #0056b3;
+}
+ 
+ 
+/* --- Error messages: align left --- */
+.error {
+  color: #d93025; /* accessible red */
+  font-size: 13px;
+  margin-top: 6px;
+  display: block;
+  text-align: left; /* ensure left alignment */
+}
+ 
+/* --- Segmented control for User/Admin --- */
+.segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 8px 0 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #cfcfcf;
+  background: #e6e6e6; /* neutral backdrop */
+}
+ 
+/* Base segment (inactive by default) */
+.segmented .segment {
+  appearance: none;
+  border: none;
+  background: #e6e6e6;      /* light grey for inactive */
+  color: #555;               /* dark text for inactive */
+  padding: 12px 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+ 
+/* Active segment: blue with white text */
+.segmented .segment.active {
+  background: #007bff; /* blue (same as login button) */
+  color: #fff;
+}
+ 
+/* Hover states */
+.segmented .segment:not(.active):hover {
+  background: #d9d9d9; /* slightly darker grey on hover */
+}
+.segmented .segment.active:hover {
+  background: #0069d9; /* slightly darker blue on hover */
+}
+ 
+/* --- Keep your existing form styles as-is (you already have these) --- */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: #eef2f7;
+  font-family: Arial, sans-serif;
+}
+ 
+.login-form {
+  width: 100%;
+  max-width: 400px; /* responsive */
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+ 
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 24px;
+  color: #333;
+}
+ 
+.form-control {
+  margin-bottom: 20px;
+}
+ 
+.form-control label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #444;
+}
+ 
+.form-control input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+}
+ 
+.form-control input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+  outline: none;
+}
+ 
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0 18px;
+}
+ 
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  font-size: 14px;
+  user-select: none;
+}
+ 
+.link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+ 
+.link:hover {
+  text-decoration: underline;
+}
+ 
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+ 
+button[type="submit"]:hover {
+  background: #0056b3;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+ 
+button[type="submit"]:focus-visible {
+  outline: 2px solid #0056b3;
+}
+ 
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+ 
+.muted {
+  color: #666;
+}
+ 
+/* Footer section */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+ 
+.muted {
+  color: #666;
+}
