@@ -1,0 +1,200 @@
+ 
+/* ========== Global / Base ========== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+ 
+.registration-html, .registration-body { margin: 0; padding: 0; }
+ 
+.registrationForm {
+  max-width: 1000px;
+  margin: 24px auto;
+  padding: 0 12px;
+  color: #111827; /* gray-900 */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  line-height: 1.4;
+}
+ 
+.registrationForm h2 {
+  margin: 0 0 16px 0;
+  font-weight: 600;
+  font-size: 22px;
+}
+ 
+/* ========== Two-Pane Layout (Equal Alignment) ========== */
+.formBody {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* equal columns */
+  gap: 24px;
+  align-items: start;
+}
+ 
+.pane {
+  background: #ffffff;
+  border: 1px solid #e5e7eb; /* gray-200 */
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  min-height: 100%;
+}
+ 
+/* Consistent row spacing and label formatting */
+.formRow {
+  margin-bottom: 14px;
+}
+.formRow:last-child { margin-bottom: 0; }
+ 
+.formRow label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151; /* gray-700 */
+  cursor: pointer;   /* prevent I-beam cursor on labels */
+  user-select: none; /* prevent selecting label text */
+}
+ 
+/* ========== Read-only description (Medical History) ========== */
+.readonlyText {
+  padding: 10px 12px;
+  background-color: #f9fafb;     /* light gray */
+  border: 1px solid #d1d5db;     /* gray border */
+  border-radius: 8px;
+  color: #6b7280;                /* muted text color */
+  font-size: 14px;
+  margin-top: 6px;
+ 
+  /* Prevent text selection and I-beam cursor */
+  user-select: none;
+  cursor: pointer;
+}
+ 
+/* ========== Prevent I-beam outside inputs/selects/textareas ========== */
+/* All static text inside the form should NOT show I-beam nor be selectable */
+.registrationForm :where(p, span, div, h1, h2, h3, h4, h5, h6) {
+  user-select: none;
+  cursor: pointer;
+}
+/* BUT keep interactive elements behaving normally */
+.registrationForm input[type="text"],
+.registrationForm input[type="date"],
+.registrationForm input[type="password"],
+.registrationForm select,
+.registrationForm textarea {
+  user-select: text;
+  cursor: text;
+}
+.registrationForm input[type="checkbox"],
+.registrationForm input[type="radio"],
+.registrationForm button,
+.registrationForm .eyeIcon {
+  cursor: pointer;
+  user-select: none;
+}
+ 
+/* ========== Inputs & Selects — equal widths ========== */
+.formInput {
+  width: 100%;
+  max-width: 480px;          /* cap so both sides look similar */
+  padding: 10px 12px;
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 8px;
+  background-color: #fafafa;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  font-size: 14px;
+}
+ 
+.formInput:focus {
+  border-color: #2563eb;     /* blue-600 */
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+ 
+/* ========== Password Field (keep eye icon) ========== */
+.passwordField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 480px; /* align with inputs */
+}
+.passwordField .formInput {
+  flex: 1;
+}
+.eyeIcon {
+  cursor: pointer;
+  user-select: none;
+  font-size: 18px;
+  line-height: 1;
+}
+ 
+/* ========== Radio Group ========== */
+.radioGroup {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.radioItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+ 
+/* ========== Acknowledgment (Right end) ========== */
+.acknowledgment {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.acknowledgment-right {
+  margin-top: 10px; /* ensure it's visually at the end of right pane */
+}
+ 
+/* ========== Error Text ========== */
+.error {
+  display: inline-block;
+  color: #b91c1c; /* red-700 */
+  font-size: 13px;
+  margin-top: 4px;
+ 
+  /* prevent I-beam on errors as well */
+  user-select: none;
+  cursor: default;
+}
+ 
+/* ========== Centered Submit Button ========== */
+.submitRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+.submit {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb; /* blue-600 */
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  transition: background-color 0.2s ease, transform 0.06s ease;
+}
+.submit:hover { background: #1e40af; /* blue-800 */ }
+.submit:active { transform: translateY(1px); }
+.submit:disabled { background: #93c5fd; /* blue-300 */ cursor: not-allowed; }
+ 
+/* ========== Responsive (Mobile) ========== */
+@media (max-width: 768px) {
+  .formBody {
+    grid-template-columns: 1fr; /* stack panes equally */
+    gap: 16px;
+  }
+  .formInput,
+  .passwordField {
+    max-width: 100%;
+  }
+}
+ 
+ 
