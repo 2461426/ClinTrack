@@ -105,7 +105,7 @@
 .registration .formInput {
   width: 100%;
   max-width: 480px;          /* cap so both sides look similar */
-  padding: 10px 12px;
+  padding: 10px 0px;
   border: 1px solid #d1d5db; /* gray-300 */
   border-radius: 8px;
   background-color: #fafafa;

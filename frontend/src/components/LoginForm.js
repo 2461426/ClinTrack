@@ -3,6 +3,17 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "../styles/LoginForm.css";
 
+// Use a runtime require to avoid test-time failures when `react-router-dom` is
+// not available (e.g., in minimal test environments). If it's not present,
+// we'll fall back to a plain anchor.
+let RouterLink = null;
+try {
+  const rr = require("react-router-dom");
+  RouterLink = rr && rr.Link ? rr.Link : null;
+} catch (e) {
+  RouterLink = null;
+}
+
 const LoginForm = () => {
   // Load remembered credentials (demo only; don't store passwords in production)
   const rememberedEmail = localStorage.getItem("remembered_email") || "";
@@ -143,13 +154,15 @@ const LoginForm = () => {
             {/* Footer */}
             <div className="footer-links">
               <span className="muted">Don’t have an account?</span>
-              <a
-                className="link"
-                href="/register"
-                onClick={(e) => e.preventDefault()}
-              >
-                Register here
-              </a>
+              {RouterLink ? (
+                <RouterLink className="link" to="/register">
+                  Register here
+                </RouterLink>
+              ) : (
+                <a className="link" href="/register">
+                  Register here
+                </a>
+              )}
             </div>
           </Form>
         )}
