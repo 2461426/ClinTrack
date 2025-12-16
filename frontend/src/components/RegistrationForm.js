@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import "../styles/RegistrationForm.css";
+import participantService from "../services/ParticipantService";
  
 /**
  * Controlled dropdown vocabularies (short, DB-friendly codes).
@@ -143,9 +144,22 @@ const RegistrationForm = () => {
     formik.setFieldValue(field, e.target.value === "yes");
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    participantService.postParticipant(formik.values)
+      .then((response) => {
+        alert("Registration successful!");
+        formik.resetForm();
+      })
+      .catch((error) => {
+        console.error("There was an error registering the participant!", error);
+        alert("Registration failed. Please try again.");
+      });
+  }
+
   return (
     <section className="registration">
-      <form className="registrationForm" onSubmit={formik.handleSubmit} noValidate>
+      <form className="registrationForm" onSubmit={handleFormSubmit} noValidate>
         <h2>Clinical Trial Registration Form</h2>
 
         {/* TWO-PANE layout — aligned equally */}

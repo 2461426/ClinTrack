@@ -1,0 +1,55 @@
+{
+  "participants": [
+    {
+      "id": "1",
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "email": "Alice Johnson",
+      "mobile": "1234567890",
+      "dateOfBirth": "1990-01-01",
+      "password": "alicepassword",
+      "confirmPassword": "alicepassword",
+      "trialType": "ONCOLOGY_THERAPY",
+      "hypertensionCategory": "STAGE_1",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "UNKNOWN",
+      "hasAsthma": false,
+      "hasChronicIIlnesses": true,
+      "acknowledgment": true
+    },
+    {
+      "id": "df99",
+      "firstName": "fgihib",
+      "lastName": "wefrgdhffd",
+      "email": "jhvdxafhj12@gmail.com",
+      "mobile": "3252326524",
+      "dateOfBirth": "2005-11-22",
+      "password": "Climax12#",
+      "confirmPassword": "Climax12#",
+      "trialType": "HYPERTENSION_TRIAL",
+      "hypertensionCategory": "ELEVATED",
+      "bpCategory": "STAGE_1",
+      "diabetesStatus": "TYPE_2",
+      "hasAsthma": false,
+      "hasChronicIllnesses": true,
+      "acknowledgment": true
+    },
+    {
+      "id": "c82e",
+      "firstName": "mathit",
+      "lastName": "csjdbvjs",
+      "email": "jhvdxafhj12@gmail.com",
+      "mobile": "3252326524",
+      "dateOfBirth": "2005-11-22",
+      "password": "HQ-.JBfv7yBqH4e",
+      "confirmPassword": "HQ-.JBfv7yBqH4e",
+      "trialType": "HYPERTENSION_TRIAL",
+      "hypertensionCategory": "STAGE_1",
+      "bpCategory": "STAGE_1",
+      "diabetesStatus": "GESTATIONAL",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true
+    }
+  ]
+}
