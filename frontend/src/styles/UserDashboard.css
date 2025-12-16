@@ -1,0 +1,182 @@
+
+/* ===========
+   Page Layout
+   =========== */
+.dashboard-page {
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* Space for content sections */
+.container {
+  max-width: 1100px;
+}
+
+/* =====================
+   Navbar & Active Links
+   ===================== */
+.navbar .navbar-brand {
+  letter-spacing: 0.2px;
+}
+
+.navbar .nav-link {
+  color: #495057;
+}
+
+.navbar .nav-link.active,
+.navbar .nav-link:hover {
+  color: #0d6efd !important; /* Bootstrap primary */
+  font-weight: 600;
+}
+
+/* Compact navbar on small screens */
+@media (max-width: 576px) {
+  .navbar .navbar-brand {
+    font-size: 1rem;
+  }
+}
+
+/* ============
+   User Avatar
+   ============ */
+.user-menu {
+  margin-left: auto;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  font-weight: 700;
+  background: #e9ecef;      /* light gray */
+  border: 1px solid #dee2e6; /* border to match Bootstrap inputs */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #495057;
+}
+
+/* Make React-controlled dropdown visible without Bootstrap JS */
+.dropdown-menu.show {
+  display: block;
+}
+
+/* Ensure dropdown aligns to the right */
+.user-menu .dropdown-menu {
+  min-width: 180px;
+}
+
+/* Divider spacing */
+.dropdown-divider {
+  margin: 4px 0;
+}
+
+/* =================
+   Trial Card Styles
+   ================= */
+.trial-card {
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+.trial-card .card-body {
+  background: #f6f7f9; /* soft gray panel */
+  border-radius: 12px;
+}
+
+/* Card title spacing */
+.trial-card .card-title {
+  font-size: 0.95rem;
+}
+
+/* Badge sizes */
+.trial-card .badge {
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+/* Buttons within card */
+.trial-card .btn {
+  border-radius: 8px;
+}
+
+/* Grid spacing for lists */
+.row.g-3 > [class*="col-"] {
+  display: flex;
+}
+.trial-card {
+  width: 100%;
+}
+
+/* ========================
+   Formik Error Text Styles
+   ======================== */
+.error {
+  color: #d93025; /* accessible red */
+  font-size: 13px;
+  margin-top: 6px;
+  text-align: left; /* keep aligned with inputs */
+}
+
+/* ===========================
+   Custom Modal (no BS JS used)
+   =========================== */
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: grid;
+  place-items: center;
+  z-index: 1050;
+}
+
+/* Modal container */
+.modal-dialog {
+  max-width: 640px;
+  width: calc(100% - 24px);
+}
+
+/* Modal card */
+.modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+}
+
+/* Modal header/footer */
+.modal-header {
+  background: #f8f9fa;
+}
+.modal-footer {
+  background: #f8f9fa;
+}
+
+/* Inputs inside modal */
+.modal-body .form-label {
+  font-weight: 600;
+}
+
+/* ====================
+   Utility / Minor Tweaks
+   ==================== */
+.text-muted {
+  color: #6c757d !important;
+}
+
+.alert-info {
+  border-radius: 10px;
+}
+
+/* Improve button focus visibility */
+.btn:focus-visible {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+/* Smooth transitions */
+.nav-link,
+.btn,
+.user-avatar {
+  transition: all 0.2s ease;
+}
+

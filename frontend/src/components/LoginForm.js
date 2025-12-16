@@ -47,11 +47,16 @@ const LoginForm = () => {
     } else {
       localStorage.removeItem("remembered_email");
       localStorage.removeItem("remembered_password");
+      
     }
 
     alert(`Login successful as ${role === "admin" ? "Admin" : "User"}!`);
-    // Example redirect:
-    // window.location.href = role === "admin" ? "/admin/dashboard" : "/dashboard";
+    // Redirect to dashboard after user dismisses the alert
+    if (role === "admin") {
+      window.location.href = "/admin/dashboard";
+    } else {
+      window.location.href = "/dashboard";
+    }
   };
 
   return (
