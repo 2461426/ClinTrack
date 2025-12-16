@@ -1,0 +1,23 @@
+{
+  "participantData": [
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "sample1@gamil.com",
+    "age": 30,
+    "gender": "Male",
+    "medicalHistory": ["Diabetes", "Hypertension"],
+    "profilePicture": "https://randomuser.me/api/portraits/men/1.jpg"
+    },
+    {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "sample@gmail.com",
+    "age": 28,
+    "gender": "Female",
+    "medicalHistory": ["Asthma"],
+    "profilePicture": "https://randomuser.me/api/portraits/women/2.jpg"
+    }
+]
+}
+
