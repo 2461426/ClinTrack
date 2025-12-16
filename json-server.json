@@ -1,0 +1,11 @@
+{
+  "port": 5000,
+  "routes": {
+    "/api/trails": "/trailDetails",
+    "/api/trails/:id": "/trailDetails/:id",
+    "/api/participants": "/participantData",
+    "/api/participants/:id": "/participantData/:id",
+    "/api/pharma": "/pharmaDetails",
+    "/api/pharma/:id": "/pharmaDetails/:id"
+  }
+}

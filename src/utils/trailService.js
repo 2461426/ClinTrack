@@ -1,6 +1,6 @@
 // Trail Service for handling trail data operations with backend API
 
-const API_URL = 'http://localhost:5000/api/trails';
+const API_URL = 'http://localhost:5000/trailDetails';
 
 // API functions to interact with backend
 export const createTrailAPI = async (newTrail) => {
@@ -10,7 +10,13 @@ export const createTrailAPI = async (newTrail) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTrail)
     });
-    return await response.json();
+    
+    if (response.ok) {
+      const data = await response.json();
+      return { success: true, trail: data };
+    } else {
+      return { success: false, error: 'Failed to create trail' };
+    }
   } catch (error) {
     console.error('Error creating trail:', error);
     return { success: false, error: error.message };
@@ -21,7 +27,8 @@ export const getTrailsAPI = async () => {
   try {
     const response = await fetch(API_URL);
     const data = await response.json();
-    return data.trailDetails;
+    // json-server returns the array directly, not wrapped in trailDetails
+    return data;
   } catch (error) {
     console.error('Error fetching trails:', error);
     return null;

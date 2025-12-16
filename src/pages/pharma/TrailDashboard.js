@@ -1,13 +1,50 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import trailDetailsData from '../../data/trailDetails.json'
 import settings from '../../assets/icons/settingsIcon.png'
 import phaseIcon from '../../assets/icons/phaseIcon.png'
 
 function TrailDashboard() {
   const { trailId } = useParams();
   const navigate = useNavigate();
-  const trail = trailDetailsData.trailDetails.find(t => t.trailId === parseInt(trailId));
+  const [trail, setTrail] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch trail details from API using query parameter
+    const fetchTrail = async () => {
+      try {
+        // Fetch all trails and filter by trailId since json-server uses 'id' field for direct lookup
+        const response = await fetch(`http://localhost:5000/trailDetails?trailId=${trailId}`);
+        if (response.ok) {
+          const data = await response.json();
+          // json-server returns an array when querying with parameters
+          if (data && data.length > 0) {
+            setTrail(data[0]);
+          } else {
+            setTrail(null);
+          }
+        } else {
+          setTrail(null);
+        }
+      } catch (error) {
+        console.error('Error fetching trail:', error);
+        setTrail(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTrail();
+  }, [trailId]);
+
+  if (loading) {
+    return (
+      <div className='flex items-center justify-center h-screen'>
+        <div className='text-center'>
+          <h1 className='text-2xl font-bold text-gray-500'>Loading...</h1>
+        </div>
+      </div>
+    );
+  }
 
   if (!trail) {
     return (

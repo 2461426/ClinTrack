@@ -1,93 +1,28 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const cors = require('cors');
+// This file is deprecated. Please use services.js instead.
+// Run: node services.js to start the JSON Server
 
-const app = express();
+const jsonServer = require('json-server');
+const path = require('path');
+
+const server = jsonServer.create();
+const router = jsonServer.router(path.join(__dirname, 'data.json'));
+const middlewares = jsonServer.defaults();
+
 const PORT = 5000;
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+server.use(middlewares);
 
-// Path to the JSON file
-const trailDetailsPath = path.join(__dirname, 'src', 'data', 'trailDetails.json');
+server.use(jsonServer.rewriter({
+  '/api/trails': '/trailDetails',
+  '/api/trails/:id': '/trailDetails/:id',
+  '/api/participants': '/participantData',
+  '/api/participants/:id': '/participantData/:id',
+  '/api/pharma': '/pharmaDetails',
+  '/api/pharma/:id': '/pharmaDetails/:id'
+}));
 
-// Get all trails
-app.get('/api/trails', (req, res) => {
-  try {
-    const data = fs.readFileSync(trailDetailsPath, 'utf8');
-    const trails = JSON.parse(data);
-    res.json(trails);
-  } catch (error) {
-    console.error('Error reading trails:', error);
-    res.status(500).json({ error: 'Failed to read trails' });
-  }
-});
+server.use(router);
 
-// Create a new trail
-app.post('/api/trails', (req, res) => {
-  try {
-    // Read existing data
-    const data = fs.readFileSync(trailDetailsPath, 'utf8');
-    const trails = JSON.parse(data);
-    
-    // Add new trail
-    const newTrail = req.body;
-    trails.trailDetails.push(newTrail);
-    
-    // Write back to file
-    fs.writeFileSync(trailDetailsPath, JSON.stringify(trails, null, 2), 'utf8');
-    
-    console.log('New trail added:', newTrail);
-    res.json({ success: true, trail: newTrail });
-  } catch (error) {
-    console.error('Error creating trail:', error);
-    res.status(500).json({ error: 'Failed to create trail' });
-  }
-});
-
-// Update a trail
-app.put('/api/trails/:id', (req, res) => {
-  try {
-    const trailId = parseInt(req.params.id);
-    const updates = req.body;
-    
-    const data = fs.readFileSync(trailDetailsPath, 'utf8');
-    const trails = JSON.parse(data);
-    
-    const index = trails.trailDetails.findIndex(t => t.trailId === trailId);
-    if (index !== -1) {
-      trails.trailDetails[index] = { ...trails.trailDetails[index], ...updates };
-      fs.writeFileSync(trailDetailsPath, JSON.stringify(trails, null, 2), 'utf8');
-      res.json({ success: true, trail: trails.trailDetails[index] });
-    } else {
-      res.status(404).json({ error: 'Trail not found' });
-    }
-  } catch (error) {
-    console.error('Error updating trail:', error);
-    res.status(500).json({ error: 'Failed to update trail' });
-  }
-});
-
-// Delete a trail
-app.delete('/api/trails/:id', (req, res) => {
-  try {
-    const trailId = parseInt(req.params.id);
-    
-    const data = fs.readFileSync(trailDetailsPath, 'utf8');
-    const trails = JSON.parse(data);
-    
-    trails.trailDetails = trails.trailDetails.filter(t => t.trailId !== trailId);
-    fs.writeFileSync(trailDetailsPath, JSON.stringify(trails, null, 2), 'utf8');
-    
-    res.json({ success: true });
-  } catch (error) {
-    console.error('Error deleting trail:', error);
-    res.status(500).json({ error: 'Failed to delete trail' });
-  }
-});
-
-app.listen(PORT, () => {
-  console.log(`Backend server running on http://localhost:${PORT}`);
+server.listen(PORT, () => {
+  console.log(`JSON Server is running on http://localhost:${PORT}`);
 });

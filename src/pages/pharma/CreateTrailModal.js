@@ -1,18 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Lottie from 'lottie-react';
+import editText from '../../assets/icons/editText.png';
+import closeIcon from '../../assets/icons/close.png';
+import thumbsUpAnimation from '../../assets/animations/ThumbsUp.json';
 
 function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
   const [currentStep, setCurrentStep] = useState(1);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     category: '',
     phase: 1,
-    participantsRequired: '',
+    participantsRequired: '100',
     image: ''
   });
-  
+
   const carouselRef = useRef(null);
-  
+
   // Add style to hide scrollbar for webkit browsers
   useEffect(() => {
     if (carouselRef.current) {
@@ -26,7 +31,7 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
       return () => document.head.removeChild(style);
     }
   }, []);
-  
+
   const categories = [
     'Cancer',
     'Diabetes',
@@ -59,7 +64,26 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    // Prevent form submission
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
+    // Validate step 1 fields before proceeding
+    if (!formData.title.trim()) {
+      alert('Please enter a trail title');
+      return;
+    }
+    if (!formData.description.trim()) {
+      alert('Please enter a trail description');
+      return;
+    }
+    if (!formData.category) {
+      alert('Please select a category');
+      return;
+    }
     setCurrentStep(2);
   };
 
@@ -69,11 +93,11 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Generate new trail ID based on timestamp to ensure uniqueness
     const newTrailId = Date.now();
-    
-    // Create new trail object
+
+    // Create new trail object (don't include 'id' - json-server will auto-generate it)
     const newTrail = {
       trailId: newTrailId,
       pharmaId: Number(pharmaId),
@@ -92,61 +116,65 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
       positiveImpacts: [0, 0, 0],
       participantsId: [],
       phaseDates: { '1': '', '2': '', '3': '', '4': '' },
-      image: formData.image || 'https://img.freepik.com/free-photo/scientist-using-microscope-medical-research_23-2149084779.jpg'
+      image: formData.image || ''
     };
-    
+
     // Call the parent callback to handle saving
     if (onTrailCreated) {
-      onTrailCreated(newTrail);
+      await onTrailCreated(newTrail);
     }
-    
-    // Reset form and close modal
-    setFormData({
-      title: '',
-      description: '',
-      category: '',
-      phase: 1,
-      participantsRequired: '',
-      image: ''
-    });
-    setCurrentStep(1);
-    onClose();
+
+    // Show success animation
+    setShowSuccess(true);
+
+    // Auto-close modal after animation plays (2 seconds)
+    setTimeout(() => {
+      setShowSuccess(false);
+      setFormData({
+        title: '',
+        description: '',
+        category: '',
+        phase: 1,
+        participantsRequired: '',
+        image: ''
+      });
+      setCurrentStep(1);
+      onClose();
+    }, 2000);
   };
 
   if (!isOpen) return null;
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
-      <div className='bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto'>
+      <div className='bg-white rounded-[25px] shadow-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto'>
+        {/* Success Animation */}
+        {showSuccess ? (
+          <div className='flex flex-col items-center justify-center py-20 px-6'>
+            <Lottie 
+              animationData={thumbsUpAnimation} 
+              loop={false}
+              style={{ width: 300, height: 300 }}
+            />
+            <h3 className='text-2xl font-bold text-indigo-600 mt-4'>Trail Created Successfully!</h3>
+          </div>
+        ) : (
+          <>
         {/* Header */}
-        <div className='border-b border-gray-200 p-6 flex justify-between items-center'>
-          <h2 className='text-2xl font-bold text-gray-800'>Create New Trail</h2>
+        <div className='p-6 flex justify-between items-center'>
+          <div className=' flex flex-col items-start '>
+            <h2 className='text-2xl font-light text-gray-800'>Create</h2>
+            <h2 className='text-3xl font-bold text-indigo-600'>New Trail!..</h2>
+          </div>
           <button
             onClick={onClose}
-            className='text-gray-400 hover:text-gray-600 text-2xl font-bold'
+            className='hover:bg-gray-200 rounded-full p-2'
           >
-            ×
+           <img src={closeIcon} alt="close" className=' w-4 h-4 ' /> 
           </button>
         </div>
 
-        {/* Progress Indicator */}
-        <div className='px-6 pt-4 pb-2'>
-          <div className='flex justify-between items-center max-w-md mx-auto'>
-            <div className={`flex items-center ${currentStep >= 1 ? 'text-indigo-500' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 1 ? 'bg-indigo-500 text-white' : 'bg-gray-200'}`}>
-                1
-              </div>
-              <span className='ml-2 text-sm font-medium'>Basic Info</span>
-            </div>
-            <div className={`flex-1 h-1 mx-4 ${currentStep >= 2 ? 'bg-indigo-500' : 'bg-gray-200'}`}></div>
-            <div className={`flex items-center ${currentStep >= 2 ? 'text-indigo-500' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 2 ? 'bg-indigo-500 text-white' : 'bg-gray-200'}`}>
-                2
-              </div>
-              <span className='ml-2 text-sm font-medium'>Details</span>
-            </div>
-          </div>
-        </div>
+
 
         {/* Form Content */}
         <form onSubmit={handleSubmit} className='p-6'>
@@ -194,11 +222,10 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                   {categories.map((cat) => (
                     <label
                       key={cat}
-                      className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all ${
-                        formData.category === cat
+                      className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all ${formData.category === cat
                           ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
                           : 'border-gray-300 hover:border-indigo-300 hover:bg-gray-50'
-                      }`}
+                        }`}
                     >
                       <input
                         type='radio'
@@ -234,11 +261,11 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
 
           {/* Step 2: Details */}
           {currentStep === 2 && (
-            <div className='space-y-6'>
-              <div className='grid grid-cols-2 gap-6'>
+            <div className='w-auto flex justify-between'>
+              <div className='w-full flex justify-between items-center px-12'>
                 {/* Participants Required - Left */}
-                <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>
+                <div className=' flex flex-col items-end '>
+                  <label className=' text-md font-medium '>
                     Participants Required
                   </label>
                   <input
@@ -248,20 +275,22 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                     onChange={handleInputChange}
                     required
                     min='1'
-                    className='w-full px-4 py-2 rounded-lg text-indigo-500 text-6xl font-black'
-                    placeholder='Enter number'
+                    className='w-48 text-right  px-0 py-0 rounded-lg text-indigo-500 text-6xl font-black focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
                   />
+                  <img src={editText} alt='edit' className='h-5 w-5 cursor-pointer' />
                 </div>
 
+                <div className='h-[250px] w-0.5 bg-gray-200 mx-4 flex-none'></div>
+
                 {/* No of Phases - Right */}
-                <div className=' flex flex-col items-center '>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>
-                    No of Phases 
+                <div className=' flex flex-col bg-gray-100 p-4 rounded-lg items-center mr-8'>
+                  <label className='block border-b border-gray-300 text-lg font-medium pb-1 mb-3'>
+                    No of Phases
                   </label>
                   <div className='flex flex-col items-center'>
                     <div
                       ref={carouselRef}
-                      className='h-[180px] w-full rounded-lg overflow-y-scroll scroll-smooth hide-scrollbar'
+                      className='h-[180px] w-32 rounded-lg overflow-y-scroll scroll-smooth hide-scrollbar'
                       style={{
                         scrollbarWidth: 'none',
                         msOverflowStyle: 'none'
@@ -285,13 +314,12 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                                 handlePhaseChange(phaseNum);
                                 scrollToPhase(phaseNum);
                               }}
-                              className={`h-[60px] flex items-center justify-center cursor-pointer transition-all ${
-                                formData.phase === phaseNum
+                              className={`h-[60px] flex items-center justify-center text-center cursor-pointer transition-all ${formData.phase === phaseNum
                                   ? 'text-6xl font-black text-indigo-600'
-                                  : 'text-lg text-gray-400 hover:text-gray-600'
-                              }`}
+                                  : 'text-2xl text-gray-400 hover:text-gray-600'
+                                }`}
                             >
-                            {phaseNum}
+                              {phaseNum}
                             </div>
                           );
                         })}
@@ -304,11 +332,11 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
           )}
 
           {/* Navigation Buttons */}
-          <div className='flex justify-between mt-6 pt-4 border-t border-gray-200'>
+          <div className='flex justify-between mt-12 pt-4  border-gray-200'>
             <button
               type='button'
               onClick={currentStep === 1 ? onClose : handlePrevious}
-              className='px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium'
+              className='px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 font-medium'
             >
               {currentStep === 1 ? 'Cancel' : 'Previous'}
             </button>
@@ -316,20 +344,22 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
               <button
                 type='button'
                 onClick={handleNext}
-                className='px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 font-medium'
+                className='px-6 py-2 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 font-medium'
               >
                 Next
               </button>
             ) : (
               <button
                 type='submit'
-                className='px-6 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 font-medium'
+                className='px-6 py-2 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 font-medium'
               >
                 Create Trail
               </button>
             )}
           </div>
         </form>
+        </>
+        )}
       </div>
     </div>
   );
