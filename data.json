@@ -50,6 +50,23 @@
       "hasAsthma": false,
       "hasChronicIllnesses": false,
       "acknowledgment": true
+    },
+    {
+      "id": "069e",
+      "firstName": "m",
+      "lastName": "a",
+      "email": "a@gmail.com",
+      "mobile": "6666666666",
+      "dateOfBirth": "2002-02-15",
+      "password": "M@131914",
+      "confirmPassword": "M@131914",
+      "trialType": "COVID_19_VACCINE",
+      "hypertensionCategory": "NORMAL",
+      "bpCategory": "NORMAL",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true
     }
   ]
 }

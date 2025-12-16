@@ -123,6 +123,21 @@ const LoginForm = () => {
   };
 
   return (
+    <>
+    <div className="clintrack-page">
+<header className="clintrack-page__header">
+  <nav className="navbar clintrack-page__navbar">
+    <div className="container d-flex align-items-center justify-content-center">
+      {/* Centered Title (same as ClinTrackPage) */}
+      <h1
+        className="clintrack-page__title text-center m-0"
+        aria-label="Clinical Trial Management and Compliance Management System"
+      >
+        Clinical Trial Management and Compliance Management System
+      </h1>
+    </div>
+   </nav>
+   </header>
     <section className="login">
       <Formik
         initialValues={{
@@ -170,7 +185,7 @@ const LoginForm = () => {
                 name="email"
                 type="email"
                 placeholder="Enter your email"
-                autoComplete="email"
+                autoComplete="off"
               />
               <ErrorMessage name="email" component="span" className="error" id="email-error" />
             </div>
@@ -183,7 +198,7 @@ const LoginForm = () => {
                 name="password"
                 type="password"
                 placeholder="Enter your password"
-                autoComplete="current-password"
+                autoComplete="off"
               />
               <ErrorMessage name="password" component="span" className="error" id="password-error" />
             </div>
@@ -233,6 +248,8 @@ const LoginForm = () => {
         )}
       </Formik>
     </section>
+    </div>
+    </>
   );
 };
 

@@ -8,12 +8,12 @@ import participantService from "../services/ParticipantService";
  */
 const HYPERTENSION_CATEGORIES = [
   { value: "", label: "-- Select hypertension category --" },
-  { value: "NORMAL", label: "Normal (<120 and <80)" },
-  { value: "ELEVATED", label: "Elevated (120–129 and <80)" },
-  { value: "STAGE_1", label: "Stage 1 (130–139 or 80–89)" },
-  { value: "STAGE_2", label: "Stage 2 (≥140 or ≥90)" },
-  { value: "CRISIS", label: "Hypertensive Crisis (≥180 and/or ≥120)" },
-  { value: "UNKNOWN", label: "Unknown / Not measured" },
+  { value: "NORMAL", label: "Normal weight" },
+  { value: "Overweight", label: "Overweight" },
+  { value: "Obesity1", label: "Obesity class 1" },
+  { value: "Obesity2", label: "Obesity class 2" },
+  { value: "Obesity3", label: "Obesity class 3" },
+ 
 ];
  
 const DIABETES_STATUS = [
@@ -158,6 +158,23 @@ const RegistrationForm = () => {
   }
 
   return (
+   <>
+{/* === ClinTrack Navbar (same as ClinTrackPage) === */}
+<div className="clintrack-page">
+<header className="clintrack-page__header">
+  <nav className="navbar clintrack-page__navbar">
+    <div className="container d-flex align-items-center justify-content-center">
+      {/* Centered Title (same as ClinTrackPage) */}
+      <h1
+        className="clintrack-page__title text-center m-0"
+        aria-label="Clinical Trial Management and Compliance Management System"
+      >
+        Clinical Trial Management and Compliance Management System
+      </h1>
+    </div>
+   </nav>
+   </header>
+  
     <section className="registration">
       <form className="registrationForm" onSubmit={handleFormSubmit} noValidate>
         <h2>Clinical Trial Registration Form</h2>
@@ -335,7 +352,7 @@ const RegistrationForm = () => {
 
           {/* REPLACED: Hypertension category (instead of Sugar level) */}
           <div className="formRow">
-            <label htmlFor="hypertensionCategory">Hypertension category</label>
+            <label htmlFor="hypertensionCategory">Obesity Classification</label>
             <select
               id="hypertensionCategory"
               name="hypertensionCategory"
@@ -485,17 +502,30 @@ const RegistrationForm = () => {
       </div>
 
       {/* Centered submit button */}
-      <div className="submitRow">
-        <button
-          type="submit"
-          className="submit"
-          disabled={!formik.values.acknowledgment}
-        >
-          Register
-        </button>
-      </div>
+     
+{/* Actions row: Back (left) + Register (right) */}
+<div className="actions-row">
+  <button
+    type="button"
+    className="btn-back"
+    onClick={() => window.location.assign("/")}
+    aria-label="Go back to ClinTrack main page"
+  >
+    ← Back
+  </button>
+
+  <button
+    type="submit"
+    className="submit"
+       disabled={!formik.values.acknowledgment}
+  >
+    Register
+  </button>
+</div>
     </form>
   </section>
+   </div>
+  </>
 );
 };
 

@@ -2,10 +2,6 @@
 import React from "react";
 import "../styles/ClinTrackPage.css";
 
-// Prefer client-side navigation when react-router-dom is available; avoid
-// importing hooks conditionally to satisfy the Rules of Hooks. We will
-// conditionally use the `Link` component where available and fall back to
-// window.location for plain navigation.
 let RouterLink = null;
 try {
   const rr = require("react-router-dom");
