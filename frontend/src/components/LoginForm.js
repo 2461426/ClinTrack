@@ -3,15 +3,58 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "../styles/LoginForm.css";
 
-// Use a runtime require to avoid test-time failures when `react-router-dom` is
-// not available (e.g., in minimal test environments). If it's not present,
-// we'll fall back to a plain anchor.
+// Runtime fallback for react-router-dom (matches your pattern)
 let RouterLink = null;
+// name intentionally does NOT start with `use` so ESLint won't treat this as
+// a React Hook (which must be called unconditionally).
+let navigateHookFactory = null;
 try {
   const rr = require("react-router-dom");
   RouterLink = rr && rr.Link ? rr.Link : null;
+  navigateHookFactory = rr && rr.useNavigate ? rr.useNavigate : null;
 } catch (e) {
   RouterLink = null;
+  navigateHookFactory = null;
+}
+
+// Runtime load for ParticipantService (optional; falls back to fetching /data.json)
+let ParticipantService = null;
+try {
+  const svc = require("../services/ParticipantService");
+  ParticipantService = svc?.default ?? svc;
+} catch (e) {
+  ParticipantService = null;
+}
+
+// Fallback: read /data.json directly if service is not available
+async function fetchParticipantsFallback() {
+  try {
+    const res = await fetch("/data.json", { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    // Expecting shape { participants: [...] } or plain array
+    return Array.isArray(data) ? data : (data.participants || []);
+  } catch (err) {
+    console.error("Failed to fetch participants:", err);
+    return [];
+  }
+}
+
+async function findByEmailAndPassword(email, password) {
+  // First try service
+  if (ParticipantService && ParticipantService.findByEmailAndPassword) {
+    return await ParticipantService.findByEmailAndPassword(email, password);
+  }
+  // Fallback to fetching data.json and filtering
+  const participants = await fetchParticipantsFallback();
+  const normalizedEmail = (email || "").trim().toLowerCase();
+  return (
+    participants.find(
+      (p) =>
+        (p.email || "").trim().toLowerCase() === normalizedEmail &&
+        (p.password || "") === password
+    ) || null
+  );
 }
 
 const LoginForm = () => {
@@ -21,7 +64,7 @@ const LoginForm = () => {
   const rememberedRole = localStorage.getItem("remembered_role") || "user";
   const rememberedRemember = localStorage.getItem("remember_me") === "true";
 
-  // Manual validation function
+  // Manual validation (frontend field shape only)
   const validate = (values) => {
     const errors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,10 +78,24 @@ const LoginForm = () => {
     return errors;
   };
 
-  const handleSubmit = (values) => {
+  const navigate = navigateHookFactory ? navigateHookFactory() : null;
+
+  const handleSubmit = async (values, { setSubmitting, setStatus }) => {
+    setSubmitting(true);
+    setStatus(undefined);
+
     const { email, password, role, rememberMe } = values;
 
-    // Persist credentials if rememberMe is checked
+    // Check credentials strictly against data.json / ParticipantService
+    const matchedUser = await findByEmailAndPassword(email, password);
+
+    if (!matchedUser) {
+      setSubmitting(false);
+      setStatus("Invalid email or password. Please use the credentials you registered with.");
+      return; // ❌ Block login
+    }
+
+    // ✅ Credentials valid: persist "remember me" info (demo only)
     localStorage.setItem("remember_me", rememberMe ? "true" : "false");
     localStorage.setItem("remembered_role", role);
     if (rememberMe) {
@@ -47,16 +104,22 @@ const LoginForm = () => {
     } else {
       localStorage.removeItem("remembered_email");
       localStorage.removeItem("remembered_password");
-      
     }
 
-    alert(`Login successful as ${role === "admin" ? "Admin" : "User"}!`);
-    // Redirect to dashboard after user dismisses the alert
+    // Optionally store the logged in user context/token (demo)
+    localStorage.setItem("auth_token", "demo_token");
+    localStorage.setItem("logged_in_user", JSON.stringify(matchedUser));
+
+    // Redirect to dashboard (user/admin)
     if (role === "admin") {
-      window.location.href = "/admin/dashboard";
+      if (navigate) navigate("/admin/dashboard");
+      else window.location.href = "/admin/dashboard";
     } else {
-      window.location.href = "/dashboard";
+      if (navigate) navigate("/dashboard");
+      else window.location.href = "/dashboard";
     }
+
+    setSubmitting(false);
   };
 
   return (
@@ -71,7 +134,7 @@ const LoginForm = () => {
         validate={validate}
         onSubmit={handleSubmit}
       >
-        {({ values, setFieldValue }) => (
+        {({ values, setFieldValue, isSubmitting, status }) => (
           <Form className="login-form" noValidate>
             <h2>Login</h2>
 
@@ -109,12 +172,7 @@ const LoginForm = () => {
                 placeholder="Enter your email"
                 autoComplete="email"
               />
-              <ErrorMessage
-                name="email"
-                component="span"
-                className="error"
-                id="email-error"
-              />
+              <ErrorMessage name="email" component="span" className="error" id="email-error" />
             </div>
 
             {/* Password */}
@@ -127,12 +185,7 @@ const LoginForm = () => {
                 placeholder="Enter your password"
                 autoComplete="current-password"
               />
-              <ErrorMessage
-                name="password"
-                component="span"
-                className="error"
-                id="password-error"
-              />
+              <ErrorMessage name="password" component="span" className="error" id="password-error" />
             </div>
 
             {/* Actions: Remember & Forgot */}
@@ -152,9 +205,16 @@ const LoginForm = () => {
             </div>
 
             {/* Submit (text reflects role) */}
-            <button className="primary" type="submit">
-              {values.role === "admin" ? "Login as Admin" : "Login as User"}
+            <button className="primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting
+                ? "Checking…"
+                : values.role === "admin"
+                ? "Login as Admin"
+                : "Login as User"}
             </button>
+
+            {/* Global login error from server-side/JSON check */}
+            {status && <div className="error" style={{ marginTop: 10 }}>{status}</div>}
 
             {/* Footer */}
             <div className="footer-links">
