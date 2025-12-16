@@ -1,15 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    phase: '01',
+    category: '',
+    phase: 1,
     participantsRequired: '',
-    image: '',
-    phaseDates: { '1': '', '2': '', '3': '', '4': '' }
+    image: ''
   });
+  
+  const carouselRef = useRef(null);
+  
+  // Add style to hide scrollbar for webkit browsers
+  useEffect(() => {
+    if (carouselRef.current) {
+      const style = document.createElement('style');
+      style.textContent = `
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `;
+      document.head.appendChild(style);
+      return () => document.head.removeChild(style);
+    }
+  }, []);
+  
+  const categories = [
+    'Cancer',
+    'Diabetes',
+    'Cardiology',
+    'Neurology',
+    'Oncology',
+    'Respiratory',
+    'Other'
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,22 +45,26 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
     }));
   };
 
-  const handlePhaseDateChange = (phase, value) => {
+  const handlePhaseChange = (value) => {
     setFormData(prev => ({
       ...prev,
-      phaseDates: {
-        ...prev.phaseDates,
-        [phase]: value
-      }
+      phase: parseInt(value)
     }));
   };
 
+  const scrollToPhase = (phase) => {
+    if (carouselRef.current) {
+      const itemHeight = 60; // Height of each phase item
+      carouselRef.current.scrollTop = (phase - 1) * itemHeight;
+    }
+  };
+
   const handleNext = () => {
-    setCurrentPage(prev => prev + 1);
+    setCurrentStep(2);
   };
 
   const handlePrevious = () => {
-    setCurrentPage(prev => prev - 1);
+    setCurrentStep(1);
   };
 
   const handleSubmit = async (e) => {
@@ -49,7 +79,8 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
       pharmaId: Number(pharmaId),
       title: formData.title,
       description: formData.description,
-      phase: formData.phase,
+      category: formData.category,
+      phase: formData.phase.toString().padStart(2, '0'),
       participantsRequired: Number(formData.participantsRequired),
       participantsEnrolled: 0,
       adverseEventsReported: 0,
@@ -60,7 +91,7 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
       negativeImpacts: [0, 0, 0],
       positiveImpacts: [0, 0, 0],
       participantsId: [],
-      phaseDates: formData.phaseDates,
+      phaseDates: { '1': '', '2': '', '3': '', '4': '' },
       image: formData.image || 'https://img.freepik.com/free-photo/scientist-using-microscope-medical-research_23-2149084779.jpg'
     };
     
@@ -73,12 +104,12 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
     setFormData({
       title: '',
       description: '',
-      phase: '01',
+      category: '',
+      phase: 1,
       participantsRequired: '',
-      image: '',
-      phaseDates: { '1': '', '2': '', '3': '', '4': '' }
+      image: ''
     });
-    setCurrentPage(1);
+    setCurrentStep(1);
     onClose();
   };
 
@@ -100,38 +131,32 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
 
         {/* Progress Indicator */}
         <div className='px-6 pt-4 pb-2'>
-          <div className='flex justify-between items-center'>
-            <div className={`flex items-center ${currentPage >= 1 ? 'text-indigo-500' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentPage >= 1 ? 'bg-indigo-500 text-white' : 'bg-gray-200'}`}>
+          <div className='flex justify-between items-center max-w-md mx-auto'>
+            <div className={`flex items-center ${currentStep >= 1 ? 'text-indigo-500' : 'text-gray-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 1 ? 'bg-indigo-500 text-white' : 'bg-gray-200'}`}>
                 1
               </div>
               <span className='ml-2 text-sm font-medium'>Basic Info</span>
             </div>
-            <div className={`flex-1 h-1 mx-4 ${currentPage >= 2 ? 'bg-indigo-500' : 'bg-gray-200'}`}></div>
-            <div className={`flex items-center ${currentPage >= 2 ? 'text-indigo-500' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentPage >= 2 ? 'bg-indigo-500 text-white' : 'bg-gray-200'}`}>
+            <div className={`flex-1 h-1 mx-4 ${currentStep >= 2 ? 'bg-indigo-500' : 'bg-gray-200'}`}></div>
+            <div className={`flex items-center ${currentStep >= 2 ? 'text-indigo-500' : 'text-gray-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStep >= 2 ? 'bg-indigo-500 text-white' : 'bg-gray-200'}`}>
                 2
               </div>
               <span className='ml-2 text-sm font-medium'>Details</span>
-            </div>
-            <div className={`flex-1 h-1 mx-4 ${currentPage >= 3 ? 'bg-indigo-500' : 'bg-gray-200'}`}></div>
-            <div className={`flex items-center ${currentPage >= 3 ? 'text-indigo-500' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentPage >= 3 ? 'bg-indigo-500 text-white' : 'bg-gray-200'}`}>
-                3
-              </div>
-              <span className='ml-2 text-sm font-medium'>Timeline</span>
             </div>
           </div>
         </div>
 
         {/* Form Content */}
         <form onSubmit={handleSubmit} className='p-6'>
-          {/* Page 1: Basic Info */}
-          {currentPage === 1 && (
+          {/* Step 1: Basic Info */}
+          {currentStep === 1 && (
             <div className='space-y-4'>
+              {/* Title */}
               <div>
                 <label className='block text-sm font-medium text-gray-700 mb-2'>
-                  Trail Title <span className='text-red-500'>*</span>
+                  Title <span className='text-red-500'>*</span>
                 </label>
                 <input
                   type='text'
@@ -143,6 +168,8 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                   placeholder='Enter trail title'
                 />
               </div>
+
+              {/* Description */}
               <div>
                 <label className='block text-sm font-medium text-gray-700 mb-2'>
                   Description <span className='text-red-500'>*</span>
@@ -157,6 +184,38 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                   placeholder='Enter trail description'
                 />
               </div>
+
+              {/* Category */}
+              <div>
+                <label className='block text-sm font-medium text-gray-700 mb-3'>
+                  Category <span className='text-red-500'>*</span>
+                </label>
+                <div className='grid grid-cols-2 gap-3'>
+                  {categories.map((cat) => (
+                    <label
+                      key={cat}
+                      className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all ${
+                        formData.category === cat
+                          ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
+                          : 'border-gray-300 hover:border-indigo-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      <input
+                        type='radio'
+                        name='category'
+                        value={cat}
+                        checked={formData.category === cat}
+                        onChange={handleInputChange}
+                        required
+                        className='w-4 h-4 text-indigo-600 focus:ring-indigo-500'
+                      />
+                      <span className='ml-2 text-sm font-medium'>{cat}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Image URL */}
               <div>
                 <label className='block text-sm font-medium text-gray-700 mb-2'>
                   Image URL
@@ -173,97 +232,73 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
             </div>
           )}
 
-          {/* Page 2: Details */}
-          {currentPage === 2 && (
-            <div className='space-y-4'>
-              <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
-                  Phase <span className='text-red-500'>*</span>
-                </label>
-                <select
-                  name='phase'
-                  value={formData.phase}
-                  onChange={handleInputChange}
-                  required
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
-                >
-                  <option value='01'>Phase 01</option>
-                  <option value='02'>Phase 02</option>
-                  <option value='03'>Phase 03</option>
-                  <option value='04'>Phase 04</option>
-                </select>
-              </div>
-              <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
-                  Participants Required <span className='text-red-500'>*</span>
-                </label>
-                <input
-                  type='number'
-                  name='participantsRequired'
-                  value={formData.participantsRequired}
-                  onChange={handleInputChange}
-                  required
-                  min='1'
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
-                  placeholder='Enter number of participants'
-                />
-              </div>
-            </div>
-          )}
+          {/* Step 2: Details */}
+          {currentStep === 2 && (
+            <div className='space-y-6'>
+              <div className='grid grid-cols-2 gap-6'>
+                {/* Participants Required - Left */}
+                <div>
+                  <label className='block text-sm font-medium text-gray-700 mb-2'>
+                    Participants Required
+                  </label>
+                  <input
+                    type='number'
+                    name='participantsRequired'
+                    value={formData.participantsRequired}
+                    onChange={handleInputChange}
+                    required
+                    min='1'
+                    className='w-full px-4 py-2 rounded-lg text-indigo-500 text-6xl font-black'
+                    placeholder='Enter number'
+                  />
+                </div>
 
-          {/* Page 3: Timeline */}
-          {currentPage === 3 && (
-            <div className='space-y-4'>
-              <div className='mb-4'>
-                <p className='text-sm text-gray-600 mb-4'>Set the target dates for each phase of the trial</p>
-              </div>
-              <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
-                  Phase 1 Date <span className='text-red-500'>*</span>
-                </label>
-                <input
-                  type='date'
-                  value={formData.phaseDates['1']}
-                  onChange={(e) => handlePhaseDateChange('1', e.target.value)}
-                  required
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
-                />
-              </div>
-              <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
-                  Phase 2 Date <span className='text-red-500'>*</span>
-                </label>
-                <input
-                  type='date'
-                  value={formData.phaseDates['2']}
-                  onChange={(e) => handlePhaseDateChange('2', e.target.value)}
-                  required
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
-                />
-              </div>
-              <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
-                  Phase 3 Date <span className='text-red-500'>*</span>
-                </label>
-                <input
-                  type='date'
-                  value={formData.phaseDates['3']}
-                  onChange={(e) => handlePhaseDateChange('3', e.target.value)}
-                  required
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
-                />
-              </div>
-              <div>
-                <label className='block text-sm font-medium text-gray-700 mb-2'>
-                  Phase 4 Date <span className='text-red-500'>*</span>
-                </label>
-                <input
-                  type='date'
-                  value={formData.phaseDates['4']}
-                  onChange={(e) => handlePhaseDateChange('4', e.target.value)}
-                  required
-                  className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
-                />
+                {/* No of Phases - Right */}
+                <div className=' flex flex-col items-center '>
+                  <label className='block text-sm font-medium text-gray-700 mb-2'>
+                    No of Phases 
+                  </label>
+                  <div className='flex flex-col items-center'>
+                    <div
+                      ref={carouselRef}
+                      className='h-[180px] w-full rounded-lg overflow-y-scroll scroll-smooth hide-scrollbar'
+                      style={{
+                        scrollbarWidth: 'none',
+                        msOverflowStyle: 'none'
+                      }}
+                      onScroll={(e) => {
+                        const scrollTop = e.target.scrollTop;
+                        const itemHeight = 60;
+                        const newPhase = Math.round(scrollTop / itemHeight) + 1;
+                        if (newPhase !== formData.phase && newPhase >= 1 && newPhase <= 10) {
+                          handlePhaseChange(newPhase);
+                        }
+                      }}
+                    >
+                      <div className='py-[60px]'>
+                        {[...Array(10)].map((_, index) => {
+                          const phaseNum = index + 1;
+                          return (
+                            <div
+                              key={phaseNum}
+                              onClick={() => {
+                                handlePhaseChange(phaseNum);
+                                scrollToPhase(phaseNum);
+                              }}
+                              className={`h-[60px] flex items-center justify-center cursor-pointer transition-all ${
+                                formData.phase === phaseNum
+                                  ? 'text-6xl font-black text-indigo-600'
+                                  : 'text-lg text-gray-400 hover:text-gray-600'
+                              }`}
+                            >
+                            {phaseNum}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -272,12 +307,12 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
           <div className='flex justify-between mt-6 pt-4 border-t border-gray-200'>
             <button
               type='button'
-              onClick={currentPage === 1 ? onClose : handlePrevious}
+              onClick={currentStep === 1 ? onClose : handlePrevious}
               className='px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium'
             >
-              {currentPage === 1 ? 'Cancel' : 'Previous'}
+              {currentStep === 1 ? 'Cancel' : 'Previous'}
             </button>
-            {currentPage < 3 ? (
+            {currentStep < 2 ? (
               <button
                 type='button'
                 onClick={handleNext}
