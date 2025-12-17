@@ -1,72 +1,58 @@
 
-// src/pages/Contact.js
-import "../styles/contact.css";
+// src/components/user/UserContact.jsx
+import React, { useState } from "react";
 
-export default function Contact() {
+const UserContact = () => {
+  const [form, setForm] = useState({ subject: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    // TODO: Wire to backend if needed
+    setSubmitted(true);
+  };
+
   return (
-    <>
-      {/* Navbar */}
-      <header className="clintrack-page__header">
-        <nav className="navbar clintrack-page__navbar">
-          <div className="container d-flex align-items-center justify-content-center">
-            <h1 className="clintrack-page__title text-center m-0">
-              Clinical Trial Management and Compliance Management System
-            </h1>
+    <section style={{ marginTop: 24 }}>
+      <h3>Contact</h3>
+      {!submitted ? (
+        <form onSubmit={onSubmit} style={{ maxWidth: 480 }}>
+          <div style={{ marginBottom: 12 }}>
+            <label>Subject</label>
+            <input
+              type="text"
+              name="subject"
+              value={form.subject}
+              onChange={onChange}
+              placeholder="Enter a short subject"
+              style={{ width: "100%", padding: 8 }}
+            />
           </div>
-        </nav>
-      </header>
-
-      <main className="contact">
-        <section className="hero">
-          <h2>Contact ClinTrack</h2>
-          <p>We’re here to help with trials, onboarding, and compliance.</p>
-        </section>
-
-        <section className="contact-grid">
-          <div className="card glass">
-            <h3>Send us a message</h3>
-            <form
-              className="contact-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert("Message sent! We’ll reach out soon.");
-              }}
-            >
-              <div className="row">
-                <label>Name</label>
-                <input required placeholder="Your name" />
-              </div>
-              <div className="row">
-                <label>Email</label>
-                <input required type="email" placeholder="you@example.com" />
-              </div>
-              <div className="row">
-                <label>Message</label>
-                <textarea rows={4} required placeholder="How can we help?" />
-              </div>
-              <div className="actions">
-                <button className="btn-primary" type="submit">Send</button>
-              </div>
-            </form>
+          <div style={{ marginBottom: 12 }}>
+            <label>Message</label>
+            <textarea
+              name="message"
+              value={form.message}
+              onChange={onChange}
+              placeholder="Write your message here"
+              rows={5}
+              style={{ width: "100%", padding: 8 }}
+            />
           </div>
-
-          <div className="card gradient">
-            <h3>Reach us</h3>
-            <ul className="reach">
-              <li><strong>Email:</strong> support@clintrack.example</li>
-              <li><strong>Phone:</strong> +91 44 4000 0000</li>
-              <li><strong>Address:</strong> Chennai, TN</li>
-            </ul>
-          </div>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="clintrack-page__footer">
-        <div className="container-copyright">
-          <small>© {new Date().getFullYear()} Clin Track. All rights reserved.</small>
+          <button type="submit">Send</button>
+        </form>
+      ) : (
+        <div style={{ background: "#e8ffe8", padding: 12 }}>
+          Thanks! Your message has been recorded.
         </div>
-      </footer>
-       </>
+      )}
+    </section>
   );
-}
+};
+
+export default UserContact;

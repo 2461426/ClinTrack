@@ -8,14 +8,14 @@
       "mobile": "1234567890",
       "dateOfBirth": "1990-01-01",
       "password": "alicepassword",
-      "confirmPassword": "alicepassword",
       "trialType": "ONCOLOGY_THERAPY",
       "obesityCategory": "STAGE_1",
       "bpCategory": "ELEVATED",
       "diabetesStatus": "UNKNOWN",
       "hasAsthma": false,
       "hasChronicIIlnesses": true,
-      "acknowledgment": true
+      "acknowledgment": true,
+      "role":"USER"
     },
     {
       "id": "df99",
@@ -25,14 +25,14 @@
       "mobile": "3252326524",
       "dateOfBirth": "2005-11-22",
       "password": "Climax12#",
-      "confirmPassword": "Climax12#",
       "trialType": "HYPERTENSION_TRIAL",
       "obesityCategory": "ELEVATED",
       "bpCategory": "STAGE_1",
       "diabetesStatus": "TYPE_2",
       "hasAsthma": false,
       "hasChronicIllnesses": true,
-      "acknowledgment": true
+      "acknowledgment": true,
+      "role":"USER"
     },
     {
       "id": "c82e",
@@ -42,14 +42,14 @@
       "mobile": "3252326524",
       "dateOfBirth": "2005-11-22",
       "password": "HQ-.JBfv7yBqH4e",
-      "confirmPassword": "HQ-.JBfv7yBqH4e",
       "trialType": "HYPERTENSION_TRIAL",
       "obesityCategory": "STAGE_1",
       "bpCategory": "STAGE_1",
       "diabetesStatus": "GESTATIONAL",
       "hasAsthma": false,
       "hasChronicIllnesses": false,
-      "acknowledgment": true
+      "acknowledgment": true,
+       "role":"USER"
     },
     {
       "id": "069e",
@@ -59,14 +59,14 @@
       "mobile": "6666666666",
       "dateOfBirth": "2002-02-15",
       "password": "M@131914",
-      "confirmPassword": "M@131914",
       "trialType": "COVID_19_VACCINE",
       "obesityCategory": "NORMAL",
       "bpCategory": "NORMAL",
       "diabetesStatus": "NONE",
       "hasAsthma": false,
       "hasChronicIllnesses": false,
-      "acknowledgment": true
+      "acknowledgment": true,
+       "role":"USER"
     },
     {
       "id": "3995",
@@ -76,14 +76,31 @@
       "mobile": "1265126512",
       "dateOfBirth": "2000-12-12",
       "password": "My@12651265",
-      "confirmPassword": "My@1265",
       "trialType": "COVID_19_VACCINE",
       "obesityCategory": "NORMAL",
       "bpCategory": "NORMAL",
       "diabetesStatus": "NONE",
       "hasAsthma": false,
       "hasChronicIllnesses": false,
-      "acknowledgment": true
+      "acknowledgment": true,
+       "role":"USER"
+    },
+     {
+      "id": "9999",
+      "firstName": "admin",
+      "lastName": "admin",
+      "email": "admin@gmail.com",
+      "mobile": "1265126512",
+      "dateOfBirth": "2000-12-12",
+      "password": "admin@12651265",
+      "trialType": "COVID_19_VACCINE",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "NORMAL",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true,
+       "role":"ADMIN"
     }
   ],
   "trials": [

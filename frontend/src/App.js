@@ -3,9 +3,13 @@ import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
 import UserDashboard from './components/UserDashboard';
 import { BrowserRouter,Route,Routes } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
 import Contact from './components/contact';
 import About from './components/About';
+import { Navigate } from 'react-router-dom';
+
+
+import ProtectedUserRoute from './components/Userroute';
+
 
 // Attempt to load react-router-dom at runtime; if it's not available (for
 // lightweight test environments), fall back to simple passthrough components
@@ -33,16 +37,44 @@ try {
 function App() {
   return (
    
- <BrowserRouter>
+//  <BrowserRouter>
+//       <Routes>
+//         <Route path="/" element={<ClinTrackPage />} />
+//         <Route path="/register" element={<RegistrationForm />} />
+//         <Route path="/login" element={<LoginForm />} />
+//         <Route path="/dashboard" element={<UserDashboard/>} />
+//         <Route path="/contact" element={<Contact />} />
+//         <Route path="/about" element={<About />} />
+//       </Routes>
+//     </BrowserRouter>
+
+<BrowserRouter>
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<ClinTrackPage />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="/dashboard" element={<UserDashboard/>} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
+
+        {/* ✅ Dashboard is the Home page (protected) */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedUserRoute>
+              <UserDashboard />
+            </ProtectedUserRoute>
+          }
+        >
+
+ <Route path="about" element={<About />} />
+          {/* <Route path="trials" element={<UserTrials />} /> */}
+          <Route path="contact" element={<Contact />} />
+        </Route>
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+       </BrowserRouter>
+
 
   );
 }
