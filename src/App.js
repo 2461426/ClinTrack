@@ -10,6 +10,7 @@ import LoginAs from './pages/LoginAs';
 import PharmaLogin from './pages/PharmaLogin';
 import ListedTrails from './pages/pharma/ListedTrails';
 import TrailDashboard from './pages/pharma/TrailDashboard';
+import ListOfParticipants from './pages/pharma/ListOfParticipants';
 
 function App() {
   const [pharmaUser, setPharmaUser] = useState(() => {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/LoginAs" element={<LoginAs />} />
+          <Route path="/ListOfParticipants" element={<ListOfParticipants />} />
           <Route
             path="/PharmaLogin"
             element={
