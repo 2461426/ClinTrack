@@ -10,7 +10,7 @@
       "password": "alicepassword",
       "confirmPassword": "alicepassword",
       "trialType": "ONCOLOGY_THERAPY",
-      "hypertensionCategory": "STAGE_1",
+      "obesityCategory": "STAGE_1",
       "bpCategory": "ELEVATED",
       "diabetesStatus": "UNKNOWN",
       "hasAsthma": false,
@@ -27,7 +27,7 @@
       "password": "Climax12#",
       "confirmPassword": "Climax12#",
       "trialType": "HYPERTENSION_TRIAL",
-      "hypertensionCategory": "ELEVATED",
+      "obesityCategory": "ELEVATED",
       "bpCategory": "STAGE_1",
       "diabetesStatus": "TYPE_2",
       "hasAsthma": false,
@@ -44,7 +44,7 @@
       "password": "HQ-.JBfv7yBqH4e",
       "confirmPassword": "HQ-.JBfv7yBqH4e",
       "trialType": "HYPERTENSION_TRIAL",
-      "hypertensionCategory": "STAGE_1",
+      "obesityCategory": "STAGE_1",
       "bpCategory": "STAGE_1",
       "diabetesStatus": "GESTATIONAL",
       "hasAsthma": false,
@@ -61,12 +61,43 @@
       "password": "M@131914",
       "confirmPassword": "M@131914",
       "trialType": "COVID_19_VACCINE",
-      "hypertensionCategory": "NORMAL",
+      "obesityCategory": "NORMAL",
       "bpCategory": "NORMAL",
       "diabetesStatus": "NONE",
       "hasAsthma": false,
       "hasChronicIllnesses": false,
       "acknowledgment": true
+    },
+    {
+      "id": "3995",
+      "firstName": "my",
+      "lastName": "TB",
+      "email": "my@gmail.com",
+      "mobile": "1265126512",
+      "dateOfBirth": "2000-12-12",
+      "password": "My@12651265",
+      "confirmPassword": "My@1265",
+      "trialType": "COVID_19_VACCINE",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "NORMAL",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true
+    }
+  ],
+  "trials": [
+    {
+      "id": "COVID_19_VACCINE",
+      "name": "COVID‑19 Vaccine"
+    },
+    {
+      "id": "HYPERTENSION_TRIAL",
+      "name": "Hypertension Trial"
+    },
+    {
+      "id": "ONCOLOGY_THERAPY",
+      "name": "Oncology Therapy Trial"
     }
   ]
 }

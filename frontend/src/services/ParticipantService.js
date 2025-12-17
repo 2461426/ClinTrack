@@ -23,6 +23,21 @@ class ParticipantService {
     };
     return axios.post(this.apiUrl, payload);
   }
+  
+  /** List all participants */
+  listParticipants() {
+    return axios.get(this.apiUrl);
+  }
+
+  /** Get participants by trialType id */
+  getParticipantsByTrial(trialType) {
+    return axios.get(`${this.apiUrl}?trialType=${encodeURIComponent(trialType)}`);
+  }
+
+  /** Update participant */
+  updateParticipant(id, partialData) {
+       return axios.patch(`${this.apiUrl}/${id}`, partialData);
+  }
 
   /** ✅ New: strict match by email + password */
   async findByEmailAndPassword(email, password) {
