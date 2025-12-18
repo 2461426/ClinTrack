@@ -18,40 +18,39 @@ const UserContact = () => {
   };
 
   return (
-    <section style={{ marginTop: 24 }}>
-      <h3>Contact</h3>
-      {!submitted ? (
-        <form onSubmit={onSubmit} style={{ maxWidth: 480 }}>
-          <div style={{ marginBottom: 12 }}>
-            <label>Subject</label>
-            <input
-              type="text"
-              name="subject"
-              value={form.subject}
-              onChange={onChange}
-              placeholder="Enter a short subject"
-              style={{ width: "100%", padding: 8 }}
-            />
-          </div>
-          <div style={{ marginBottom: 12 }}>
-            <label>Message</label>
-            <textarea
-              name="message"
-              value={form.message}
-              onChange={onChange}
-              placeholder="Write your message here"
-              rows={5}
-              style={{ width: "100%", padding: 8 }}
-            />
-          </div>
-          <button type="submit">Send</button>
-        </form>
-      ) : (
-        <div style={{ background: "#e8ffe8", padding: 12 }}>
-          Thanks! Your message has been recorded.
+    
+  <div style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "50vh",
+    }}>
+      <div style={{
+       
+        borderRadius: "12px",
+       boxShadow: "10px 10px 10px 10px rgba(0,0,0,0.1)",       
+         width: "500px",
+        padding: "20px",
+        textAlign: "center"
+      }}>
+        <h2 style={{
+          background: "#007bff",
+          color: "#fff",
+          padding: "12px",
+          borderRadius: "8px",
+          marginBottom: "16px"
+        }}>
+          CONTACT US
+        </h2>
+        <div style={{ textAlign: "left", fontSize: "16px", lineHeight: "1.8" }}>
+          <p>☎️ +123-456-7890</p>
+        
+           <p>🌐 www.Clintrials.com</p>
+          <p>📧 clintrial@gmail.com</p>
+          <p>🗺️ Chennai,TamilNadu,India</p>
         </div>
-      )}
-    </section>
+      </div>
+    </div>
   );
 };
 

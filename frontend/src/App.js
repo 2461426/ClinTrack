@@ -9,12 +9,6 @@ import { Navigate } from 'react-router-dom';
 
 
 import ProtectedUserRoute from './components/Userroute';
-
-
-// Attempt to load react-router-dom at runtime; if it's not available (for
-// lightweight test environments), fall back to simple passthrough components
-// so the app still renders.
-// Robustly load router components (support both ESM and CommonJS package shapes).
 let BrowserRouterComp = ({ children }) => <>{children}</>;
 let RoutesComp = ({ children }) => <>{children}</>;
 let RouteComp = ({ element }) => element;
@@ -55,6 +49,15 @@ function App() {
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
 
+
+        <Route
+          path="admin/dashboard"
+
+          
+        >
+
+ 
+        </Route>
         {/* ✅ Dashboard is the Home page (protected) */}
         <Route
           path="/dashboard"
@@ -63,6 +66,7 @@ function App() {
               <UserDashboard />
             </ProtectedUserRoute>
           }
+          
         >
 
  <Route path="about" element={<About />} />

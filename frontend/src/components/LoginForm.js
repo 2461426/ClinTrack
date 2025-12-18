@@ -47,12 +47,13 @@ const LoginForm = () => {
         UtilityService.storeInforation(
           matchedUser.id,
           matchedUser.email,
-          role.toUpperCase()
+          matchedUser.role.toUpperCase()
         );
 
         // Navigate by role
         if (UtilityService.isAdmin()) {
           navigate("/admin/dashboard");
+
         } else {
           navigate("/dashboard");
         }
@@ -97,7 +98,7 @@ return (
             <h2>Login</h2>
 
             {/* Role segmented toggle */}
-            <div className="segmented" role="tablist" aria-label="Select login role">
+            {/* <div className="segmented" role="tablist" aria-label="Select login role">
               <button
                 type="button"
                 className={`segment ${values.role === "user" ? "active" : ""}`}
@@ -118,7 +119,7 @@ return (
               >
                 Admin
               </button>
-            </div>
+            </div> */}
 
             {/* Email */}
             <div className="form-control">
@@ -163,11 +164,7 @@ return (
 
             {/* Submit */}
             <button className="primary" type="submit" disabled={isSubmitting}>
-              {isSubmitting
-                ? "Checking…"
-                : values.role === "admin"
-                ? "Login as Admin"
-                : "Login as User"}
+              {isSubmitting ? "Logging in..." : "Login"}
             </button>
 
             {/* Global login error */}

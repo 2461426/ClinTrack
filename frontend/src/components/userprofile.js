@@ -1,8 +1,8 @@
 
 // src/components/user/UserProfile.jsx
 import React, { useState, useEffect } from "react";
-import participantService from "../../services/participantService";
-import UtilityService from "../../services/UtilityService";
+import participantService from "../services/ParticipantService";
+import UtilityService from "../services/UtilityService";  
 
 const UserProfile = ({ user, onClose, onUpdated }) => {
   const [form, setForm] = useState({
@@ -40,12 +40,22 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
   function validate() {
     if (!form.firstName.trim()) return "First name is required.";
     if (!form.lastName.trim()) return "Last name is required.";
+
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email)) return "Please enter a valid email.";
-    var mobileDigits = form.mobile.replace(/\D/g, "");
-    if (mobileDigits.length < 10 || mobileDigits.length > 15)
+
+    var mobileDigits = (form.mobile || "").replace(/\D/g, "");
+    if (mobileDigits.length < 10 || mobileDigits.length > 15) {
       return "Contact number must be 10–15 digits.";
+    }
+
     if (!form.dateOfBirth) return "Date of birth is required.";
+
+    // Optional: simple DOB sanity check (YYYY-MM-DD)
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(form.dateOfBirth)) {
+      return "Date of birth must be in YYYY-MM-DD format.";
+    }
+
     return "";
   }
 
@@ -57,6 +67,7 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
       setSuccess("");
       return;
     }
+
     setError("");
     setSuccess("");
     setSaving(true);
@@ -64,19 +75,20 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
     var payload = {
       firstName: form.firstName.trim(),
       lastName: form.lastName.trim(),
-      email: form.email.trim().toLowerCase(), // keep deterministic email
+      email: form.email.trim().toLowerCase(), // keep email deterministic
       mobile: form.mobile.trim(),
       dateOfBirth: form.dateOfBirth,
     };
 
-    participantService
-      .updateParticipant(user.id, payload)
-      .then(function (res) {
+    participantService.updateParticipant(user.id, payload)
+      .then(function () {
         var updatedUser = { ...user, ...payload };
+
         // Persist updated user locally
         localStorage.setItem("logged_in_user", JSON.stringify(updatedUser));
-        // Keep stored role consistent if you rely on UtilityService
-        var role = localStorage.getItem("role") || (user.role || "USER");
+
+        // Keep stored role consistent
+        var role = localStorage.getItem("role") || user.role || "USER";
         UtilityService.storeInforation(user.id, updatedUser.email, role);
 
         setSuccess("Profile updated successfully.");
@@ -170,6 +182,7 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
                 style={{ width: "100%", padding: 8 }}
               />
             </div>
+
             <div>
               <label>Last Name</label>
               <input
@@ -181,6 +194,7 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
                 style={{ width: "100%", padding: 8 }}
               />
             </div>
+
             <div>
               <label>Email</label>
               <input
@@ -192,6 +206,7 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
                 style={{ width: "100%", padding: 8 }}
               />
             </div>
+
             <div>
               <label>Contact</label>
               <input
@@ -203,6 +218,7 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
                 style={{ width: "100%", padding: 8 }}
               />
             </div>
+
             <div>
               <label>Date of Birth</label>
               <input
@@ -215,18 +231,18 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
             </div>
           </div>
 
-          <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
-            <button type="submit" disabled={saving}>
+          <div style={{ display: "flex", gap: 12, marginTop: 16,}}>
+            <button  style ={{backgroundColor:"#007bff", color: "#fff", border: "none", padding: "8px 12px", borderRadius: 6, cursor: "pointer"}} type="submit" disabled={saving}>
               {saving ? "Saving..." : "Save Changes"}
             </button>
-            <button type="button" onClick={onClose}>
+            <button style ={{backgroundColor:"#007bff", color: "#fff", border: "none", padding: "8px 12px", borderRadius: 6, cursor: "pointer"}} type="button" onClick={onClose}>
               Cancel
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
+   );
 };
 
 export default UserProfile;
