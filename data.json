@@ -1,91 +1,6 @@
 {
   "participants": [
     {
-      "id": "1",
-      "firstName": "Alice",
-      "lastName": "Johnson",
-      "email": "Alice Johnson",
-      "mobile": "1234567890",
-      "dateOfBirth": "1990-01-01",
-      "password": "alicepassword",
-      "trialType": "ONCOLOGY_THERAPY",
-      "obesityCategory": "STAGE_1",
-      "bpCategory": "ELEVATED",
-      "diabetesStatus": "UNKNOWN",
-      "hasAsthma": false,
-      "hasChronicIIlnesses": true,
-      "acknowledgment": true,
-      "role": "USER"
-    },
-    {
-      "id": "df99",
-      "firstName": "fgihib",
-      "lastName": "wefrgdhffd",
-      "email": "jhvdxafhj12@gmail.com",
-      "mobile": "3252326524",
-      "dateOfBirth": "2005-11-22",
-      "password": "Climax12#",
-      "trialType": "HYPERTENSION_TRIAL",
-      "obesityCategory": "ELEVATED",
-      "bpCategory": "STAGE_1",
-      "diabetesStatus": "TYPE_2",
-      "hasAsthma": false,
-      "hasChronicIllnesses": true,
-      "acknowledgment": true,
-      "role": "USER"
-    },
-    {
-      "id": "c82e",
-      "firstName": "mathit",
-      "lastName": "csjdbvjs",
-      "email": "jhvdxafhj12@gmail.com",
-      "mobile": "3252326524",
-      "dateOfBirth": "2005-11-22",
-      "password": "HQ-.JBfv7yBqH4e",
-      "trialType": "HYPERTENSION_TRIAL",
-      "obesityCategory": "STAGE_1",
-      "bpCategory": "STAGE_1",
-      "diabetesStatus": "GESTATIONAL",
-      "hasAsthma": false,
-      "hasChronicIllnesses": false,
-      "acknowledgment": true,
-      "role": "USER"
-    },
-    {
-      "id": "069e",
-      "firstName": "m",
-      "lastName": "a",
-      "email": "a@gmail.com",
-      "mobile": "6666666666",
-      "dateOfBirth": "2002-02-15",
-      "password": "M@131914",
-      "trialType": "COVID_19_VACCINE",
-      "obesityCategory": "NORMAL",
-      "bpCategory": "NORMAL",
-      "diabetesStatus": "NONE",
-      "hasAsthma": false,
-      "hasChronicIllnesses": false,
-      "acknowledgment": true,
-      "role": "USER"
-    },
-    {
-      "id": "3995",
-      "firstName": "my",
-      "lastName": "TB",
-      "email": "m@gmail.com",
-      "mobile": "1265126512",
-      "dateOfBirth": "2000-12-12",
-      "password": "My@12651265",
-      "trialType": "COVID_19_VACCINE",
-      "obesityCategory": "NORMAL",
-      "bpCategory": "NORMAL",
-      "diabetesStatus": "NONE",
-      "hasAsthma": false,
-      "hasChronicIllnesses": false,
-      "acknowledgment": true,
-      "role": "USER"
-    },
-    {
       "id": "9999",
       "firstName": "admin",
       "lastName": "admin",
@@ -103,21 +18,58 @@
       "role": "ADMIN"
     },
     {
-      "id": "8e9e",
-      "firstName": "user",
-      "lastName": "user",
-      "email": "user@gmail.com",
-      "mobile": "6666666666",
-      "dateOfBirth": "2000-12-14",
-      "password": "U1@gmail.com",
-      "confirmPassword": "U1@gmail.com",
-      "trialType": "COVID_19_VACCINE",
+      "id": "f72f",
+      "firstName": "mahi",
+      "lastName": "t",
+      "email": "mahi@gmail.com",
+      "mobile": "7777777777",
+      "dateOfBirth": "2003-12-15",
+      "password": "Mahith@2003",
+      "confirmPassword": "Mahith@2003",
+      "trialType": "HYPERTENSION_TRIAL",
       "obesityCategory": "NORMAL",
       "bpCategory": "NORMAL",
       "diabetesStatus": "NONE",
       "hasAsthma": false,
       "hasChronicIllnesses": false,
-      "acknowledgment": true
+      "acknowledgment": true,
+      "role": "USER"
+    },
+    {
+      "id": "7d64",
+      "firstName": "u1",
+      "lastName": "u1",
+      "email": "u1@gmail.com",
+      "mobile": "4444444444",
+      "dateOfBirth": "2003-06-10",
+      "password": "Userone@123",
+      "confirmPassword": "Userone@123",
+      "trialType": "ONCOLOGY_THERAPY",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true,
+      "role": "USER"
+    },
+    {
+      "id": "ccc4",
+      "firstName": "vivek",
+      "lastName": "deshmukh",
+      "email": "vivek11@gmail.com",
+      "mobile": "1234567855",
+      "dateOfBirth": "2003-02-11",
+      "password": "g2t.-:eXGTFNLtM",
+      "confirmPassword": "g2t.-:eXGTFNLtM",
+      "trialType": "COVID_19_VACCINE",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "PREDIABETES",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true,
+      "role": "USER"
     }
   ],
   "trials": [
@@ -132,6 +84,32 @@
     {
       "id": "ONCOLOGY_THERAPY",
       "name": "Oncology Therapy Trial"
+    }
+  ],
+  "schedules": [
+    {
+      "id": "SCH-001",
+      "ScheduleID": "SCH-001",
+      "ParticipantID": "f72f",
+      "Phase": "Phase II",
+      "VisitDate": "2025-12-28",
+      "Status": "PLANNED"
+    },
+    {
+      "id": "SCH-20251220-920456",
+      "ScheduleID": "SCH-20251220-920456",
+      "ParticipantID": "f72f",
+      "Phase": "phase-3",
+      "VisitDate": "2025-12-31",
+      "Status": "PLANNED"
+    },
+    {
+      "id": "SCH-20251220-807826",
+      "ScheduleID": "SCH-20251220-807826",
+      "ParticipantID": "ccc4",
+      "Phase": "phase 1",
+      "VisitDate": "2025-12-27",
+      "Status": "PLANNED"
     }
   ]
 }

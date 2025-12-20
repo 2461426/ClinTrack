@@ -2,28 +2,26 @@
 // src/components/user/UserProfile.jsx
 import React, { useState, useEffect } from "react";
 import participantService from "../services/ParticipantService";
-import UtilityService from "../services/UtilityService";  
+import UtilityService from "../services/UtilityService"; 
+import { useNavigate } from "react-router-dom"; 
 
 const UserProfile = ({ user, onClose, onUpdated }) => {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    email: "",
     mobile: "",
-    dateOfBirth: "",
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) return;
     setForm({
       firstName: user.firstName || "",
       lastName: user.lastName || "",
-      email: user.email || "",
       mobile: user.mobile || "",
-      dateOfBirth: user.dateOfBirth || "",
     });
   }, [user]);
 
@@ -40,23 +38,11 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
   function validate() {
     if (!form.firstName.trim()) return "First name is required.";
     if (!form.lastName.trim()) return "Last name is required.";
-
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(form.email)) return "Please enter a valid email.";
-
     var mobileDigits = (form.mobile || "").replace(/\D/g, "");
     if (mobileDigits.length < 10 || mobileDigits.length > 15) {
-      return "Contact number must be 10–15 digits.";
+      return "Contact number must be 10 digits";
     }
-
-    if (!form.dateOfBirth) return "Date of birth is required.";
-
-    // Optional: simple DOB sanity check (YYYY-MM-DD)
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(form.dateOfBirth)) {
-      return "Date of birth must be in YYYY-MM-DD format.";
-    }
-
-    return "";
+    return null;
   }
 
   function onSubmit(e) {
@@ -75,9 +61,7 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
     var payload = {
       firstName: form.firstName.trim(),
       lastName: form.lastName.trim(),
-      email: form.email.trim().toLowerCase(), // keep email deterministic
       mobile: form.mobile.trim(),
-      dateOfBirth: form.dateOfBirth,
     };
 
     participantService.updateParticipant(user.id, payload)
@@ -106,6 +90,12 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
         setSaving(false);
       });
   }
+  const onLogout = () => {
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("logged_in_user");
+    UtilityService.clearInformation();
+    navigate("/login");
+  };
 
   return (
     <div
@@ -194,19 +184,6 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
                 style={{ width: "100%", padding: 8 }}
               />
             </div>
-
-            <div>
-              <label>Email</label>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={onChange}
-                placeholder="Enter email"
-                style={{ width: "100%", padding: 8 }}
-              />
-            </div>
-
             <div>
               <label>Contact</label>
               <input
@@ -218,19 +195,7 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
                 style={{ width: "100%", padding: 8 }}
               />
             </div>
-
-            <div>
-              <label>Date of Birth</label>
-              <input
-                type="date"
-                name="dateOfBirth"
-                value={form.dateOfBirth}
-                onChange={onChange}
-                style={{ width: "100%", padding: 8 }}
-              />
-            </div>
           </div>
-
           <div style={{ display: "flex", gap: 12, marginTop: 16,}}>
             <button  style ={{backgroundColor:"#007bff", color: "#fff", border: "none", padding: "8px 12px", borderRadius: 6, cursor: "pointer"}} type="submit" disabled={saving}>
               {saving ? "Saving..." : "Save Changes"}
@@ -238,6 +203,20 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
             <button style ={{backgroundColor:"#007bff", color: "#fff", border: "none", padding: "8px 12px", borderRadius: 6, cursor: "pointer"}} type="button" onClick={onClose}>
               Cancel
             </button>
+            <button
+            className="logout"
+            onClick={onLogout}
+            style={{
+              background: "#ef4444",
+              color: "#fff",
+              border: "none",
+              padding: "8px 12px",
+              borderRadius: 6,
+              cursor: "pointer",
+            }}
+          >
+            Logout
+          </button>
           </div>
         </form>
       </div>

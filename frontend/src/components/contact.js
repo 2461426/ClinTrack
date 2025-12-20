@@ -28,7 +28,10 @@ const UserContact = () => {
       <div style={{
        
         borderRadius: "12px",
-       boxShadow: "10px 10px 10px 10px rgba(0,0,0,0.1)",       
+       
+        boxShadow:
+        "inset rgba(0, 0, 0, 0.1) -14px -8px 18px 11px",
+       
          width: "500px",
         padding: "20px",
         textAlign: "center"

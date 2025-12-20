@@ -82,6 +82,17 @@ class ParticipantService {
   getparticipantByemail(email) {
     return axios.get(`${this.apiUrl}?email=${encodeURIComponent(email)}`);
   }
+  
+
+// src/services/ParticipantService.js
+getAllParticipants() {
+  // _ne = not equal
+  return axios
+    .get(`${this.apiUrl}?role_ne=ADMIN`)
+    .then(res => res.data);
+}
+
+
 
   postParticipant(participantData) {
     // Store email in lowercase to make lookups deterministic

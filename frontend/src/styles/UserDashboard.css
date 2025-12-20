@@ -1,18 +1,88 @@
 
-/* ===========
+/* ==============
    Page Layout
-   =========== */
-.dashboard-page {
-  background: #f8fafc;
-  min-height: 100vh;
+   ============== */
+
+.dashboard-header {
+  /* keep for future overrides */
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.container {
-  max-width: 1100px;
+.dashboard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid #eee;
+  background-color: #f0f4ff; /* NEW: navbar background color */
+}
+
+/* LEFT: Brand + Avatar group */
+.dashboard-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand {
+  font-weight: 600;
+}
+
+/* NOTE: Per your request, not adding specific button styles.
+   Using a class for possible future hooks; keeping defaults. */
+.profile-button {
+  
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* CENTER: nav links */
+.nav-links {
+position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+/* Remove link-like styles and provide hover light background
+   without adding "button styles". No padding/borders applied. */
+.nav-links a {
+  color: inherit;
+  text-decoration: none;       /* remove underline */
+  transition: background-color 0.2s ease;
+}
+
+.nav-links a:hover {
+  background-color: #e9efff;  /* light color on hover */
+}
+
+/* Active state: keep readable and simple */
+.nav-links a.active {
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+/* ==============
+   Content Area
+   ============== */
+.dashboard-content {
+  padding: 20px;
+}
+
+.welcome-title {
+  font-family: "Lucida", Arial, sans-serif;
 }
 
 /* =====================
    Navbar & Active Links
+   (from your older CSS)
    ===================== */
 .navbar .navbar-brand {
   letter-spacing: 0.2px;
@@ -26,6 +96,7 @@
 .navbar .nav-link:hover {
   color: #0d6efd !important;
   font-weight: 600;
+  text-decoration: none;
 }
 
 @media (max-width: 576px) {
@@ -164,15 +235,24 @@
 
 /* Centered welcome on Home */
 .home-welcome {
-  padding: 40px 0;
+  padding: 10px 0;
 }
 .home-welcome h2 {
   margin-bottom: 8px;
 }
+.profile-button{
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+.nav-links i {
+  margin-right: 8px; /* Adjust as needed */
+}
+
 
 /* Active nav style enhancement */
-.navbar .nav-link.active {
-  /* color: #0d6efd !important; */
+/* .navbar .nav-link.active {
   font-weight: 600;
   text-decoration: none;
-}
+  font-size: 500px;
+} */
