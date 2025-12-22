@@ -1,9 +1,10 @@
 
-// src/components/user/UserProfile.jsx
 import React, { useState, useEffect } from "react";
+// ✅ Fix paths if services are under src/services
 import participantService from "../services/ParticipantService";
 import UtilityService from "../services/UtilityService"; 
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+
 
 const UserProfile = ({ user, onClose, onUpdated }) => {
   const [form, setForm] = useState({
@@ -26,19 +27,14 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
   }, [user]);
 
   function onChange(e) {
-    var name = e.target.name;
-    var value = e.target.value;
-    setForm(function (prev) {
-      var next = { ...prev };
-      next[name] = value;
-      return next;
-    });
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
   }
 
   function validate() {
     if (!form.firstName.trim()) return "First name is required.";
     if (!form.lastName.trim()) return "Last name is required.";
-    var mobileDigits = (form.mobile || "").replace(/\D/g, "");
+    const mobileDigits = (form.mobile || "").replace(/\D/g, "");
     if (mobileDigits.length < 10 || mobileDigits.length > 15) {
       return "Contact number must be 10 digits";
     }
@@ -47,7 +43,7 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
 
   function onSubmit(e) {
     e.preventDefault();
-    var v = validate();
+    const v = validate();
     if (v) {
       setError(v);
       setSuccess("");
@@ -58,45 +54,39 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
     setSuccess("");
     setSaving(true);
 
-    var payload = {
+    const payload = {
       firstName: form.firstName.trim(),
       lastName: form.lastName.trim(),
       mobile: form.mobile.trim(),
     };
 
     participantService.updateParticipant(user.id, payload)
-      .then(function () {
-        var updatedUser = { ...user, ...payload };
+      .then(() => {
+        const updatedUser = { ...user, ...payload };
 
         // Persist updated user locally
         localStorage.setItem("logged_in_user", JSON.stringify(updatedUser));
 
         // Keep stored role consistent
-        var role = localStorage.getItem("role") || user.role || "USER";
+        const role = localStorage.getItem("role") || user.role || "USER";
         UtilityService.storeInforation(user.id, updatedUser.email, role);
+
 
         setSuccess("Profile updated successfully.");
         setError("");
 
-        // Notify parent (dashboard) to refresh greeting/avatar
+        // Notify parent (dashboard or menu) to refresh greeting/avatar
         if (typeof onUpdated === "function") onUpdated(updatedUser);
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.error(err);
         setError("Update failed. Please try again.");
         setSuccess("");
       })
-      .finally(function () {
+      .finally(() => {
         setSaving(false);
       });
   }
-  const onLogout = () => {
-    localStorage.removeItem("auth_token");
-    localStorage.removeItem("logged_in_user");
-    UtilityService.clearInformation();
-    navigate("/login");
-  };
-
   return (
     <div
       className="profile-modal-overlay"
@@ -196,27 +186,35 @@ const UserProfile = ({ user, onClose, onUpdated }) => {
               />
             </div>
           </div>
-          <div style={{ display: "flex", gap: 12, marginTop: 16,}}>
-            <button  style ={{backgroundColor:"#007bff", color: "#fff", border: "none", padding: "8px 12px", borderRadius: 6, cursor: "pointer"}} type="submit" disabled={saving}>
+          <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
+            <button
+              style={{
+                backgroundColor: "#007bff",
+                color: "#fff",
+                border: "none",
+                padding: "8px 12px",
+                borderRadius: 6,
+                cursor: "pointer",
+              }}
+              type="submit"
+              disabled={saving}
+            >
               {saving ? "Saving..." : "Save Changes"}
             </button>
-            <button style ={{backgroundColor:"#007bff", color: "#fff", border: "none", padding: "8px 12px", borderRadius: 6, cursor: "pointer"}} type="button" onClick={onClose}>
+            <button
+              style={{
+                backgroundColor: "#007bff",
+                color: "#fff",
+                border: "none",
+                padding: "8px 12px",
+                borderRadius: 6,
+                cursor: "pointer",
+              }}
+              type="button"
+              onClick={onClose}
+            >
               Cancel
             </button>
-            <button
-            className="logout"
-            onClick={onLogout}
-            style={{
-              background: "#ef4444",
-              color: "#fff",
-              border: "none",
-              padding: "8px 12px",
-              borderRadius: 6,
-              cursor: "pointer",
-            }}
-          >
-            Logout
-          </button>
           </div>
         </form>
       </div>

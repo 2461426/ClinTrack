@@ -8,6 +8,9 @@ import About from './components/About';
 import { Navigate } from 'react-router-dom';
 import ProtectedUserRoute from './components/Userroute';
 import AdminDashboard from './components/Admindashboard';
+import AdminSchedule from './components/AdminSchedule';
+import Usertrails from './components/Usertrails';
+import Logout from './components/Logout';
 function App() {
   return (
 <BrowserRouter>
@@ -16,11 +19,13 @@ function App() {
         <Route path="/" element={<ClinTrackPage />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="admin/dashboard" element={
+        {/* <Route path="/admin/dashboard" element={
           <AdminDashboard />} >
-        </Route>
+          <Route path="/admin/dashboard/schedule" element={<AdminSchedule />} />
+          
+        </Route> */}
         {/* ✅ Dashboard is the Home page (protected) */}
-        <Route
+        {/* <Route
           path="/dashboard"
           element={
             <ProtectedUserRoute>
@@ -28,13 +33,14 @@ function App() {
             </ProtectedUserRoute>
           }
           
-        >
-
- <Route path="about" element={<About />} />
-          {/* <Route path="trials" element={<UserTrials />} /> */}
+        > */}
+        <Route path="dashboard" element={<UserDashboard />} />
+        <Route path="admindashboard" element={<AdminDashboard />} />
+          <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-        </Route>
-
+          <Route path='trails' element={<Usertrails/>}/>
+          <Route path="logout" element={<Logout />} />
+       
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -4,6 +4,7 @@ import "../styles/LoginForm.css";
 import UtilityService from "../services/UtilityService";
 import participantService from "../services/ParticipantService";
 import { Link, useNavigate } from "react-router-dom";
+import Menu from "./Menu";
 
 const LoginForm = () => {
   // Restore remembered values
@@ -69,7 +70,7 @@ const LoginForm = () => {
  
 return (
   <div className="clintrack-page">
-    <header className="clintrack-page__header">
+    {/* <header className="clintrack-page__header">
       <nav className="navbar clintrack-page__navbar">
         <div className="container d-flex align-items-center justify-content-center">
           <h1
@@ -80,8 +81,8 @@ return (
           </h1>
         </div>
       </nav>
-    </header>
-
+    </header> */}
+   <Menu/>
     <section className="login">
       <Formik
         initialValues={{
@@ -94,6 +95,7 @@ return (
         onSubmit={handleSubmit}
       >
         {({ values, setFieldValue, isSubmitting, status }) => (
+    
           <Form className="login-form" noValidate>
             <h2>Login</h2>
 

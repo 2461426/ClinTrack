@@ -1,6 +1,6 @@
 
 import React, { useEffect, useMemo, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import participantService from "../services/ParticipantService";
 import "../styles/Admindashboard.css";
 import "../styles/UserDashboard.css";
@@ -43,9 +43,7 @@ function AdminParticipants() {
 
     setLoading(true);
     setErr("");
-
-    participantService
-      .getAllParticipants()
+    participantService.getAllParticipants()
       .then((participants) => {
         const usersOnly = (participants || []).filter((p) => p.role !== "ADMIN");
         setData(usersOnly);
@@ -119,7 +117,7 @@ function AdminParticipants() {
           <ul className="nav-links">
             <li><NavLink to="/dashboard" ><i className="bi bi-house-fill me-2" />Home</NavLink></li>
             <li><NavLink to="/admin/schedule"><i className="bi bi-calendar2-plus me-2" />Schedule</NavLink></li>
-            <li><NavLink to="/admin/participants"><i className="bi bi-people-fill me-2" />Trial Data</NavLink></li>
+            <li><NavLink to="/admin/participants"><i className="bi bi-people-fill me-2" />View Analytics & Data</NavLink></li>
           </ul>
         </nav>
       </header>
@@ -202,8 +200,13 @@ function AdminParticipants() {
           </div>
         </>
       )}
+      <Outlet />
     </div>
+    
   );
 }
 
 export default AdminParticipants;
+
+
+

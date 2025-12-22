@@ -1,6 +1,7 @@
 
 // src/components/user/UserContact.jsx
 import React, { useState } from "react";
+import Menu from "./Menu";
 
 const UserContact = () => {
   const [form, setForm] = useState({ subject: "", message: "" });
@@ -18,7 +19,9 @@ const UserContact = () => {
   };
 
   return (
-    
+   <div>
+    <Menu/>
+
   <div style={{
       display: "flex",
       justifyContent: "center",
@@ -54,6 +57,7 @@ const UserContact = () => {
         </div>
       </div>
     </div>
+    </div> 
   );
 };
 

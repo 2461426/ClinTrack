@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import "../styles/RegistrationForm.css";
 import participantService from "../services/ParticipantService";
+import Menu from "./Menu";
 
 /** Controlled dropdown vocabularies */
 const OBESITY_CATEGORIES = [
@@ -127,16 +128,35 @@ const RegistrationForm = () => {
       return errors;
     },
 
-    onSubmit: async (values, { resetForm }) => {
-      try {
-        await participantService.postParticipant(values);
-        alert("Registration successful!");
-        resetForm();
-      } catch (error) {
-        console.error("There was an error registering the participant!", error);
-        alert("Registration failed. Please try again.");
+   
+onSubmit: (values, { resetForm }) => {
+  const normalizedEmail = (values.email || '').trim().toLowerCase();
+
+  // 1) Check if email already exists
+  participantService.getParticipantByEmail(normalizedEmail)
+    .then(existing => {
+      if (existing && existing.length > 0) {
+        alert("Email is already registered. Please use a different email or login.");
+        return; // Stop further execution
       }
-    },
+
+      // 2) Proceed with registration
+      participantService.postParticipant(values)
+        .then(() => {
+          alert("Registration successful!");
+          resetForm();
+        })
+        .catch(error => {
+          console.error("Error during registration:", error);
+          alert("Registration failed. Please try again.");
+        });
+    })
+    .catch(error => {
+      console.error("Error checking email:", error);
+      alert("Could not verify email. Please try again.");
+    });
+},
+
   });
 
   // Helper to set boolean from radios (yes/no)
@@ -148,7 +168,7 @@ const RegistrationForm = () => {
     <>
       {/* === ClinTrack Navbar (same as ClinTrackPage) === */}
       <div className="clintrack-page">
-        <header className="clintrack-page__header">
+        {/* <header className="clintrack-page__header">
           <nav className="navbar clintrack-page__navbar">
             <div className="container d-flex align-items-center justify-content-center">
               <h1
@@ -159,8 +179,8 @@ const RegistrationForm = () => {
               </h1>
             </div>
           </nav>
-        </header>
-
+        </header> */}
+        <Menu/>
         <section className="registration">
           {/* IMPORTANT: Let Formik control submit with its validation */}
           <form className="registrationForm" onSubmit={formik.handleSubmit} noValidate>
@@ -488,6 +508,5 @@ const RegistrationForm = () => {
     </>
   );
 };
-
 export default RegistrationForm;
 
