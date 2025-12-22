@@ -1,15 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
+import './CreateTrailModal.css';
 import Lottie from 'lottie-react';
 import editText from '../../assets/icons/editText.png';
 import closeIcon from '../../assets/icons/close.png';
 import thumbsUpAnimation from '../../assets/animations/ThumbsUp.json';
 
 function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
-  // STEP 1: State Management - storing component data
-  const [currentStep, setCurrentStep] = useState(1); // Tracks which step user is on (1 or 2)
-  const [showSuccess, setShowSuccess] = useState(false); // Shows success animation when true
+  const [currentStep, setCurrentStep] = useState(1);
+  const [showSuccess, setShowSuccess] = useState(false);
   
-  // Form data - stores all input values
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -19,10 +18,8 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
     image: ''
   });
 
-  // Reference to the phase carousel for scrolling
   const phaseCarouselRef = useRef(null);
 
-  // STEP 2: Setup - Hide scrollbar for phase carousel
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = '.hide-scrollbar::-webkit-scrollbar { display: none; }';
@@ -30,7 +27,6 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
     return () => document.head.removeChild(style);
   }, []);
 
-  // Available categories for selection
   const AVAILABLE_CATEGORIES = [
     'Cancer',
     'Diabetes',
@@ -41,23 +37,18 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
     'Other'
   ];
 
-  const PHASE_ITEM_HEIGHT = 60; // Height of each phase item in pixels
+  const PHASE_ITEM_HEIGHT = 60;
 
-  // STEP 3: Event Handlers - Functions that respond to user actions
-
-  // Updates form data when user types in input fields
   const updateFormField = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
     setFormData({ ...formData, [fieldName]: fieldValue });
   };
 
-  // Updates the selected phase number
   const updatePhase = (phaseNumber) => {
     setFormData({ ...formData, phase: parseInt(phaseNumber) });
   };
 
-  // Scrolls the carousel to show the selected phase
   const scrollCarouselToPhase = (phaseNumber) => {
     if (phaseCarouselRef.current) {
       const scrollPosition = (phaseNumber - 1) * PHASE_ITEM_HEIGHT;
@@ -65,14 +56,12 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
     }
   };
 
-  // Validates step 1 and moves to step 2
   const goToNextStep = (e) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
     
-    // Validation: Check if required fields are filled
     if (!formData.title.trim()) {
       alert('Please enter a trail title');
       return;
@@ -86,15 +75,13 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
       return;
     }
     
-    setCurrentStep(2); // Move to next step
+    setCurrentStep(2);
   };
 
-  // Goes back to step 1
   const goToPreviousStep = () => {
     setCurrentStep(1);
   };
 
-  // Resets form to initial state
   const resetForm = () => {
     setFormData({
       title: '',
@@ -107,18 +94,16 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
     setCurrentStep(1);
   };
 
-  // Creates the new trail when form is submitted
   const createNewTrail = async (e) => {
-    e.preventDefault(); // Prevents page reload
+    e.preventDefault();
 
-    // Build trail object with all required data
     const trailData = {
-      trailId: Date.now(), // Unique ID based on timestamp
+      trailId: Date.now(),
       pharmaId: Number(pharmaId),
       title: formData.title,
       description: formData.description,
       category: formData.category,
-      phase: formData.phase.toString().padStart(2, '0'), // Format: "01", "02", etc.
+      phase: formData.phase.toString().padStart(2, '0'),
       participantsRequired: Number(formData.participantsRequired),
       participantsEnrolled: 0,
       adverseEventsReported: 0,
@@ -133,15 +118,12 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
       image: formData.image || ''
     };
 
-    // Send trail data to parent component
     if (onTrailCreated) {
       await onTrailCreated(trailData);
     }
 
-    // Show success animation
     setShowSuccess(true);
 
-    // After 2 seconds: hide success, reset form, close modal
     setTimeout(() => {
       setShowSuccess(false);
       resetForm();
@@ -149,48 +131,41 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
     }, 2000);
   };
 
-  // Don't render anything if modal is closed
   if (!isOpen) return null;
 
-  // STEP 4: Render UI - Display the modal interface
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
-      <div className='bg-white rounded-[25px] shadow-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto'>
+    <div className='modal-overlay'>
+      <div className='modal-container'>
         
-        {/* Success Animation Screen */}
         {showSuccess ? (
-          <div className='flex flex-col items-center justify-center py-20 px-6'>
+          <div className='modal-success'>
             <Lottie 
               animationData={thumbsUpAnimation} 
               loop={false}
               style={{ width: 300, height: 300 }}
             />
-            <h3 className='text-2xl font-bold text-indigo-600 mt-4'>Trail Created Successfully!</h3>
+            <h3 className='modal-success__title'>Trail Created Successfully!</h3>
           </div>
         ) : (
           <>
-            {/* Modal Header */}
-            <div className='p-6 flex justify-between items-center'>
-              <div className='flex flex-col items-start'>
-                <h2 className='text-2xl font-light text-gray-800'>Create</h2>
-                <h2 className='text-3xl font-bold text-indigo-600'>New Trail!..</h2>
+            <div className='modal-header'>
+              <div className='modal-header__title-wrapper'>
+                <h2 className='modal-header__subtitle'>Create</h2>
+                <h2 className='modal-header__title'>New Trail!..</h2>
               </div>
-              <button onClick={onClose} className='hover:bg-gray-200 rounded-full p-2'>
-                <img src={closeIcon} alt="close" className='w-4 h-4' /> 
+              <button onClick={onClose} className='modal-header__close-btn'>
+                <img src={closeIcon} alt="close" className='modal-header__close-icon' /> 
               </button>
             </div>
 
-            {/* Modal Form */}
-            <form onSubmit={createNewTrail} className='p-6'>
+            <form onSubmit={createNewTrail} className='modal-form'>
               
-              {/* STEP 1: Basic Information */}
               {currentStep === 1 && (
-                <div className='space-y-4'>
+                <div className='modal-step'>
                   
-                  {/* Trail Title Input */}
-                  <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-2'>
-                      Title <span className='text-red-500'>*</span>
+                  <div className='form-field'>
+                    <label className='form-field__label'>
+                      Title <span className='form-field__required'>*</span>
                     </label>
                     <input
                       type='text'
@@ -198,15 +173,14 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                       value={formData.title}
                       onChange={updateFormField}
                       required
-                      className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
+                      className='form-field__input'
                       placeholder='Enter trail title'
                     />
                   </div>
 
-                  {/* Trail Description Input */}
-                  <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-2'>
-                      Description <span className='text-red-500'>*</span>
+                  <div className='form-field'>
+                    <label className='form-field__label'>
+                      Description <span className='form-field__required'>*</span>
                     </label>
                     <textarea
                       name='description'
@@ -214,27 +188,22 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                       onChange={updateFormField}
                       required
                       rows='4'
-                      className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
+                      className='form-field__textarea'
                       placeholder='Enter trail description'
                     />
                   </div>
 
-                  {/* Category Selection */}
-                  <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-3'>
-                      Category <span className='text-red-500'>*</span>
+                  <div className='form-field'>
+                    <label className='form-field__label form-field__label--with-margin'>
+                      Category <span className='form-field__required'>*</span>
                     </label>
-                    <div className='grid grid-cols-2 gap-3'>
+                    <div className='category-grid'>
                       {AVAILABLE_CATEGORIES.map((categoryName) => {
                         const isSelected = formData.category === categoryName;
                         return (
                           <label
                             key={categoryName}
-                            className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all ${
-                              isSelected
-                                ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                                : 'border-gray-300 hover:border-indigo-300 hover:bg-gray-50'
-                            }`}
+                            className={`category-option ${isSelected ? 'category-option--selected' : ''}`}
                           >
                             <input
                               type='radio'
@@ -243,18 +212,17 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                               checked={isSelected}
                               onChange={updateFormField}
                               required
-                              className='w-4 h-4 text-indigo-600 focus:ring-indigo-500'
+                              className='category-option__radio'
                             />
-                            <span className='ml-2 text-sm font-medium'>{categoryName}</span>
+                            <span className='category-option__label'>{categoryName}</span>
                           </label>
                         );
                       })}
                     </div>
                   </div>
 
-                  {/* Image URL Input (Optional) */}
-                  <div>
-                    <label className='block text-sm font-medium text-gray-700 mb-2'>
+                  <div className='form-field'>
+                    <label className='form-field__label'>
                       Image URL
                     </label>
                     <input
@@ -262,21 +230,19 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                       name='image'
                       value={formData.image}
                       onChange={updateFormField}
-                      className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500'
+                      className='form-field__input'
                       placeholder='Enter image URL (optional)'
                     />
                   </div>
                 </div>
               )}
 
-              {/* STEP 2: Participants and Phase Selection */}
               {currentStep === 2 && (
-                <div className='w-auto flex justify-between'>
-                  <div className='w-full flex justify-between items-center px-12'>
+                <div className='modal-step-two'>
+                  <div className='modal-step-two__content'>
                     
-                    {/* Participants Required Section */}
-                    <div className='flex flex-col items-end'>
-                      <label className='text-md font-medium'>
+                    <div className='participants-section'>
+                      <label className='participants-section__label'>
                         Participants Required
                       </label>
                       <input
@@ -286,24 +252,21 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                         onChange={updateFormField}
                         required
                         min='1'
-                        className='w-48 text-right px-0 py-0 rounded-lg text-indigo-500 text-6xl font-black focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+                        className='participants-section__input'
                       />
-                      <img src={editText} alt='edit' className='h-5 w-5 cursor-pointer' />
+                      <img src={editText} alt='edit' className='participants-section__edit-icon' />
                     </div>
 
-                    {/* Vertical Divider */}
-                    <div className='h-[250px] w-0.5 bg-gray-200 mx-4 flex-none'></div>
+                    <div className='vertical-divider'></div>
 
-                    {/* Phase Selection Carousel */}
-                    <div className='flex flex-col bg-gray-100 p-4 rounded-lg items-center mr-8'>
-                      <label className='block border-b border-gray-300 text-lg font-medium pb-1 mb-3'>
+                    <div className='phase-selector'>
+                      <label className='phase-selector__label'>
                         No of Phases
                       </label>
-                      <div className='flex flex-col items-center'>
+                      <div className='phase-selector__wrapper'>
                         <div
                           ref={phaseCarouselRef}
-                          className='h-[180px] w-32 rounded-lg overflow-y-scroll scroll-smooth hide-scrollbar'
-                          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                          className='phase-carousel hide-scrollbar'
                           onScroll={(e) => {
                             const scrollTop = e.target.scrollTop;
                             const calculatedPhase = Math.round(scrollTop / PHASE_ITEM_HEIGHT) + 1;
@@ -315,7 +278,7 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                             }
                           }}
                         >
-                          <div className='py-[60px]'>
+                          <div className='phase-carousel__padding'>
                             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((phaseNumber) => {
                               const isCurrentPhase = formData.phase === phaseNumber;
                               return (
@@ -325,11 +288,7 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                                     updatePhase(phaseNumber);
                                     scrollCarouselToPhase(phaseNumber);
                                   }}
-                                  className={`h-[60px] flex items-center justify-center text-center cursor-pointer transition-all ${
-                                    isCurrentPhase
-                                      ? 'text-6xl font-black text-indigo-600'
-                                      : 'text-2xl text-gray-400 hover:text-gray-600'
-                                  }`}
+                                  className={`phase-carousel__item ${isCurrentPhase ? 'phase-carousel__item--active' : ''}`}
                                 >
                                   {phaseNumber}
                                 </div>
@@ -343,12 +302,11 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                 </div>
               )}
 
-              {/* Navigation Buttons */}
-              <div className='flex justify-between mt-12 pt-4 border-gray-200'>
+              <div className='modal-navigation'>
                 <button
                   type='button'
                   onClick={currentStep === 1 ? onClose : goToPreviousStep}
-                  className='px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 font-medium'
+                  className='modal-navigation__btn modal-navigation__btn--secondary'
                 >
                   {currentStep === 1 ? 'Cancel' : 'Previous'}
                 </button>
@@ -357,14 +315,14 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                   <button
                     type='button'
                     onClick={goToNextStep}
-                    className='px-6 py-2 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 font-medium'
+                    className='modal-navigation__btn modal-navigation__btn--primary'
                   >
                     Next
                   </button>
                 ) : (
                   <button
                     type='submit'
-                    className='px-6 py-2 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 font-medium'
+                    className='modal-navigation__btn modal-navigation__btn--primary'
                   >
                     Create Trail
                   </button>

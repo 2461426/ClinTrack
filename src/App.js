@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import ParticipantNavbar from './components/ParticipantNavbar';
-import Home from './pages/Home';
-import ParticipantListOfTrails from './pages/ParticipantListOfTrails';
-import Contact from './pages/Contact';
-import AboutUs from './pages/AboutUs';
-import LoginAs from './pages/LoginAs';
-import PharmaLogin from './pages/PharmaLogin';
-import ListedTrails from './pages/pharma/ListedTrails';
-import TrailDashboard from './pages/pharma/TrailDashboard';
-import ListOfParticipants from './pages/pharma/ListOfParticipants';
+import ParticipantNavbar from './components/ParticipantNavbar/ParticipantNavbar';
+import Home from './components/Home/Home';
+import ParticipantListOfTrails from './components/ParticipantListOfTrails/ParticipantListOfTrails';
+import Contact from './components/Contact/Contact';
+import AboutUs from './components/AboutUs/AboutUs';
+import LoginAs from './components/LoginAs/LoginAs';
+import PharmaLogin from './components/PharmaLogin/PharmaLogin';
+import ListedTrails from './components/ListedTrails/ListedTrails';
+import TrailDashboard from './components/TrailDashboard/TrailDashboard';
+import ListOfParticipants from './components/ListOfParticipants/ListOfParticipants';
 
 function App() {
   const [pharmaUser, setPharmaUser] = useState(() => {

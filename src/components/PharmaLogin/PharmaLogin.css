@@ -1,0 +1,113 @@
+.pharma-login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.pharma-login-container { display: flex; flex-direction: column; align-items: center; }
+
+.pharma-login-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 96rem;
+  margin-bottom: 1.5rem;
+}
+
+.pharma-login-header__subtitle { font-size: 1.5rem; font-weight: 300; }
+.pharma-login-header__title { font-size: 1.875rem; font-weight: bold; color: #6366f1; }
+.pharma-login-card { border: 1px solid #e5e7eb; border-radius: 25px; }
+.pharma-login-card__content { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.pharma-login-animation { height: 200px; }
+
+.pharma-login-divider {
+  display: none;
+  height: 250px;
+  width: 0.125rem;
+  background: #e5e7eb;
+  margin: 0 -1rem;
+  flex-shrink: 0;
+}
+
+.pharma-login-form { position: relative; z-index: 10; width: 100%; }
+.pharma-login-form__fields { display: flex; flex-direction: column; padding: 1rem 1.5rem; gap: 1rem; width: 100%; }
+.pharma-login-field { display: flex; flex-direction: column; gap: 0.25rem; width: 100%; }
+.pharma-login-field__label { font-size: 0.875rem; font-weight: 600; }
+
+.pharma-login-field__input {
+  border: 1px solid #d1d5db;
+  width: 100%;
+  height: 2.75rem;
+  padding-left: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.pharma-login-field__input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+}
+
+.pharma-login-field__error { color: #ef4444; font-size: 0.75rem; }
+.pharma-login-field__password-wrapper { position: relative; width: 100%; }
+.pharma-login-field__password-wrapper .pharma-login-field__input { padding-right: 3rem; }
+
+.pharma-login-field__toggle-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.pharma-login-field__toggle-btn:hover { color: #374151; }
+.pharma-login-auth-error { color: #ef4444; font-size: 0.875rem; }
+
+.pharma-login-submit-btn {
+  width: 100%;
+  background: #6366f1;
+  font-weight: 600;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.pharma-login-submit-btn:hover { background: #4f46e5; }
+
+.pharma-login-back-btn {
+  border: 1px solid #d1d5db;
+  color: #6b7280;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.pharma-login-back-btn:hover { background: #6366f1; color: white; }
+
+@media (min-width: 640px) {
+  .pharma-login-header__subtitle { font-size: 1.875rem; }
+  .pharma-login-header__title { font-size: 2.25rem; }
+  .pharma-login-field__label { font-size: 1rem; }
+  .pharma-login-back-btn { width: auto; }
+}
+
+@media (min-width: 768px) {
+  .pharma-login-animation { height: 300px; }
+  .pharma-login-card__content { flex-direction: row; }
+  .pharma-login-divider { display: block; }
+  .pharma-login-field__input { width: 16rem; }
+}

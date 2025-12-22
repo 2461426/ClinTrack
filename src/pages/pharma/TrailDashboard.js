@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import settings from '../../assets/icons/settingsIcon.png'
 import phaseIcon from '../../assets/icons/phaseIcon.png'
+import TrailNavBar from './TrailNavBar';
+import BackIcon from '../../assets/icons/backIcon.png'
 
 function TrailDashboard() {
   const { trailId } = useParams();
@@ -65,21 +67,32 @@ function TrailDashboard() {
   return (
     <div>
       <nav className='fixed w-full p-4 px-6 text-gray-500 font-medium items-center flex justify-between bg-white border-b border-gray-200'>
+        <div className='flex items-center gap-4'>
         <button 
           onClick={() => navigate('/ListedTrails')}
           className='text-indigo-500 hover:text-indigo-700 font-semibold'
         >
-          ← Back to Trails
+        <img src={BackIcon} alt='back' className=' h-auto w-8 object-cover' />
         </button>
+                  <img src={trail.image} alt={trail.title} className='border rounded h-10 w-10 sm:h-12 sm:w-12 object-cover' />
+
+        <div className='flex flex-col items-start'>
+        <h1 className='text-lg sm:text-xl font-bold text-[#353535]'>{trail.title}</h1>
+            <p className='text-sm sm:text-base font-regular text-indigo-500'>Dashboard</p>
+            </div>
+            </div>
         <div className='flex gap-4 items-center'>
           <div>Support</div>
           <img src={settings} alt="setting" className='h-7 w-auto' />
         </div>
       </nav>
-
-      <div className='pt-24 px-6 pb-6'>
+      
+      <div className='flex items-start pt-24 pr-6 pb-6'>
+        
+       <TrailNavBar />
         {/* Trail Header */}
-        <div className='flex gap-6 mb-6'>
+        <div className='flex grid flex-1 flex-col'>
+        {/* <div className='flex gap-6 mb-6'>
           <img src={trail.image} alt={trail.title} className='border rounded-lg h-48 w-48 object-cover' />
           <div className='flex flex-col justify-between flex-1'>
             <div>
@@ -93,7 +106,7 @@ function TrailDashboard() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Trail Details Grid */}
         <div className='grid grid-cols-2 gap-6 mb-6'>
@@ -216,6 +229,7 @@ function TrailDashboard() {
                   <span className='font-semibold text-green-600'>{impact}</span>
                 </div>
               ))}
+            </div>
             </div>
           </div>
         </div>
