@@ -70,7 +70,7 @@ function Usertrails() {
 
       {/* ====== Next Scheduled Visit (moved from dashboard) ====== */}
       <section style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }}>
-        <div style={{ border: "1px solid #e9ecef", borderRadius: 12, padding: 16, background: "#fff" }}>
+        <div style={{ border: "1px solid #e9ecef", borderRadius: 12, padding: 16, background: "#fff", marginBottom:300 }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
             <h3 style={{ margin: 0 }}>
               <i className="bi bi-calendar2-event" />{" "}
@@ -114,6 +114,16 @@ function Usertrails() {
 
       {/* (Optional) Below this, you can later render Upcoming / Current / Past trials lists */}
     </main>
+    <div className="clintrack-page__banner">
+          <div className="container py-3 text-center">
+            <p className="m-0 clintrack-page__banner-text">
+              All the trials are conducted according to FDA and ICH-GCP guidelines.
+            </p>
+          </div>
+          <div className="container-copyright">
+          <small>© {new Date().getFullYear()} Clin Track. All rights reserved.</small>
+        </div>
+        </div>
     </div>
   );
 }

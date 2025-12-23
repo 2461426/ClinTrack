@@ -5,7 +5,7 @@ import "../styles/UserDashboard.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import scheduleService from "../services/ScheduleService";
 import participantService from "../services/ParticipantService";
-import UserProfile from "./userprofile";
+import UserProfile from "./UserProfile";
 import Menu from "./Menu";
 
 const getFirstName = (user) => {
@@ -140,7 +140,8 @@ const UserDashboard = () => {
               border: "1px solid #e9ecef",
               borderRadius: 12,
               padding: 16,
-              background: "#fff"
+              background: "#fff",
+              marginBottom:130
             }}>
               <div style={{
                 display: "flex",
@@ -232,6 +233,16 @@ const UserDashboard = () => {
           onUpdated={handleProfileUpdated}
         />
       )}
+      <div className="clintrack-page__banner">
+          <div className="container py-3 text-center">
+            <p className="m-0 clintrack-page__banner-text">
+              All the trials are conducted according to FDA and ICH-GCP guidelines.
+            </p>
+          </div>
+          <div className="container-copyright">
+          <small>© {new Date().getFullYear()} Clin Track. All rights reserved.</small>
+        </div>
+        </div>
     </div>
   );
 };

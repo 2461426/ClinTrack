@@ -1,10 +1,14 @@
-
+.dashboard-content{
+  padding-left: 20px;
+  padding-right: 20px;
+}
 .dashboard-header {
   background: #ffffff;
   border-bottom: 1px solid #e9ecef;
   position: sticky;
   top: 0;
   z-index: 999;
+ 
 }
 
 .dashboard-nav {

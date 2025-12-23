@@ -27,6 +27,8 @@ const UserContact = () => {
       justifyContent: "center",
       alignItems: "center",
       minHeight: "50vh",
+      marginBottom:"100px",
+      marginTop:"60px"
     }}>
       <div style={{
        
@@ -57,6 +59,16 @@ const UserContact = () => {
         </div>
       </div>
     </div>
+    <div className="clintrack-page__banner">
+          <div className="container py-3 text-center">
+            <p className="m-0 clintrack-page__banner-text">
+              All the trials are conducted according to FDA and ICH-GCP guidelines.
+            </p>
+          </div>
+          <div className="container-copyright">
+          <small>© {new Date().getFullYear()} Clin Track. All rights reserved.</small>
+        </div>
+        </div>
     </div> 
   );
 };
