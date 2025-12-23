@@ -12,3 +12,8 @@
   width: 2rem;
   object-fit: cover;
 }
+
+.trail-navbar__icon:hover {
+  border-radius: 10%;
+  background-color: rgb(242, 242, 242);
+}

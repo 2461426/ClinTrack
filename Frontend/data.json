@@ -286,14 +286,14 @@
       "image": "https://img.freepik.com/free-photo/scientist-using-microscope-medical-research_23-2149084779.jpg"
     },
     {
-      "id": "8540",
-      "trailId": 1765939526153,
+      "id": "07ef",
+      "trailId": 1766405036308,
       "pharmaId": 1,
-      "title": "Rahul",
-      "description": "Sample Description",
-      "category": "Cardiology",
-      "phase": "10",
-      "participantsRequired": 2340,
+      "title": "covid covaccine",
+      "description": "tempoerary",
+      "category": "Other",
+      "phase": "01",
+      "participantsRequired": 100,
       "participantsEnrolled": 0,
       "adverseEventsReported": 0,
       "adverseEventsHigh": 0,
@@ -317,7 +317,7 @@
         "3": "",
         "4": ""
       },
-      "image": "https://img.freepik.com/premium-vector/blood-cells-red-background-medical-plasma-human-artery-hemoglobin-erythrocytes-hematology-medicine-red-blood-cells-vein-stream-body-vascular-system-cancer-microbiology-science_8071-1527.jpg"
+      "image": ""
     }
   ]
 }

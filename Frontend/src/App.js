@@ -11,6 +11,7 @@ import PharmaLogin from './components/PharmaLogin/PharmaLogin';
 import ListedTrails from './components/ListedTrails/ListedTrails';
 import TrailDashboard from './components/TrailDashboard/TrailDashboard';
 import ListOfParticipants from './components/ListOfParticipants/ListOfParticipants';
+import ScheduleTrail from './components/ScheduleTrail/ScheduleTrail';
 
 function App() {
   const [pharmaUser, setPharmaUser] = useState(() => {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/LoginAs" element={<LoginAs />} />
           <Route path="/ListOfParticipants" element={<ListOfParticipants />} />
+          <Route path="/ScheduleTrail" element={<ScheduleTrail />} />
           <Route
             path="/PharmaLogin"
             element={
