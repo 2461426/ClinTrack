@@ -5,6 +5,7 @@ import participantService from "../services/ParticipantService";
 import "../styles/Admindashboard.css";
 import "../styles/UserDashboard.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import Menu from "./Menu";
 
 const columns = [
   { key: "id", label: "ID" },
@@ -108,19 +109,7 @@ function AdminParticipants() {
   return (
     <div className="admin-wrap">
       {/* Navbar */}
-      <header className="dashboard-header">
-        <nav className="dashboard-nav">
-          <div className="dashboard-left">
-            <div className="brand">ClinTrial</div>
-            <button className="profile-button">{currentUser?.firstName?.charAt(0) || "A"}</button>
-          </div>
-          <ul className="nav-links">
-            <li><NavLink to="/dashboard" ><i className="bi bi-house-fill me-2" />Home</NavLink></li>
-            <li><NavLink to="/admin/schedule"><i className="bi bi-calendar2-plus me-2" />Schedule</NavLink></li>
-            <li><NavLink to="/admin/participants"><i className="bi bi-people-fill me-2" />View Analytics & Data</NavLink></li>
-          </ul>
-        </nav>
-      </header>
+     <Menu/>
 
       {/* Page Header */}
       <div className="header-row" style={{ marginTop: 12 }}>

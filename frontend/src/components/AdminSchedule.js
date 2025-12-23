@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import participantService from "../services/ParticipantService";
 import scheduleService from "../services/ScheduleService";
 import "../styles/Admindashboard.css";
+import Menu from "./Menu";
 
 const ROLE_ADMIN = "ADMIN";
 const TRIAL_TYPES = [
@@ -98,6 +99,9 @@ function AdminSchedule() {
   }
 
   return (
+    <>
+    <Menu/>
+  
     <div className="admin-wrap">
       <div className="header-row">
         <h2 className="page-title">
@@ -233,6 +237,7 @@ function AdminSchedule() {
         </table>
       </div>
     </div>
+      </>
   );
 }
 

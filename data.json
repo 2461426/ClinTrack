@@ -33,6 +33,23 @@
       "hasChronicIllnesses": false,
       "acknowledgment": true,
       "role": "USER"
+    },
+    {
+      "id": "7d65",
+      "firstName": "mahith",
+      "lastName": "tumpala",
+      "email": "u2@gmail.com",
+      "mobile": "4444444449",
+      "dateOfBirth": "2003-06-10",
+      "password": "Userone@123",
+      "trialType": "HYPERTENSION_TRIAL",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true,
+      "role": "USER"
     }
   ],
   "trials": [
@@ -89,6 +106,14 @@
       "Phase": "phase-2",
       "VisitDate": "2026-12-12",
       "Status": "COMPLETED"
+    },
+    {
+      "id": "SCH-20251223-403095",
+      "ScheduleID": "SCH-20251223-403095",
+      "ParticipantID": "7d65",
+      "Phase": "FGHFNB",
+      "VisitDate": "2025-12-24",
+      "Status": "PLANNED"
     }
   ]
 }

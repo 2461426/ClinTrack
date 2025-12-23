@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom';
 import AdminDashboard from './components/Admindashboard';
 import Usertrails from './components/UserTrails';
 import Logout from './components/Logout';
+import AdminSchedule from './components/AdminSchedule';
 function App() {
   return (
 <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="dashboard" element={<UserDashboard />} />
         <Route path="admindashboard" element={<AdminDashboard />} />
+        <Route path='adminschedule' element={<AdminSchedule/>}/>
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path='trails' element={<Usertrails/>}/>

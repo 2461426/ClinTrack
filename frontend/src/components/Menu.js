@@ -275,11 +275,16 @@ const Menu = ({ onOpenProfile, avatarLetter: avatarProp }) => {
                 <i className="bi bi-telephone-fill" /> Contact
               </NavLink>
             </li>
+            <li>
+              <NavLink to="/adminschedule">
+                <i className="bi bi-calendar" /> Schedule
+              </NavLink>
+            </li>
 
             {isLoggedIn && isAdmin && (
               <li>
-                <NavLink to="/admin/profile">
-                  <i className="bi bi-shield-lock-fill" /> Admin Profile
+                <NavLink to="/admindashboard">
+                  <i className="bi bi-shield-lock-fill" /> Admin Dashboard
                 </NavLink>
               </li>
             )}
