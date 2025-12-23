@@ -1,0 +1,282 @@
+/* Profile Container */
+.pharma-profile__container {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #6f00ff 0%, #e72fff 100%);
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+ 
+.pharma-profile__wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+ 
+/* Header Section */
+.pharma-profile__header {
+    background: linear-gradient(135deg, #667eea 0%, #8204ff 100%);
+    padding: 3rem 2rem;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+}
+ 
+.pharma-profile__back-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+ 
+.pharma-profile__back-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+ 
+.pharma-profile__image-wrapper {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+ 
+.pharma-profile__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+ 
+.pharma-profile__name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+ 
+.pharma-profile__email {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 400;
+}
+ 
+/* Body Section */
+.pharma-profile__body {
+    padding: 2rem;
+}
+ 
+.pharma-profile__section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+ 
+/* Info Grid */
+.pharma-profile__info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+ 
+.pharma-profile__info-card {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+ 
+.pharma-profile__info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+}
+ 
+.pharma-profile__info-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+ 
+.pharma-profile__info-value {
+    font-size: 1.3rem;
+    color: #333;
+    font-weight: 700;
+}
+ 
+/* Trails Section */
+.pharma-profile__trails-section {
+    margin-top: 2rem;
+}
+ 
+.pharma-profile__trails-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+ 
+.pharma-profile__trail-card {
+    background-color: #ffffff;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+ 
+.pharma-profile__trail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+    border-color: #667eea;
+}
+ 
+.pharma-profile__trail-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+ 
+.pharma-profile__trail-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+ 
+.pharma-profile__trail-category {
+    display: inline-block;
+    background-color: #667eea;
+    color: #ffffff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+ 
+.pharma-profile__trail-phase {
+    display: inline-block;
+    background-color: #764ba2;
+    color: #ffffff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+ 
+.pharma-profile__trail-description {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+ 
+.pharma-profile__trail-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+ 
+.pharma-profile__trail-stat {
+    text-align: center;
+}
+ 
+.pharma-profile__trail-stat-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #667eea;
+}
+ 
+.pharma-profile__trail-stat-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 0.2rem;
+}
+ 
+/* Progress Bar */
+.pharma-profile__progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+ 
+.pharma-profile__progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s ease;
+}
+ 
+/* Loading State */
+.pharma-profile__loading-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+ 
+.pharma-profile__loading-text {
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+ 
+/* Error State */
+.pharma-profile__error-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+ 
+.pharma-profile__error-text {
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+}
+ 
+/* No Trails */
+.pharma-profile__no-trails {
+    text-align: center;
+    padding: 3rem;
+    color: #6c757d;
+    font-size: 1.2rem;
+}
+ 
+ 

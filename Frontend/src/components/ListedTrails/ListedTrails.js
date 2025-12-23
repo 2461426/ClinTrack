@@ -8,49 +8,49 @@ import CreateTrailModal from '../CreateTrailModal/CreateTrailModal'
 import { getTrailsAPI, createTrailAPI } from '../../utils/trailService'
 import Lottie from 'lottie-react'
 import LoaderAnimation from '../../assets/animations/Loader.json'
-
+ 
 function ListedTrails({ pharma, onLogout }) {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [trails, setTrails] = useState([]);
   const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, trailId: null });
-
+ 
   useEffect(() => {
     loadTrails();
-    
+   
     const closeContextMenu = () => setContextMenu({ visible: false, x: 0, y: 0, trailId: null });
     document.addEventListener('click', closeContextMenu);
-    
+   
     return () => document.removeEventListener('click', closeContextMenu);
   }, []);
-
+ 
   const loadTrails = async () => {
     const trailsFromAPI = await getTrailsAPI();
     setTrails(trailsFromAPI || []);
   };
-  
+ 
   if (!pharma) {
     return <div className='error-message'>Error: No pharma data provided</div>;
   }
-  
+ 
   const pharmaTrails = trails.filter(trail => Number(trail.pharmaId) === Number(pharma.id));
-
+ 
   const handleLogout = () => {
     if (onLogout) onLogout();
     navigate('/Home');
   };
-
+ 
   const handleTrailCreated = async (newTrail) => {
     const result = await createTrailAPI(newTrail);
-    
+   
     if (result.success) {
       await loadTrails();
     } else {
       alert('Failed to create trail. Please make sure the backend server is running.');
     }
   };
-
+ 
   const handleContextMenu = (e, trailId) => {
     e.preventDefault();
     e.stopPropagation();
@@ -61,26 +61,26 @@ function ListedTrails({ pharma, onLogout }) {
       trailId
     });
   };
-
+ 
   const handleDeleteTrail = async (e, trailId) => {
     e.stopPropagation();
-    
+   
     if (!window.confirm('Are you sure you want to delete this trail?')) {
       setContextMenu({ visible: false, x: 0, y: 0, trailId: null });
       return;
     }
-    
+   
     try {
       const trail = trails.find(t => t.trailId === trailId);
       if (!trail?.id) {
         alert('Trail not found');
         return;
       }
-      
+     
       const response = await fetch(`http://localhost:5000/trailDetails/${trail.id}`, {
         method: 'DELETE'
       });
-      
+     
       if (response.ok) {
         await loadTrails();
         alert('Trail deleted successfully!');
@@ -90,10 +90,10 @@ function ListedTrails({ pharma, onLogout }) {
     } catch (error) {
       alert('Failed to delete trail. Please make sure the backend server is running.');
     }
-    
+   
     setContextMenu({ visible: false, x: 0, y: 0, trailId: null });
   };
-
+ 
   return (
     <div className='listed-trails-page'>
       <nav className='navbar'>
@@ -116,7 +116,10 @@ function ListedTrails({ pharma, onLogout }) {
             {dropdownOpen && (
               <div className='navbar__dropdown'>
                 <button
-                  onClick={() => setDropdownOpen(false)}
+                  onClick={() =>{ setDropdownOpen(false)
+ 
+                    navigate('/PharmaProfile')
+                  }}
                   className='navbar__dropdown-item'
                 >
                   Profile
@@ -135,22 +138,22 @@ function ListedTrails({ pharma, onLogout }) {
           </div>
         </div>
       </nav>
-
+ 
       <div className='page-header'>
         <div className='page-header__text'>
           <h1 className='page-header__subtitle'>Active</h1>
           <h1 className='page-header__title'>Ongoing Trails</h1>
         </div>
-        <button 
+        <button
           onClick={() => setIsModalOpen(true)}
           className='page-header__create-btn'
         >
-          <img src={createIcon} className='page-header__create-icon' alt='create' /> 
+          <img src={createIcon} className='page-header__create-icon' alt='create' />
           <span className='page-header__create-text'>Create Trail</span>
           <span className='page-header__create-text-mobile'>Create</span>
         </button>
       </div>
-      
+     
       {pharmaTrails.length === 0 ? (
         <div className='trails-loader'>
           <Lottie animationData={LoaderAnimation} className='trails-loader__animation' />
@@ -158,7 +161,7 @@ function ListedTrails({ pharma, onLogout }) {
       ) : (
         <div className='trails-grid'>
           {pharmaTrails.map((trail) => (
-            <div 
+            <div
               key={trail.trailId}
               onClick={() => navigate(`/TrailDashboard/${trail.trailId}`)}
               onContextMenu={(e) => handleContextMenu(e, trail.trailId)}
@@ -187,7 +190,7 @@ function ListedTrails({ pharma, onLogout }) {
           ))}
         </div>
       )}
-
+ 
       {contextMenu.visible && (
         <div
           className='context-menu'
@@ -205,8 +208,8 @@ function ListedTrails({ pharma, onLogout }) {
           </button>
         </div>
       )}
-      
-      <CreateTrailModal 
+     
+      <CreateTrailModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         pharmaId={pharma.id}
@@ -215,5 +218,7 @@ function ListedTrails({ pharma, onLogout }) {
     </div>
   )
 }
-
+ 
 export default ListedTrails
+ 
+ 
