@@ -1,0 +1,330 @@
+{
+  "participants": [
+    {
+      "pharmaId": "1",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "mobile": "1265126512",
+      "password": "admin@123",
+      "profilePicture": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg",
+      "role": "ADMIN",
+      "id": "9043"
+    },
+    {
+      "id": "7d64",
+      "firstName": "u1",
+      "lastName": "u2",
+      "email": "u1@gmail.com",
+      "mobile": "4444444449",
+      "dateOfBirth": "2003-06-10",
+      "password": "user@123",
+      "trialType": "ONCOLOGY_THERAPY",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true,
+      "role": "USER"
+    },
+    {
+      "id": "7d65",
+      "firstName": "mahith",
+      "lastName": "tumpala",
+      "email": "u2@gmail.com",
+      "mobile": "4444444449",
+      "dateOfBirth": "2003-06-10",
+      "password": "Userone@123",
+      "trialType": "HYPERTENSION_TRIAL",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true,
+      "role": "USER"
+    }
+  ],
+  "trailDetails": [
+    {
+      "trailId": 1,
+      "pharmaId": 1,
+      "title": "Cancer drug trail",
+      "description": "This is a sample description for the trail.",
+      "category": "Cancer",
+      "phase": "04",
+      "participantsRequired": 2549,
+      "participantsEnrolled": 1,
+      "adverseEventsReported": 15,
+      "adverseEventsHigh": 3,
+      "adverseEventsMedium": 7,
+      "adverseEventsLow": 5,
+      "progress": 50,
+      "negativeImpacts": [
+        10,
+        5,
+        2
+      ],
+      "positiveImpacts": [
+        20,
+        15,
+        8
+      ],
+      "participantsId": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        "7d64"
+      ],
+      "phaseDates": {
+        "1": "2026-01-01",
+        "2": "2026-03-31",
+        "3": "2026-06-30",
+        "4": "2026-12-31"
+      },
+      "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg",
+      "id": "c18e"
+    },
+    {
+      "trailId": 2,
+      "pharmaId": 1,
+      "title": "Diabetes drug trail",
+      "description": "This is a sample description for the trail.",
+      "category": "Diabetes",
+      "phase": "02",
+      "participantsRequired": 1500,
+      "participantsEnrolled": 801,
+      "adverseEventsReported": 8,
+      "adverseEventsHigh": 1,
+      "adverseEventsMedium": 4,
+      "adverseEventsLow": 3,
+      "progress": 53,
+      "negativeImpacts": [
+        5,
+        3,
+        1
+      ],
+      "positiveImpacts": [
+        12,
+        9,
+        4
+      ],
+      "participantsId": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        "7d64"
+      ],
+      "phaseDates": {
+        "1": "2026-02-01",
+        "2": "2026-05-31",
+        "3": "2026-09-30",
+        "4": "2027-01-31"
+      },
+      "image": "https://img.freepik.com/free-photo/diabetic-person-checking-their-glucose-level_52683-135690.jpg",
+      "id": "3922"
+    },
+    {
+      "trailId": 3,
+      "pharmaId": 2,
+      "title": "Hypertension drug trail",
+      "description": "This is a sample description for the trail.",
+      "category": "Hypertension",
+      "phase": "03",
+      "participantsRequired": 2000,
+      "participantsEnrolled": 1500,
+      "adverseEventsReported": 12,
+      "adverseEventsHigh": 2,
+      "adverseEventsMedium": 6,
+      "adverseEventsLow": 4,
+      "progress": 75,
+      "negativeImpacts": [
+        8,
+        4,
+        2
+      ],
+      "positiveImpacts": [
+        18,
+        12,
+        6
+      ],
+      "participantsId": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "phaseDates": {
+        "1": "2025-11-01",
+        "2": "2026-02-28",
+        "3": "2026-06-30",
+        "4": "2026-10-31"
+      },
+      "image": "https://img.freepik.com/premium-photo/blood-pressure-meter-toy-heart-light-blue-background_1339860-898.jpg",
+      "id": "570d"
+    },
+    {
+      "trailId": 4,
+      "pharmaId": 1,
+      "title": "Asthma drug trail",
+      "description": "This is a sample description for the trail.",
+      "category": "Asthma",
+      "phase": "01",
+      "participantsRequired": 1200,
+      "participantsEnrolled": 400,
+      "adverseEventsReported": 5,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 2,
+      "adverseEventsLow": 3,
+      "progress": 33,
+      "negativeImpacts": [
+        3,
+        2,
+        1
+      ],
+      "positiveImpacts": [
+        10,
+        7,
+        3
+      ],
+      "participantsId": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "phaseDates": {
+        "1": "2026-03-01",
+        "2": "2026-06-30",
+        "3": "2026-10-31",
+        "4": "2027-02-28"
+      },
+      "image": "https://img.freepik.com/premium-photo/young-man-using-asthma-inhaler-white-background_495423-60995.jpg",
+      "id": "cf4d"
+    },
+    {
+      "id": "9c5c",
+      "trailId": 1765904700765,
+      "pharmaId": 1,
+      "title": "Hypertension Medicine Trail",
+      "description": "This is a sample description for the trail",
+      "category": "Cancer",
+      "phase": "01",
+      "participantsRequired": 100,
+      "participantsEnrolled": 0,
+      "adverseEventsReported": 0,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 0,
+      "progress": 0,
+      "negativeImpacts": [
+        0,
+        0,
+        0
+      ],
+      "positiveImpacts": [
+        0,
+        0,
+        0
+      ],
+      "participantsId": [],
+      "phaseDates": {
+        "1": "2025-12-25",
+        "2": "2025-12-26",
+        "3": "2025-12-30",
+        "4": "2025-12-31"
+      },
+      "image": "https://img.freepik.com/free-photo/weak-young-ill-girl-with-closed-eyes-wearing-white-robe-measuring-her-own-pressure-with-sphygmomanometer-putting-hand-forehead-isolated-pink_141793-86341.jpg"
+    },
+    {
+      "id": "d79b",
+      "trailId": 1765906759519,
+      "pharmaId": 2,
+      "title": "Rahul",
+      "description": "wefw",
+      "category": "Diabetes",
+      "phase": "03",
+      "participantsRequired": 1020,
+      "participantsEnrolled": 0,
+      "adverseEventsReported": 0,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 0,
+      "progress": 0,
+      "negativeImpacts": [
+        0,
+        0,
+        0
+      ],
+      "positiveImpacts": [
+        0,
+        0,
+        0
+      ],
+      "participantsId": [],
+      "phaseDates": {
+        "1": "",
+        "2": "",
+        "3": "",
+        "4": ""
+      },
+      "image": "https://img.freepik.com/free-photo/scientist-using-microscope-medical-research_23-2149084779.jpg"
+    }
+  ],
+  "schedules": [
+    {
+      "id": "SCH-001",
+      "ScheduleID": "SCH-001",
+      "ParticipantID": "f72f",
+      "Phase": "Phase II",
+      "VisitDate": "2025-12-28",
+      "Status": "PLANNED"
+    },
+    {
+      "id": "SCH-20251220-920456",
+      "ScheduleID": "SCH-20251220-920456",
+      "ParticipantID": "f72f",
+      "Phase": "phase-3",
+      "VisitDate": "2025-12-31",
+      "Status": "PLANNED"
+    },
+    {
+      "id": "SCH-20251220-807826",
+      "ScheduleID": "SCH-20251220-807826",
+      "ParticipantID": "ccc4",
+      "Phase": "phase 1",
+      "VisitDate": "2025-12-27",
+      "Status": "PLANNED"
+    },
+    {
+      "id": "SCH-20251221-644050",
+      "ScheduleID": "SCH-20251221-644050",
+      "ParticipantID": "7d64",
+      "Phase": "phase-3",
+      "VisitDate": "2026-02-02",
+      "Status": "COMPLETED"
+    },
+    {
+      "id": "SCH-20251221-681018",
+      "ScheduleID": "SCH-20251221-681018",
+      "ParticipantID": "7d64",
+      "Phase": "phase-2",
+      "VisitDate": "2026-12-12",
+      "Status": "COMPLETED"
+    },
+    {
+      "id": "SCH-20251223-403095",
+      "ScheduleID": "SCH-20251223-403095",
+      "ParticipantID": "7d65",
+      "Phase": "FGHFNB",
+      "VisitDate": "2025-12-24",
+      "Status": "PLANNED"
+    }
+  ]
+}

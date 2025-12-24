@@ -1,0 +1,19 @@
+.trail-navbar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  gap: 3rem;
+  padding: 1rem 1.5rem;
+  align-items: center;
+}
+
+.trail-navbar__icon {
+  height: 2rem;
+  width: 2rem;
+  object-fit: cover;
+}
+
+.trail-navbar__icon:hover {
+  border-radius: 10%;
+  background-color: rgb(242, 242, 242);
+}
