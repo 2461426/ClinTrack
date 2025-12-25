@@ -25,12 +25,14 @@ function TrailDetail() {
   }
 
   useEffect(() => {
+    // Reset enrollment request when trail changes
+    setEnrollmentRequest(null);
+    
     // Fetch trail details
     axios
       .get(`http://localhost:5000/trailDetails/${trailId}`)
       .then((response) => {
         setTrail(response.data);
-        setLoading(false);
         
         // Fetch enrollment request status if user is logged in
         if (currentUser && currentUser.id) {
@@ -38,16 +40,18 @@ function TrailDetail() {
             `http://localhost:5000/enrollmentRequests?trailId=${response.data.id}&participantId=${currentUser.id}`
           );
         }
+        setLoading(false);
         return null;
       })
       .then((enrollmentResponse) => {
         if (enrollmentResponse && enrollmentResponse.data && enrollmentResponse.data.length > 0) {
-          // Get the most recent enrollment request
+          // Get the most recent enrollment request for THIS user and THIS trail
           const sortedRequests = enrollmentResponse.data.sort(
             (a, b) => new Date(b.requestDate) - new Date(a.requestDate)
           );
           setEnrollmentRequest(sortedRequests[0]);
         }
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching trail details:", error);
@@ -267,7 +271,7 @@ function TrailDetail() {
                   </>
                 )}
               </button>
-            ) : enrollmentRequest && enrollmentRequest.status === 'pending' ? (
+            ) : enrollmentRequest && enrollmentRequest.status === 'pending' && enrollmentRequest.participantId === currentUser?.id ? (
               <button
                 disabled
                 className="enroll-button requested"
@@ -275,7 +279,7 @@ function TrailDetail() {
                 <i className="bi bi-clock-history me-2" />
                 Requested
               </button>
-            ) : enrollmentRequest && enrollmentRequest.status === 'approved' ? (
+            ) : enrollmentRequest && enrollmentRequest.status === 'approved' && enrollmentRequest.participantId === currentUser?.id ? (
               <button
                 disabled
                 className="enroll-button approved"

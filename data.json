@@ -10,7 +10,6 @@
       "role": "ADMIN",
       "id": "9043"
     },
-  
     {
       "id": "6459",
       "firstName": "Rahul",
@@ -23,6 +22,22 @@
       "obesityCategory": "NORMAL",
       "bpCategory": "NORMAL",
       "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true
+    },
+    {
+      "id": "0f45",
+      "firstName": "User",
+      "lastName": "One",
+      "email": "u1@gmail.com",
+      "mobile": "1234567899",
+      "dateOfBirth": "2000-12-25",
+      "password": "user@123",
+      "trialType": "HYPERTENSION_TRIAL",
+      "obesityCategory": "OBESITY_CLASS_1",
+      "bpCategory": "STAGE_2",
+      "diabetesStatus": "TYPE_2",
       "hasAsthma": false,
       "hasChronicIllnesses": false,
       "acknowledgment": true
@@ -44,7 +59,7 @@
       "hasChronicIllnesses": false,
       "phase": "04",
       "participantsRequired": 10,
-      "participantsEnrolled": 1,
+      "participantsEnrolled": 2,
       "adverseEventsReported": 0,
       "adverseEventsHigh": 0,
       "adverseEventsMedium": 0,
@@ -61,7 +76,8 @@
         0
       ],
       "participantsId": [
-        "7d64"
+        "7d64",
+        "6459"
       ],
       "phaseDates": {
         "1": "2026-01-01",
@@ -176,6 +192,24 @@
       "participantEmail": "u1@gmail.com",
       "status": "approved",
       "requestDate": "2025-12-25T16:35:32.032Z"
+    },
+    {
+      "id": "bccc",
+      "trailId": "86ee",
+      "participantId": "6459",
+      "participantName": "Rahul R",
+      "participantEmail": "rahul.rajkumar@cognizant.com",
+      "status": "approved",
+      "requestDate": "2025-12-25T18:56:18.989Z"
+    },
+    {
+      "id": "f174",
+      "trailId": "86ee",
+      "participantId": "0f45",
+      "participantName": "User One",
+      "participantEmail": "u1@gmail.com",
+      "status": "pending",
+      "requestDate": "2025-12-25T18:57:06.634Z"
     }
   ]
 }

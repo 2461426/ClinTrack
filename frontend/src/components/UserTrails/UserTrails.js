@@ -58,10 +58,15 @@ function Usertrails() {
 
   // Get trails where user is enrolled OR has an enrollment request
   const registeredTrails = trails.filter(trail => {
+    // Only show if user is logged in
+    if (!currentUser || !currentUser.id) return false;
+    
     // Check if user is already enrolled
-    const isEnrolled = trail.participantsId?.includes(currentUser?.id);
-    // Check if user has an enrollment request (pending or approved)
-    const hasRequest = enrollmentRequests.some(req => req.trailId === trail.id);
+    const isEnrolled = trail.participantsId?.includes(currentUser.id);
+    // Check if user has an enrollment request for THIS specific trail
+    const hasRequest = enrollmentRequests.some(req => 
+      req.trailId === trail.id && req.participantId === currentUser.id
+    );
     return isEnrolled || hasRequest;
   });
 
@@ -71,7 +76,9 @@ function Usertrails() {
 
   // Helper function to get enrollment status for a trail
   const getEnrollmentStatus = (trailId) => {
-    const request = enrollmentRequests.find(req => req.trailId === trailId);
+    const request = enrollmentRequests.find(req => 
+      req.trailId === trailId && req.participantId === currentUser?.id
+    );
     return request ? request.status : null;
   };
 
