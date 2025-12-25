@@ -35,13 +35,6 @@ const DIABETES_STATUS = [
   { value: "UNKNOWN", label: "Unknown / Not sure" },
 ];
 
-const TRIAL_TYPES = [
-  { value: "", label: "-- Select type of trial --" },
-  { value: "COVID_19_VACCINE", label: "COVID‑19 Vaccine" },
-  { value: "HYPERTENSION_TRIAL", label: "Hypertension Trial" },
-  { value: "ONCOLOGY_THERAPY", label: "Oncology Therapy Trial" },
-];
-
 const RegistrationForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -58,7 +51,7 @@ const RegistrationForm = () => {
       confirmPassword: "",
 
       // RIGHT PANE — medical history + dropdowns + radios
-      trialType: "",
+      profilePicture: "",
       obesityCategory: "",
       bpCategory: "",
       diabetesStatus: "",
@@ -112,8 +105,12 @@ const RegistrationForm = () => {
         errors.confirmPassword = "Passwords do not match";
       }
 
+      // Profile picture - optional URL validation
+      if (values.profilePicture && !/^https?:\/\/.+/.test(values.profilePicture)) {
+        errors.profilePicture = "Please enter a valid URL (starting with http:// or https://)";
+      }
+
       // Dropdowns — required selection
-      if (!values.trialType) errors.trialType = "Please select type of trial";
       if (!values.obesityCategory) errors.obesityCategory = "Please select obesity category";
       if (!values.bpCategory) errors.bpCategory = "Please select BP category";
       if (!values.diabetesStatus) errors.diabetesStatus = "Please select diabetes status";
@@ -319,29 +316,24 @@ onSubmit: (values, { resetForm }) => {
               {/* RIGHT PANE — Medical History + Acknowledgment at end */}
               <div className="pane rightPane">
                 <div className="formRow">
+                  <label htmlFor="profilePicture">Profile Picture URL (Optional)</label>
+                  <input
+                    id="profilePicture"
+                    type="text"
+                    name="profilePicture"
+                    className="formInput"
+                    placeholder="Enter profile picture URL"
+                    value={formik.values.profilePicture}
+                    onChange={formik.handleChange}
+                  />
+                  {formik.errors.profilePicture && <span className="error">{formik.errors.profilePicture}</span>}
+                </div>
+
+                <div className="formRow">
                   <label>Medical History</label>
                   <p className="readonlyText" aria-readonly="true">
                     Give response to the below ones whether you are having that issue or not...
                   </p>
-                </div>
-
-                {/* Type of trial */}
-                <div className="formRow">
-                  <label htmlFor="trialType">Type of trial</label>
-                  <select
-                    id="trialType"
-                    name="trialType"
-                    className="formInput"
-                    value={formik.values.trialType}
-                    onChange={formik.handleChange}
-                  >
-                    {TRIAL_TYPES.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </select>
-                  {formik.errors.trialType && <span className="error">{formik.errors.trialType}</span>}
                 </div>
 
                 {/* Obesity classification */}

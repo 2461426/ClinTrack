@@ -6,11 +6,6 @@ import "../styles/Admindashboard.css";
 import Menu from "./Menu";
 
 const ROLE_ADMIN = "ADMIN";
-const TRIAL_TYPES = [
-  { id: "HYPERTENSION_TRIAL", name: "Hypertension Trial" },
-  { id: "COVID_19_VACCINE", name: "COVID‑19 Vaccine" },
-  { id: "ONCOLOGY_THERAPY", name: "Oncology Therapy Trial" }
-];
 
 const isFutureDate = (d) => {
   if (!d) return false;
@@ -27,7 +22,6 @@ function AdminSchedule() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
 
-  const [trialType, setTrialType] = useState(TRIAL_TYPES[0].id);
   const [selectedParticipantId, setSelectedParticipantId] = useState("");
   const [phase, setPhase] = useState("");
   const [visitDate, setVisitDate] = useState("");
@@ -54,8 +48,8 @@ function AdminSchedule() {
   }, [isAdmin]);
 
   const filtered = useMemo(
-    () => participants.filter((p) => p.trialType === trialType),
-    [participants, trialType]
+    () => participants,
+    [participants]
   );
 
   const submit = (e) => {
@@ -106,30 +100,11 @@ function AdminSchedule() {
       <div className="header-row">
         <h2 className="page-title">
           <i className="bi bi-calendar2-plus me-2" />
-          Schedule by Trial Type
+          Schedule Participant Visits
         </h2>
       </div>
 
       <div className="card" style={{ display: "grid", gap: 12 }}>
-        {/* Trial type selector */}
-        <div className="row">
-          <label className="form-label">Trial Type</label>
-          <select
-            className="input"
-            value={trialType}
-            onChange={(e) => {
-              setTrialType(e.target.value);
-              setSelectedParticipantId("");
-            }}
-          >
-            {TRIAL_TYPES.map((tt) => (
-              <option key={tt.id} value={tt.id}>
-                {tt.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
         {/* Participants dropdown */}
         <div className="row">
           <label className="form-label">Participant</label>
@@ -146,7 +121,7 @@ function AdminSchedule() {
             ))}
           </select>
           <div className="text-muted" style={{ marginTop: 6 }}>
-            {filtered.length} participant(s) found for <strong>{trialType}</strong>.
+            {filtered.length} participant(s) available.
           </div>
         </div>
 
@@ -211,14 +186,14 @@ function AdminSchedule() {
               <th>Email</th>
               <th>Mobile</th>
               <th>DOB</th>
-              <th>Trial Type</th>
+              <th>Profile Picture</th>
             </tr>
           </thead>
           <tbody>
             {filtered.length === 0 ? (
               <tr>
                 <td colSpan={6} className="text-muted">
-                  No participants for selected trial type.
+                  No participants available.
                 </td>
               </tr>
             ) : (
@@ -229,7 +204,7 @@ function AdminSchedule() {
                   <td>{p.email}</td>
                   <td>{p.mobile}</td>
                   <td>{p.dateOfBirth}</td>
-                  <td>{p.trialType}</td>
+                  <td>{p.profilePicture ? <img src={p.profilePicture} alt="Profile" style={{width: '30px', height: '30px', borderRadius: '50%', objectFit: 'cover'}} /> : 'N/A'}</td>
                 </tr>
               ))
             )}

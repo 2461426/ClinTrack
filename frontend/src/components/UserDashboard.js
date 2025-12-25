@@ -175,7 +175,7 @@ const UserDashboard = () => {
                   <div><strong>Email:</strong> {currentUser.email}</div>
                   <div><strong>Mobile:</strong> {currentUser.mobile}</div>
                   <div><strong>DOB:</strong> {formatDate(currentUser.dateOfBirth)}</div>
-                  <div><strong>Trial Type:</strong> {currentUser.trialType}</div>
+                  <div><strong>Profile Picture:</strong> {currentUser.profilePicture ? <img src={currentUser.profilePicture} alt="Profile" style={{width: '50px', height: '50px', borderRadius: '50%', objectFit: 'cover', marginLeft: '10px'}} /> : 'Not set'}</div>
                 </div>
                 <div>
                   <div><strong>Obesity:</strong> {currentUser.obesityCategory || "-"}</div>

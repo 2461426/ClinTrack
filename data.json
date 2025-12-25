@@ -22,6 +22,7 @@
       "obesityCategory": "NORMAL",
       "bpCategory": "NORMAL",
       "diabetesStatus": "NONE",
+      "profilePicture": "https://img.freepik.com/free-photo/young-handsome-man-wearing-casual-tshirt-blue-background-happy-face-smiling-with-crossed-arms-looking-camera-positive-person_839833-12963.jpg",
       "hasAsthma": false,
       "hasChronicIllnesses": false,
       "acknowledgment": true
@@ -41,6 +42,22 @@
       "hasAsthma": false,
       "hasChronicIllnesses": false,
       "acknowledgment": true
+    },
+    {
+      "id": "c0f7",
+      "firstName": "User",
+      "lastName": "Two",
+      "email": "u2@gmail.com",
+      "mobile": "1234567891",
+      "dateOfBirth": "2001-11-11",
+      "password": "user@123",
+      "profilePicture": "https://img.freepik.com/free-photo/lifestyle-beauty-fashion-people-emotions-concept-young-asian-female-office-manager-ceo-with-pleased-expression-standing-white-background-smiling-with-arms-crossed-chest_1258-59329.jpg",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "STAGE_1",
+      "diabetesStatus": "NONE",
+      "hasAsthma": true,
+      "hasChronicIllnesses": true,
+      "acknowledgment": true
     }
   ],
   "trailDetails": [
@@ -59,7 +76,7 @@
       "hasChronicIllnesses": false,
       "phase": "04",
       "participantsRequired": 10,
-      "participantsEnrolled": 2,
+      "participantsEnrolled": 3,
       "adverseEventsReported": 0,
       "adverseEventsHigh": 0,
       "adverseEventsMedium": 0,
@@ -77,7 +94,8 @@
       ],
       "participantsId": [
         "7d64",
-        "6459"
+        "6459",
+        "c0f7"
       ],
       "phaseDates": {
         "1": "2026-01-01",
@@ -210,6 +228,15 @@
       "participantEmail": "u1@gmail.com",
       "status": "pending",
       "requestDate": "2025-12-25T18:57:06.634Z"
+    },
+    {
+      "id": "cd12",
+      "trailId": "86ee",
+      "participantId": "c0f7",
+      "participantName": "User Two",
+      "participantEmail": "u2@gmail.com",
+      "status": "approved",
+      "requestDate": "2025-12-25T19:08:50.784Z"
     }
   ]
 }

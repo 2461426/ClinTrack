@@ -14,7 +14,7 @@ const columns = [
   { key: "email", label: "Email" },
   { key: "mobile", label: "Mobile" },
   { key: "dateOfBirth", label: "DOB" },
-  { key: "trialType", label: "Trial Type" },
+  { key: "profilePicture", label: "Profile Picture" },
   { key: "obesityCategory", label: "Obesity" },
   { key: "bpCategory", label: "BP" },
   { key: "diabetesStatus", label: "Diabetes" },
@@ -30,7 +30,7 @@ function AdminParticipants() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
   const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState("trialType");
+  const [sortBy, setSortBy] = useState("firstName");
   const [sortDir, setSortDir] = useState("asc");
   const [page, setPage] = useState(1);
   const pageSize = 10;
@@ -58,7 +58,7 @@ function AdminParticipants() {
     if (!term) return data;
     return data.filter((p) => {
       const cannon = [
-        p.id, p.firstName, p.lastName, p.email, p.mobile, p.trialType
+        p.id, p.firstName, p.lastName, p.email, p.mobile
       ]
         .filter(Boolean)
         .map(String)
@@ -123,7 +123,9 @@ function AdminParticipants() {
             className="input"
           />
           <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="input">
-            <option value="trialType">Sort by Trial Type</option>
+            <option value="firstName">Sort by First Name</option>
+            <option value="lastName">Sort by Last Name</option>
+            <option value="email">Sort by Email</option>
           </select>
           <button className="btn" onClick={() => setSortDir((d) => d === "asc" ? "desc" : "asc")}>
             <i className={`bi ${sortDir === "asc" ? "bi-sort-alpha-down" : "bi-sort-alpha-up"} me-1`} />
@@ -164,7 +166,7 @@ function AdminParticipants() {
                     <td>{p.email}</td>
                     <td>{p.mobile}</td>
                     <td>{p.dateOfBirth}</td>
-                    <td>{p.trialType}</td>
+                    <td>{p.profilePicture ? <img src={p.profilePicture} alt="Profile" style={{width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover'}} /> : 'N/A'}</td>
                     <td>{p.obesityCategory}</td>
                     <td>{p.bpCategory}</td>
                     <td>{p.diabetesStatus}</td>
