@@ -16,7 +16,7 @@ const UserAbout = () => (
       <article className="about-card" aria-labelledby="who-we-are-title">
         <figure className="about-card__media">
           <img
-            src="https://www.olympus-europa.com/medical/rmt/media/Content/Content-MSD/Images/ContentHub/Supporting-the-Continuum-of-Care-through-Healthcare-Digitalization/hismiss_main.jpg"
+            src="https://mrctcenter.org/clinical-research-glossary/wp-content/uploads/sites/6/2021/05/clinical-trial-1-1536x962.png"
             alt="Research institute building"
             className="about-card__img1"
             style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}

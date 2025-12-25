@@ -46,6 +46,7 @@
 /* Consistent row spacing and label formatting */
 .registration .formRow {
   margin-bottom: 14px;
+
 }
 .registration .formRow:last-child {
   margin-bottom: 0;
@@ -59,6 +60,7 @@
   color: #374151; /* gray-700 */
   cursor: pointer;   /* prevent I-beam cursor on labels */
   user-select: none; /* prevent selecting label text */
+  
 }
 
 /* ========== Read-only description (Medical History) ========== */
@@ -144,6 +146,7 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  
 }
 
 .registration .radioItem {

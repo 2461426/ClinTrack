@@ -8,7 +8,6 @@
       "mobile": "1265126512",
       "dateOfBirth": "2000-12-12",
       "password": "admin@12651265",
-      "trialType": "COVID_19_VACCINE",
       "obesityCategory": "NORMAL",
       "bpCategory": "NORMAL",
       "diabetesStatus": "NONE",
@@ -25,7 +24,6 @@
       "mobile": "4444444449",
       "dateOfBirth": "2003-06-10",
       "password": "Userone@123",
-      "trialType": "ONCOLOGY_THERAPY",
       "obesityCategory": "NORMAL",
       "bpCategory": "ELEVATED",
       "diabetesStatus": "NONE",
@@ -39,10 +37,9 @@
       "firstName": "mahith",
       "lastName": "tumpala",
       "email": "u2@gmail.com",
-      "mobile": "4444444449",
+      "mobile": "7896543210",
       "dateOfBirth": "2003-06-10",
       "password": "Userone@123",
-      "trialType": "HYPERTENSION_TRIAL",
       "obesityCategory": "NORMAL",
       "bpCategory": "ELEVATED",
       "diabetesStatus": "NONE",
@@ -55,15 +52,27 @@
   "trials": [
     {
       "id": "COVID_19_VACCINE",
-      "name": "COVID‑19 Vaccine"
+      "code": "COVID_19_VACCINE",
+      "name": "COVID‑19 Vaccine",
+      "startDate": "2026-01-10",
+      "location": "Chennai",
+      "description": "Phase IV follow-up assessing booster efficacy and long-term safety."
     },
     {
       "id": "HYPERTENSION_TRIAL",
-      "name": "Hypertension Trial"
+      "code": "HYPERTENSION_TRIAL",
+      "name": "Hypertension Trial",
+      "startDate": "2026-02-05",
+      "location": "Bengaluru",
+      "description": "Lifestyle and medication adherence program for stage 1–2 hypertension."
     },
     {
       "id": "ONCOLOGY_THERAPY",
-      "name": "Oncology Therapy Trial"
+      "code": "ONCOLOGY_THERAPY",
+      "name": "Oncology Therapy Trial",
+      "startDate": "2026-03-15",
+      "location": "Mumbai",
+      "description": "Targeted therapy evaluation for solid tumors with biomarker-driven cohorts."
     }
   ],
   "schedules": [
@@ -114,6 +123,20 @@
       "Phase": "FGHFNB",
       "VisitDate": "2025-12-24",
       "Status": "PLANNED"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": "a18d",
+      "participantId": "7d64",
+      "trialId": "COVID_19_VACCINE",
+      "enrolledAt": "2025-12-24T15:35:28.764Z"
+    },
+    {
+      "id": "c61e",
+      "participantId": "7d65",
+      "trialId": "COVID_19_VACCINE",
+      "enrolledAt": "2025-12-24T15:55:02.738Z"
     }
   ]
 }

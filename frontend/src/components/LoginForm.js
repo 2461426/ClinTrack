@@ -50,8 +50,6 @@ const LoginForm = () => {
           matchedUser.email,
           matchedUser.role.toUpperCase()
         );
-
-        // Navigate by role
         if (UtilityService.isAdmin()) {
           navigate("/admin/dashboard");
 
@@ -70,18 +68,6 @@ const LoginForm = () => {
  
 return (
   <div className="clintrack-page">
-    {/* <header className="clintrack-page__header">
-      <nav className="navbar clintrack-page__navbar">
-        <div className="container d-flex align-items-center justify-content-center">
-          <h1
-            className="clintrack-page__title text-center m-0"
-            aria-label="Clinical Trial Management and Compliance Management System"
-          >
-            Clinical Trial Management and Compliance Management System
-          </h1>
-        </div>
-      </nav>
-    </header> */}
    <Menu/>
     <section className="login">
       <Formik

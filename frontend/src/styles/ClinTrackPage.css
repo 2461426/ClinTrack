@@ -1,4 +1,4 @@
-
+/* 
 /* Root scope */
 .clintrack-page {
   --ct-bg: #ffffff;
@@ -76,8 +76,4 @@
   padding: 1rem 0px;
   text-align: center;
 }
-
-/* ===== Optional Navbar helpers (if needed) ===== */
-/* If Menu uses .dashboard-header + .dashboard-nav, they will sit above the hero naturally.
-   No change is required here unless you want a sticky header. */
-
+ 

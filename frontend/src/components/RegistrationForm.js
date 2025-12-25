@@ -35,12 +35,12 @@ const DIABETES_STATUS = [
   { value: "UNKNOWN", label: "Unknown / Not sure" },
 ];
 
-const TRIAL_TYPES = [
-  { value: "", label: "-- Select type of trial --" },
-  { value: "COVID_19_VACCINE", label: "COVID‑19 Vaccine" },
-  { value: "HYPERTENSION_TRIAL", label: "Hypertension Trial" },
-  { value: "ONCOLOGY_THERAPY", label: "Oncology Therapy Trial" },
-];
+// const TRIAL_TYPES = [
+//   { value: "", label: "-- Select type of trial --" },
+//   { value: "COVID_19_VACCINE", label: "COVID‑19 Vaccine" },
+//   { value: "HYPERTENSION_TRIAL", label: "Hypertension Trial" },
+//   { value: "ONCOLOGY_THERAPY", label: "Oncology Therapy Trial" },
+// ];
 
 const RegistrationForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -58,7 +58,6 @@ const RegistrationForm = () => {
       confirmPassword: "",
 
       // RIGHT PANE — medical history + dropdowns + radios
-      trialType: "",
       obesityCategory: "",
       bpCategory: "",
       diabetesStatus: "",
@@ -84,7 +83,7 @@ const RegistrationForm = () => {
 
       if (!values.mobile) {
         errors.mobile = "Mobile number is required";
-      } else if (!/^\d{10}$/.test(values.mobile)) {
+      } else if (!/^[6-9]{1}\d{9}$/.test(values.mobile)) {
         errors.mobile = "Mobile number must be exactly 10 digits";
       }
 
@@ -113,7 +112,7 @@ const RegistrationForm = () => {
       }
 
       // Dropdowns — required selection
-      if (!values.trialType) errors.trialType = "Please select type of trial";
+      // if (!values.trialType) errors.trialType = "Please select type of trial";
       if (!values.obesityCategory) errors.obesityCategory = "Please select obesity category";
       if (!values.bpCategory) errors.bpCategory = "Please select BP category";
       if (!values.diabetesStatus) errors.diabetesStatus = "Please select diabetes status";
@@ -326,7 +325,7 @@ onSubmit: (values, { resetForm }) => {
                 </div>
 
                 {/* Type of trial */}
-                <div className="formRow">
+                {/* <div className="formRow">
                   <label htmlFor="trialType">Type of trial</label>
                   <select
                     id="trialType"
@@ -342,7 +341,7 @@ onSubmit: (values, { resetForm }) => {
                     ))}
                   </select>
                   {formik.errors.trialType && <span className="error">{formik.errors.trialType}</span>}
-                </div>
+                </div> */}
 
                 {/* Obesity classification */}
                 <div className="formRow">

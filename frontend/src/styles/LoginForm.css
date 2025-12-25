@@ -1,101 +1,72 @@
 
-/* ===== Login (scoped to .login) ===== */
-
-/* Component container: centers the login card without touching global <body> */
+/* ===== Login Section ===== */
 .login {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* avoid forcing page-wide vertical centering */
-  padding: 24px 0;
-  background: transparent; /* keep page bg in index.css if needed */
-  font-family: Arial, sans-serif;
+  align-items: flex-start;
+  padding: 24px 16px;
+  background: #f7f8fa;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+    Arial, sans-serif;
 }
 
-/* Card */
+/* ===== Login Card ===== */
 .login .login-form {
   width: 100%;
-  max-width: 400px; /* responsive */
-  padding: 30px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 420px;
+  padding: 28px 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
 }
 
 .login .login-form h2 {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
   font-size: 24px;
-  color: #333;
+  font-weight: 700;
+  color: #111827;
 }
 
-/* Segmented control (User/Admin) */
-.login .segmented {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 8px 0 20px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #cfcfcf;
-  background: #e6e6e6; /* grey backdrop */
-}
-
-.login .segmented .segment {
-  appearance: none;
-  border: none;
-  background: #e6e6e6;      /* light grey for inactive */
-  color: #555;
-  padding: 12px 10px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.login .segmented .segment.active {
-  background: #007bff; /* blue (same as login button) */
-  color: #fff;
-}
-
-.login .segmented .segment:not(.active):hover {
-  background: #d9d9d9; /* slightly darker grey on hover */
-}
-
-.login .segmented .segment.active:hover {
-  background: #0069d9; /* slightly darker blue on hover */
-}
-
-/* Inputs */
+/* ===== Inputs ===== */
 .login .form-control {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .login .form-control label {
   display: block;
-  text-align: left;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #444;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #374151;
 }
 
 .login .form-control input {
   width: 100%;
   padding: 12px;
   font-size: 16px;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   background: #fff;
+  color: #111827;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .login .form-control input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+  border-color: #1e6ee5;
+  box-shadow: 0 0 0 3px rgba(30, 110, 229, 0.2);
   outline: none;
 }
 
-/* Actions row: Remember me & Forgot password */
+/* ===== Error Messages ===== */
+.login .error {
+  color: #d93025;
+  font-size: 13px;
+  margin-top: 6px;
+  display: block;
+}
+
+/* ===== Actions Row ===== */
 .login .form-actions {
   display: flex;
   justify-content: space-between;
@@ -103,18 +74,8 @@
   margin: 8px 0 18px;
 }
 
-.login .remember {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: #333;
-  font-size: 14px;
-  user-select: none;
-}
-
-/* Links */
 .login .link {
-  color: #007bff;
+  color: #1e6ee5;
   text-decoration: none;
   font-size: 14px;
 }
@@ -123,38 +84,30 @@
   text-decoration: underline;
 }
 
-/* Primary submit button (scoped; replaces global button[type="submit"]) */
+/* ===== Submit Button ===== */
 .login .primary {
   width: 100%;
   padding: 14px;
   font-size: 16px;
-  background: #007bff;
-  color: white;
+  background: #1e6ee5;
+  color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .login .primary:hover {
-  background: #0056b3;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  background: #1659bc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.login .primary:focus-visible {
-  outline: 2px solid #0056b3;
+.login .primary:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
 }
 
-/* Error messages: align left */
-.login .error {
-  color: #d93025; /* accessible red */
-  font-size: 13px;
-  margin-top: 6px;
-  display: block;
-  text-align: left; /* ensure left alignment */
-}
-
-/* Footer section */
+/* ===== Footer Links ===== */
 .login .footer-links {
   display: flex;
   justify-content: center;
@@ -164,6 +117,24 @@
 }
 
 .login .muted {
-  color: #666;
+  color: #6b7280;
 }
 
+/* ===== Banner ===== */
+.clintrack-page__banner {
+  margin-top: auto;
+  background-color: #f3f4f6;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.clintrack-page__banner-text {
+  color: #111827;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.container-copyright {
+  padding: 1rem 0;
+  text-align: center;
+}

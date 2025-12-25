@@ -7,7 +7,7 @@ import Contact from './components/Contact';
 import About from './components/About';
 import { Navigate } from 'react-router-dom';
 import AdminDashboard from './components/Admindashboard';
-import Usertrails from './components/UserTrails';
+import Usertrails from './components/UserTrials';
 import Logout from './components/Logout';
 import AdminSchedule from './components/AdminSchedule';
 function App() {
