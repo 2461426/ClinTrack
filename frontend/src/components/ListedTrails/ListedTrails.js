@@ -95,7 +95,7 @@ function ListedTrails({ onLogout }) {
     axios.delete(`http://localhost:5000/trailDetails/${trail.id}`)
       .then(response => {
         loadTrails();
-        alert('Trail deleted successfully!');
+        console.log('Trail deleted successfully');
       })
       .catch(error => {
         console.error('Error deleting trail:', error);

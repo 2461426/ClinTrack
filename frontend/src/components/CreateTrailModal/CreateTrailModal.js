@@ -7,7 +7,7 @@ import editText from '../../assets/icons/editText.png';
 import closeIcon from '../../assets/icons/close.png';
 import thumbsUpAnimation from '../../assets/animations/ThumbsUp.json';
 
-function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
+function CreateTrailModal({ isOpen, onClose, pharmaId }) {
   const [currentStep, setCurrentStep] = useState(1);
   const [showSuccess, setShowSuccess] = useState(false);
   const phaseCarouselRef = useRef(null);
@@ -15,10 +15,17 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
   const initialValues = {
     title: '',
     description: '',
-    category: '',
+    gender: '',
+    minAge: '',
+    obesityCategory: '',
+    bpCategory: '',
+    diabetesStatus: '',
+    hasAsthma: '',
+    hasChronicIllnesses: '',
     phase: 1,
     participantsRequired: '100',
-    image: ''
+    image: '',
+    phaseDates: {}
   };
 
   useEffect(() => {
@@ -28,54 +35,84 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
     return () => document.head.removeChild(style);
   }, []);
 
-  const AVAILABLE_CATEGORIES = [
-    'Cancer',
-    'Diabetes',
-    'Cardiology',
-    'Neurology',
-    'Oncology',
-    'Respiratory',
-    'Other'
+  const OBESITY_CATEGORIES = [
+    { value: '', label: '-- Select obesity category --' },
+    { value: 'NORMAL', label: 'Normal weight' },
+    { value: 'OVERWEIGHT', label: 'Overweight' },
+    { value: 'OBESITY_CLASS_1', label: 'Obesity class 1' },
+    { value: 'OBESITY_CLASS_2', label: 'Obesity class 2' },
+    { value: 'OBESITY_CLASS_3', label: 'Obesity class 3' },
+  ];
+
+  const BP_CATEGORIES = [
+    { value: '', label: '-- Select BP category --' },
+    { value: 'NORMAL', label: 'Normal (<120 and <80)' },
+    { value: 'ELEVATED', label: 'Elevated (120–129 and <80)' },
+    { value: 'STAGE_1', label: 'Stage 1 (130–139 or 80–89)' },
+    { value: 'STAGE_2', label: 'Stage 2 (≥140 or ≥90)' },
+    { value: 'CRISIS', label: 'Hypertensive Crisis (≥180 and/or ≥120)' },
+    { value: 'UNKNOWN', label: 'Unknown / Not measured' },
+  ];
+
+  const DIABETES_STATUS = [
+    { value: '', label: '-- Select diabetes status --' },
+    { value: 'NONE', label: 'No diabetes' },
+    { value: 'PREDIABETES', label: 'Prediabetes' },
+    { value: 'TYPE_1', label: 'Type 1 diabetes' },
+    { value: 'TYPE_2', label: 'Type 2 diabetes' },
+    { value: 'GESTATIONAL', label: 'Gestational diabetes' },
+    { value: 'UNKNOWN', label: 'Unknown / Not sure' },
+  ];
+
+  const GENDER_OPTIONS = [
+    { value: '', label: '-- Select gender --' },
+    { value: 'MALE', label: 'Male' },
+    { value: 'FEMALE', label: 'Female' },
+    { value: 'ANY', label: 'Any' },
   ];
 
   const PHASE_ITEM_HEIGHT = 60;
 
-  const validateForm = (values) => {
+  const validate = (values) => {
     const errors = {};
-    if (!values.title.trim()) {
-      errors.title = 'Title is required';
-    }
-    if (!values.description.trim()) {
-      errors.description = 'Description is required';
-    }
-    if (!values.category) {
-      errors.category = 'Category is required';
+    if (currentStep === 1) {
+      if (!values.title.trim()) errors.title = 'Title is required';
+      if (!values.description.trim()) errors.description = 'Description is required';
+      if (!values.gender) errors.gender = 'Please select gender';
+      if (!values.minAge) {
+        errors.minAge = 'Minimum age is required';
+      } else if (values.minAge < 18 || values.minAge > 100) {
+        errors.minAge = 'Minimum age must be between 18 and 100';
+      }
+      if (!values.obesityCategory) errors.obesityCategory = 'Please select obesity category';
+      if (!values.bpCategory) errors.bpCategory = 'Please select BP category';
+      if (!values.diabetesStatus) errors.diabetesStatus = 'Please select diabetes status';
+      if (!values.hasAsthma) errors.hasAsthma = 'Please select an option';
+      if (!values.hasChronicIllnesses) errors.hasChronicIllnesses = 'Please select an option';
     }
     return errors;
   };
 
   const scrollCarouselToPhase = (phaseNumber) => {
     if (phaseCarouselRef.current) {
-      const scrollPosition = (phaseNumber - 1) * PHASE_ITEM_HEIGHT;
-      phaseCarouselRef.current.scrollTop = scrollPosition;
+      phaseCarouselRef.current.scrollTop = (phaseNumber - 1) * PHASE_ITEM_HEIGHT;
     }
   };
 
-  const goToNextStep = (values) => {
-    if (!values.title.trim() || !values.description.trim() || !values.category) {
-      alert('Please fill all required fields');
+  const handleSubmit = (values, { setSubmitting, resetForm, setFieldValue }) => {
+    if (currentStep === 1) {
+      setCurrentStep(2);
+      setSubmitting(false);
       return;
     }
-    setCurrentStep(2);
-  };
 
-  const goToPreviousStep = () => {
-    setCurrentStep(1);
-  };
-
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    if (currentStep === 1) {
-      goToNextStep(values);
+    if (currentStep === 2) {
+      const dates = {};
+      for (let i = 1; i <= values.phase; i++) {
+        dates[i] = '';
+      }
+      setFieldValue('phaseDates', dates);
+      setCurrentStep(3);
       setSubmitting(false);
       return;
     }
@@ -85,7 +122,13 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
       pharmaId: Number(pharmaId),
       title: values.title,
       description: values.description,
-      category: values.category,
+      gender: values.gender,
+      minAge: Number(values.minAge),
+      obesityCategory: values.obesityCategory,
+      bpCategory: values.bpCategory,
+      diabetesStatus: values.diabetesStatus,
+      hasAsthma: values.hasAsthma === 'true',
+      hasChronicIllnesses: values.hasChronicIllnesses === 'true',
       phase: values.phase.toString().padStart(2, '0'),
       participantsRequired: Number(values.participantsRequired),
       participantsEnrolled: 0,
@@ -97,12 +140,12 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
       negativeImpacts: [0, 0, 0],
       positiveImpacts: [0, 0, 0],
       participantsId: [],
-      phaseDates: { '1': '', '2': '', '3': '', '4': '' },
+      phaseDates: values.phaseDates,
       image: values.image || 'https://img.freepik.com/free-photo/scientist-using-microscope-medical-research_23-2149084779.jpg'
     };
 
     axios.post('http://localhost:5000/trailDetails', trailData)
-      .then(response => {
+      .then((response) => {
         setShowSuccess(true);
         setTimeout(() => {
           setShowSuccess(false);
@@ -111,8 +154,8 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
           onClose();
         }, 2000);
       })
-      .catch(error => {
-        console.error('Error creating trail:', error);
+      .catch((error) => {
+        console.error('Error:', error);
         alert('Failed to create trail. Please try again.');
       })
       .finally(() => {
@@ -125,7 +168,6 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
   return (
     <div className='modal-overlay'>
       <div className='modal-container'>
-        
         {showSuccess ? (
           <div className='modal-success'>
             <Lottie 
@@ -136,11 +178,7 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
             <h3 className='modal-success__title'>Trail Created Successfully!</h3>
           </div>
         ) : (
-          <Formik
-            initialValues={initialValues}
-            validate={validateForm}
-            onSubmit={handleSubmit}
-          >
+          <Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmit}>
             {({ values, setFieldValue, isSubmitting }) => (
               <>
                 <div className='modal-header'>
@@ -154,20 +192,13 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                 </div>
 
                 <Form className='modal-form'>
-              
                   {currentStep === 1 && (
                     <div className='modal-step'>
-                      
                       <div className='form-field'>
                         <label className='form-field__label'>
                           Title <span className='form-field__required'>*</span>
                         </label>
-                        <Field
-                          type='text'
-                          name='title'
-                          className='form-field__input'
-                          placeholder='Enter trail title'
-                        />
+                        <Field type='text' name='title' className='form-field__input' placeholder='Enter trail title' />
                         <ErrorMessage name='title' component='div' className='form-field__error' />
                       </div>
 
@@ -175,49 +206,105 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                         <label className='form-field__label'>
                           Description <span className='form-field__required'>*</span>
                         </label>
-                        <Field
-                          as='textarea'
-                          name='description'
-                          rows='4'
-                          className='form-field__textarea'
-                          placeholder='Enter trail description'
-                        />
+                        <Field as='textarea' name='description' rows='4' className='form-field__textarea' placeholder='Enter trail description' />
                         <ErrorMessage name='description' component='div' className='form-field__error' />
                       </div>
 
+                      <h3 className='eligibility-criteria-title'>Eligibility Criteria</h3>
+
                       <div className='form-field'>
-                        <label className='form-field__label form-field__label--with-margin'>
-                          Category <span className='form-field__required'>*</span>
+                        <label className='form-field__label'>
+                          Gender <span className='form-field__required'>*</span>
                         </label>
-                        <div className='category-grid'>
-                          {AVAILABLE_CATEGORIES.map((categoryName) => (
-                            <label
-                              key={categoryName}
-                              className={`category-option ${values.category === categoryName ? 'category-option--selected' : ''}`}
-                            >
-                              <Field
-                                type='radio'
-                                name='category'
-                                value={categoryName}
-                                className='category-option__radio'
-                              />
-                              <span className='category-option__label'>{categoryName}</span>
-                            </label>
+                        <Field as='select' name='gender' className='form-field__select'>
+                          {GENDER_OPTIONS.map((option) => (
+                            <option key={option.value} value={option.value}>{option.label}</option>
                           ))}
-                        </div>
-                        <ErrorMessage name='category' component='div' className='form-field__error' />
+                        </Field>
+                        <ErrorMessage name='gender' component='div' className='form-field__error' />
                       </div>
 
                       <div className='form-field'>
                         <label className='form-field__label'>
-                          Image URL
+                          Minimum Age <span className='form-field__required'>*</span>
                         </label>
-                        <Field
-                          type='url'
-                          name='image'
-                          className='form-field__input'
-                          placeholder='Enter image URL (optional)'
-                        />
+                        <Field type='number' name='minAge' className='form-field__input' placeholder='Enter minimum age (18-100)' min='18' max='100' />
+                        <ErrorMessage name='minAge' component='div' className='form-field__error' />
+                      </div>
+
+                      <div className='form-field'>
+                        <label className='form-field__label'>
+                          Obesity Category <span className='form-field__required'>*</span>
+                        </label>
+                        <Field as='select' name='obesityCategory' className='form-field__select'>
+                          {OBESITY_CATEGORIES.map((option) => (
+                            <option key={option.value} value={option.value}>{option.label}</option>
+                          ))}
+                        </Field>
+                        <ErrorMessage name='obesityCategory' component='div' className='form-field__error' />
+                      </div>
+
+                      <div className='form-field'>
+                        <label className='form-field__label'>
+                          Blood Pressure Category <span className='form-field__required'>*</span>
+                        </label>
+                        <Field as='select' name='bpCategory' className='form-field__select'>
+                          {BP_CATEGORIES.map((option) => (
+                            <option key={option.value} value={option.value}>{option.label}</option>
+                          ))}
+                        </Field>
+                        <ErrorMessage name='bpCategory' component='div' className='form-field__error' />
+                      </div>
+
+                      <div className='form-field'>
+                        <label className='form-field__label'>
+                          Diabetes Status <span className='form-field__required'>*</span>
+                        </label>
+                        <Field as='select' name='diabetesStatus' className='form-field__select'>
+                          {DIABETES_STATUS.map((option) => (
+                            <option key={option.value} value={option.value}>{option.label}</option>
+                          ))}
+                        </Field>
+                        <ErrorMessage name='diabetesStatus' component='div' className='form-field__error' />
+                      </div>
+
+                      <div className='form-field'>
+                        <label className='form-field__label'>
+                          Asthma History <span className='form-field__required'>*</span>
+                        </label>
+                        <div className='radio-group'>
+                          <label className='radio-label'>
+                            <Field type='radio' name='hasAsthma' value='true' />
+                            Required
+                          </label>
+                          <label className='radio-label'>
+                            <Field type='radio' name='hasAsthma' value='false' />
+                            Not Required
+                          </label>
+                        </div>
+                        <ErrorMessage name='hasAsthma' component='div' className='form-field__error' />
+                      </div>
+
+                      <div className='form-field'>
+                        <label className='form-field__label'>
+                          Chronic Illnesses <span className='form-field__required'>*</span>
+                        </label>
+                        <div className='radio-group'>
+                          <label className='radio-label'>
+                            <Field type='radio' name='hasChronicIllnesses' value='true' />
+                            Required
+                          </label>
+                          <label className='radio-label'>
+                            <Field type='radio' name='hasChronicIllnesses' value='false' />
+                            Not Required
+                          </label>
+                        </div>
+                        <ErrorMessage name='hasChronicIllnesses' component='div' className='form-field__error' />
+                      </div>
+
+                      <div className='form-field'>
+                        <label className='form-field__label'>Image URL</label>
+                        <Field type='url' name='image' className='form-field__input' placeholder='Enter image URL (optional)' />
                       </div>
                     </div>
                   )}
@@ -225,26 +312,16 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                   {currentStep === 2 && (
                     <div className='modal-step-two'>
                       <div className='modal-step-two__content'>
-                        
                         <div className='participants-section'>
-                          <label className='participants-section__label'>
-                            Participants Required
-                          </label>
-                          <Field
-                            type='number'
-                            name='participantsRequired'
-                            min='1'
-                            className='participants-section__input'
-                          />
+                          <label className='participants-section__label'>Participants Required</label>
+                          <Field type='number' name='participantsRequired' min='1' className='participants-section__input' />
                           <img src={editText} alt='edit' className='participants-section__edit-icon' />
                         </div>
 
                         <div className='vertical-divider'></div>
 
                         <div className='phase-selector'>
-                          <label className='phase-selector__label'>
-                            No of Phases
-                          </label>
+                          <label className='phase-selector__label'>No of Phases</label>
                           <div className='phase-selector__wrapper'>
                             <div
                               ref={phaseCarouselRef}
@@ -278,21 +355,31 @@ function CreateTrailModal({ isOpen, onClose, pharmaId, onTrailCreated }) {
                     </div>
                   )}
 
+                  {currentStep === 3 && (
+                    <div className='modal-step-three'>
+                      <h3 className='phase-dates-title'>Set Phase Dates</h3>
+                      <div className='phase-dates-grid'>
+                        {Array.from({ length: values.phase }, (_, i) => i + 1).map((phaseNum) => (
+                          <div key={phaseNum} className='form-field'>
+                            <label className='form-field__label'>Phase {phaseNum} Date</label>
+                            <Field type='date' name={`phaseDates.${phaseNum}`} className='form-field__input' />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   <div className='modal-navigation'>
                     <button
                       type='button'
-                      onClick={currentStep === 1 ? onClose : goToPreviousStep}
+                      onClick={currentStep === 1 ? onClose : () => setCurrentStep(currentStep - 1)}
                       className='modal-navigation__btn modal-navigation__btn--secondary'
                     >
                       {currentStep === 1 ? 'Cancel' : 'Previous'}
                     </button>
                     
-                    <button
-                      type='submit'
-                      disabled={isSubmitting}
-                      className='modal-navigation__btn modal-navigation__btn--primary'
-                    >
-                      {isSubmitting ? 'Creating...' : currentStep === 1 ? 'Next' : 'Create Trail'}
+                    <button type='submit' disabled={isSubmitting} className='modal-navigation__btn modal-navigation__btn--primary'>
+                      {isSubmitting ? 'Creating...' : currentStep === 3 ? 'Create Trail' : 'Next'}
                     </button>
                   </div>
                 </Form>

@@ -147,7 +147,7 @@ function TrailDashboard() {
                       cx='80'
                       cy='80'
                       r='70'
-                      stroke='#6366f1'
+                      stroke='#5041FF'
                       strokeWidth='12'
                       fill='none'
                       strokeDasharray={`${2 * Math.PI * 70}`}

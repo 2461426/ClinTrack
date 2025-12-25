@@ -253,7 +253,7 @@ const Menu = ({ onOpenProfile, avatarLetter: avatarProp }) => {
             {isUser && (
               <>
                 <li>
-                  <NavLink to="/dashboard" end>
+                  <NavLink to="/home" end>
                     <i className="bi bi-house-fill" /> Home
                   </NavLink>
                 </li>
@@ -283,7 +283,7 @@ const Menu = ({ onOpenProfile, avatarLetter: avatarProp }) => {
 
             {isLoggedIn && isAdmin && (
               <li>
-                <NavLink to="/admindashboard">
+                <NavLink to="/ListedTrials">
                   <i className="bi bi-shield-lock-fill" /> Admin Dashboard
                 </NavLink>
               </li>

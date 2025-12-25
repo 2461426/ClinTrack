@@ -2,7 +2,7 @@
   "participants": [
     {
       "pharmaId": "1",
-      "name": "admin",
+      "name": "Sun Pharma",
       "email": "admin@gmail.com",
       "mobile": "1265126512",
       "password": "admin@123",
@@ -10,271 +10,66 @@
       "role": "ADMIN",
       "id": "9043"
     },
+  
     {
-      "id": "7d64",
-      "firstName": "u1",
-      "lastName": "u2",
-      "email": "u1@gmail.com",
-      "mobile": "4444444449",
-      "dateOfBirth": "2003-06-10",
-      "password": "user@123",
-      "trialType": "ONCOLOGY_THERAPY",
+      "id": "6459",
+      "firstName": "Rahul",
+      "lastName": "R",
+      "email": "rahul.rajkumar@cognizant.com",
+      "mobile": "1234567891",
+      "dateOfBirth": "2000-12-12",
+      "password": "Rahul@123",
+      "trialType": "COVID_19_VACCINE",
       "obesityCategory": "NORMAL",
-      "bpCategory": "ELEVATED",
+      "bpCategory": "NORMAL",
       "diabetesStatus": "NONE",
       "hasAsthma": false,
       "hasChronicIllnesses": false,
-      "acknowledgment": true,
-      "role": "USER"
-    },
-    {
-      "id": "7d65",
-      "firstName": "mahith",
-      "lastName": "tumpala",
-      "email": "u2@gmail.com",
-      "mobile": "4444444449",
-      "dateOfBirth": "2003-06-10",
-      "password": "Userone@123",
-      "trialType": "HYPERTENSION_TRIAL",
-      "obesityCategory": "NORMAL",
-      "bpCategory": "ELEVATED",
-      "diabetesStatus": "NONE",
-      "hasAsthma": false,
-      "hasChronicIllnesses": false,
-      "acknowledgment": true,
-      "role": "USER"
+      "acknowledgment": true
     }
   ],
   "trailDetails": [
     {
-      "trailId": 1,
+      "id": "86ee",
+      "trailId": 1766678894255,
       "pharmaId": 1,
-      "title": "Cancer drug trail",
-      "description": "This is a sample description for the trail.",
-      "category": "Cancer",
+      "title": "Cancer Drug Trail",
+      "description": "Study Title: TG2812\n\nWhy is this study being done?\nStandard treatments for Cancer work for many, but they don't work for everyone. We are looking for a better way. This research study is testing an investigational drug called [Drug Name/Code]. We want to see if this drug is safe and if it can help [shrink tumors / stop cancer from growing] more effectively than the treatments used today.\n\nWhat is the \"Investigational\" Drug?\nThe drug being tested is a type of [e.g., Immunotherapy]. Instead of attacking all fast-growing cells, it is designed to teach your immune system to recognize and attack only the cancer cells.\n\nWhat will happen if I join?\nIf you choose to participate, you will be a \"partner\" in this research for approximately two months. Your journey will include:\n\nDetailed Health Checks: Extra scans (like CT or MRI) and blood tests to monitor your health closely.\n\nStudy Treatment: You will receive [the study drug / the standard drug] via [pill/infusion] every [Number] weeks.\n\nExpert Care: You will be monitored by a specialized team of doctors and nurses who are experts in this specific type of cancer.",
+      "gender": "ANY",
+      "minAge": 18,
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "TYPE_1",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
       "phase": "04",
-      "participantsRequired": 2549,
+      "participantsRequired": 10,
       "participantsEnrolled": 1,
-      "adverseEventsReported": 15,
-      "adverseEventsHigh": 3,
-      "adverseEventsMedium": 7,
-      "adverseEventsLow": 5,
-      "progress": 50,
+      "adverseEventsReported": 0,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 0,
+      "progress": 0,
       "negativeImpacts": [
-        10,
-        5,
-        2
+        0,
+        0,
+        0
       ],
       "positiveImpacts": [
-        20,
-        15,
-        8
+        0,
+        0,
+        0
       ],
       "participantsId": [
-        1,
-        2,
-        3,
-        4,
-        5,
         "7d64"
       ],
       "phaseDates": {
         "1": "2026-01-01",
-        "2": "2026-03-31",
-        "3": "2026-06-30",
-        "4": "2026-12-31"
+        "2": "2026-02-02",
+        "3": "2026-03-03",
+        "4": "2026-04-04"
       },
-      "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg",
-      "id": "c18e"
-    },
-    {
-      "trailId": 2,
-      "pharmaId": 1,
-      "title": "Diabetes drug trail",
-      "description": "This is a sample description for the trail.",
-      "category": "Diabetes",
-      "phase": "02",
-      "participantsRequired": 1500,
-      "participantsEnrolled": 801,
-      "adverseEventsReported": 8,
-      "adverseEventsHigh": 1,
-      "adverseEventsMedium": 4,
-      "adverseEventsLow": 3,
-      "progress": 53,
-      "negativeImpacts": [
-        5,
-        3,
-        1
-      ],
-      "positiveImpacts": [
-        12,
-        9,
-        4
-      ],
-      "participantsId": [
-        6,
-        7,
-        8,
-        9,
-        10,
-        "7d64"
-      ],
-      "phaseDates": {
-        "1": "2026-02-01",
-        "2": "2026-05-31",
-        "3": "2026-09-30",
-        "4": "2027-01-31"
-      },
-      "image": "https://img.freepik.com/free-photo/diabetic-person-checking-their-glucose-level_52683-135690.jpg",
-      "id": "3922"
-    },
-    {
-      "trailId": 3,
-      "pharmaId": 2,
-      "title": "Hypertension drug trail",
-      "description": "This is a sample description for the trail.",
-      "category": "Hypertension",
-      "phase": "03",
-      "participantsRequired": 2000,
-      "participantsEnrolled": 1500,
-      "adverseEventsReported": 12,
-      "adverseEventsHigh": 2,
-      "adverseEventsMedium": 6,
-      "adverseEventsLow": 4,
-      "progress": 75,
-      "negativeImpacts": [
-        8,
-        4,
-        2
-      ],
-      "positiveImpacts": [
-        18,
-        12,
-        6
-      ],
-      "participantsId": [
-        11,
-        12,
-        13,
-        14,
-        15
-      ],
-      "phaseDates": {
-        "1": "2025-11-01",
-        "2": "2026-02-28",
-        "3": "2026-06-30",
-        "4": "2026-10-31"
-      },
-      "image": "https://img.freepik.com/premium-photo/blood-pressure-meter-toy-heart-light-blue-background_1339860-898.jpg",
-      "id": "570d"
-    },
-    {
-      "trailId": 4,
-      "pharmaId": 1,
-      "title": "Asthma drug trail",
-      "description": "This is a sample description for the trail.",
-      "category": "Asthma",
-      "phase": "01",
-      "participantsRequired": 1200,
-      "participantsEnrolled": 400,
-      "adverseEventsReported": 5,
-      "adverseEventsHigh": 0,
-      "adverseEventsMedium": 2,
-      "adverseEventsLow": 3,
-      "progress": 33,
-      "negativeImpacts": [
-        3,
-        2,
-        1
-      ],
-      "positiveImpacts": [
-        10,
-        7,
-        3
-      ],
-      "participantsId": [
-        16,
-        17,
-        18,
-        19,
-        20
-      ],
-      "phaseDates": {
-        "1": "2026-03-01",
-        "2": "2026-06-30",
-        "3": "2026-10-31",
-        "4": "2027-02-28"
-      },
-      "image": "https://img.freepik.com/premium-photo/young-man-using-asthma-inhaler-white-background_495423-60995.jpg",
-      "id": "cf4d"
-    },
-    {
-      "id": "9c5c",
-      "trailId": 1765904700765,
-      "pharmaId": 1,
-      "title": "Hypertension Medicine Trail",
-      "description": "This is a sample description for the trail",
-      "category": "Cancer",
-      "phase": "01",
-      "participantsRequired": 100,
-      "participantsEnrolled": 0,
-      "adverseEventsReported": 0,
-      "adverseEventsHigh": 0,
-      "adverseEventsMedium": 0,
-      "adverseEventsLow": 0,
-      "progress": 0,
-      "negativeImpacts": [
-        0,
-        0,
-        0
-      ],
-      "positiveImpacts": [
-        0,
-        0,
-        0
-      ],
-      "participantsId": [],
-      "phaseDates": {
-        "1": "2025-12-25",
-        "2": "2025-12-26",
-        "3": "2025-12-30",
-        "4": "2025-12-31"
-      },
-      "image": "https://img.freepik.com/free-photo/weak-young-ill-girl-with-closed-eyes-wearing-white-robe-measuring-her-own-pressure-with-sphygmomanometer-putting-hand-forehead-isolated-pink_141793-86341.jpg"
-    },
-    {
-      "id": "d79b",
-      "trailId": 1765906759519,
-      "pharmaId": 2,
-      "title": "Rahul",
-      "description": "wefw",
-      "category": "Diabetes",
-      "phase": "03",
-      "participantsRequired": 1020,
-      "participantsEnrolled": 0,
-      "adverseEventsReported": 0,
-      "adverseEventsHigh": 0,
-      "adverseEventsMedium": 0,
-      "adverseEventsLow": 0,
-      "progress": 0,
-      "negativeImpacts": [
-        0,
-        0,
-        0
-      ],
-      "positiveImpacts": [
-        0,
-        0,
-        0
-      ],
-      "participantsId": [],
-      "phaseDates": {
-        "1": "",
-        "2": "",
-        "3": "",
-        "4": ""
-      },
-      "image": "https://img.freepik.com/free-photo/scientist-using-microscope-medical-research_23-2149084779.jpg"
+      "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg"
     }
   ],
   "schedules": [
@@ -325,6 +120,62 @@
       "Phase": "FGHFNB",
       "VisitDate": "2025-12-24",
       "Status": "PLANNED"
+    }
+  ],
+  "enrollmentRequests": [
+    {
+      "id": "ebd2",
+      "trailId": "cf4d",
+      "participantId": null,
+      "participantName": "u1 u2",
+      "participantEmail": "u1@gmail.com",
+      "status": "pending",
+      "requestDate": "2025-12-25T13:57:19.992Z"
+    },
+    {
+      "id": "5051",
+      "trailId": "c18e",
+      "participantId": null,
+      "participantName": "u1 u2",
+      "participantEmail": "u1@gmail.com",
+      "status": "approved",
+      "requestDate": "2025-12-25T13:57:38.162Z"
+    },
+    {
+      "id": "9695",
+      "trailId": "9c5c",
+      "participantId": null,
+      "participantName": "u1 u2",
+      "participantEmail": "u1@gmail.com",
+      "status": "rejected",
+      "requestDate": "2025-12-25T14:08:35.526Z"
+    },
+    {
+      "id": "9c64",
+      "trailId": "9c5c",
+      "participantId": null,
+      "participantName": "u1 u2",
+      "participantEmail": "u1@gmail.com",
+      "status": "approved",
+      "requestDate": "2025-12-25T14:09:04.458Z"
+    },
+    {
+      "id": "692b",
+      "trailId": "2beb",
+      "participantId": null,
+      "participantName": "u1 u2",
+      "participantEmail": "u1@gmail.com",
+      "status": "pending",
+      "requestDate": "2025-12-25T14:56:31.178Z"
+    },
+    {
+      "id": "a84b",
+      "trailId": "86ee",
+      "participantId": null,
+      "participantName": "u1 u2",
+      "participantEmail": "u1@gmail.com",
+      "status": "approved",
+      "requestDate": "2025-12-25T16:35:32.032Z"
     }
   ]
 }

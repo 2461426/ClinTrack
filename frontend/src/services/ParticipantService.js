@@ -59,6 +59,40 @@ class ParticipantService {
         return null;
       });
   }
+
+  // Enrollment request methods
+  createEnrollmentRequest(requestData) {
+    return axios.post('http://localhost:5000/enrollmentRequests', requestData);
+  }
+
+  getEnrollmentRequestsByTrail(trailId) {
+    return axios.get(`http://localhost:5000/enrollmentRequests?trailId=${trailId}`);
+  }
+
+  approveEnrollmentRequest(requestId, participantId, trailId) {
+    // First, get the trail details
+    return axios.get(`http://localhost:5000/trailDetails/${trailId}`)
+      .then(response => {
+        const trail = response.data;
+        const updatedParticipantsId = trail.participantsId ? [...trail.participantsId, participantId] : [participantId];
+        const updatedTrail = {
+          ...trail,
+          participantsId: updatedParticipantsId,
+          participantsEnrolled: trail.participantsEnrolled + 1
+        };
+        
+        // Update the trail with new participant
+        return axios.put(`http://localhost:5000/trailDetails/${trailId}`, updatedTrail);
+      })
+      .then(() => {
+        // Update the request status to approved
+        return axios.patch(`http://localhost:5000/enrollmentRequests/${requestId}`, { status: 'approved' });
+      });
+  }
+
+  rejectEnrollmentRequest(requestId) {
+    return axios.patch(`http://localhost:5000/enrollmentRequests/${requestId}`, { status: 'rejected' });
+  }
 }
 
 const participantService = new ParticipantService();

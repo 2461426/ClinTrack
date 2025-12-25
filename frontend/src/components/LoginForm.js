@@ -32,6 +32,7 @@ const LoginForm = () => {
     setSubmitting(true);
     setStatus(undefined);
     const { email, password, role, rememberMe } = values;
+    
     participantService.findByEmailAndPassword(email, password)
       .then((matchedUser) => {
         if (!matchedUser) {
@@ -45,16 +46,19 @@ const LoginForm = () => {
         // Store token + user info
         localStorage.setItem("auth_token", "demo_token");
         localStorage.setItem("logged_in_user", JSON.stringify(matchedUser));
+        
+        // Ensure role exists and is uppercase
+        const userRole = matchedUser.role ? matchedUser.role.toUpperCase() : "USER";
+        
         UtilityService.storeInforation(
           matchedUser.id,
           matchedUser.email,
-          matchedUser.role.toUpperCase()
+          userRole
         );
 
         // Navigate by role
         if (UtilityService.isAdmin()) {
           navigate("/listedtrails");
-
         } else {
           navigate("/dashboard");
         }
@@ -62,8 +66,8 @@ const LoginForm = () => {
         setSubmitting(false);
       })
       .catch((error) => {
-        console.error(error);
-        setStatus("Login failed due to server error.");
+        console.error("Login error:", error);
+        setStatus("Login failed. Please check your credentials and try again.");
         setSubmitting(false);
       });
   };

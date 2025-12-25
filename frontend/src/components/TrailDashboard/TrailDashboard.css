@@ -26,7 +26,7 @@
 
 .dashboard-error__button {
   margin-top: 1rem;
-  background-color: #6366f1;
+  background-color: #5041FF;
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
@@ -60,7 +60,7 @@
 }
 
 .dashboard-navbar__back-btn {
-  color: #6366f1;
+  color: #5041FF;
   font-weight: 600;
   background: transparent;
   border: none;
@@ -102,7 +102,7 @@
 .dashboard-navbar__trail-subtitle {
   font-size: 0.875rem;
   font-weight: 400;
-  color: #6366f1;
+  color: #5041FF;
 }
 
 .dashboard-navbar__right {
@@ -187,7 +187,7 @@
 }
 
 .dashboard-stat__value--primary {
-  color: #6366f1;
+  color: #5041FF;
 }
 
 .dashboard-stat__value--success {
@@ -212,7 +212,7 @@
 }
 
 .progress-bar__fill {
-  background-color: #6366f1;
+  background-color: #5041FF;
   height: 100%;
   border-radius: 9999px;
   transition: width 0.3s;
@@ -250,7 +250,7 @@
 .circular-progress__percentage {
   font-size: 1.875rem;
   font-weight: bold;
-  color: #6366f1;
+  color: #5041FF;
 }
 
 /* Dashboard Impacts */

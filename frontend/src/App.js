@@ -7,13 +7,14 @@ import Contact from './components/contact';
 import About from './components/About';
 import { Navigate } from 'react-router-dom';
 import AdminDashboard from './components/Admindashboard';
-import Usertrails from './components/Usertrails';
+import Usertrails from './components/UserTrails/UserTrails';
 import Logout from './components/Logout';
 import AdminSchedule from './components/AdminSchedule';
 import ListedTrails from './components/ListedTrails/ListedTrails';
 import TrailDashboard from './components/TrailDashboard/TrailDashboard';
 import TrailDetail from './components/TrailDetail/TrailDetail';
 import ListOfParticipants from './components/ListOfParticipants/ListOfParticipants';
+import Home from './components/Home/Home';
 function App() {
   return (
 <BrowserRouter>
@@ -23,6 +24,7 @@ function App() {
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="dashboard" element={<UserDashboard />} />
+        <Route path="home" element={<Home />} />
         <Route path="admindashboard" element={<AdminDashboard />} />
         <Route path='adminschedule' element={<AdminSchedule/>}/>
         <Route path="/listedtrails" element={<ListedTrails />} />

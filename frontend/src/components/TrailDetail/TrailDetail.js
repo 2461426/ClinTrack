@@ -13,6 +13,7 @@ function TrailDetail() {
   const [enrolling, setEnrolling] = useState(false);
   const [withdrawing, setWithdrawing] = useState(false);
   const [message, setMessage] = useState("");
+  const [enrollmentRequest, setEnrollmentRequest] = useState(null);
 
   // Get current user from localStorage
   const raw = localStorage.getItem("logged_in_user");
@@ -30,6 +31,23 @@ function TrailDetail() {
       .then((response) => {
         setTrail(response.data);
         setLoading(false);
+        
+        // Fetch enrollment request status if user is logged in
+        if (currentUser && currentUser.id) {
+          return axios.get(
+            `http://localhost:5000/enrollmentRequests?trailId=${response.data.id}&participantId=${currentUser.id}`
+          );
+        }
+        return null;
+      })
+      .then((enrollmentResponse) => {
+        if (enrollmentResponse && enrollmentResponse.data && enrollmentResponse.data.length > 0) {
+          // Get the most recent enrollment request
+          const sortedRequests = enrollmentResponse.data.sort(
+            (a, b) => new Date(b.requestDate) - new Date(a.requestDate)
+          );
+          setEnrollmentRequest(sortedRequests[0]);
+        }
       })
       .catch((error) => {
         console.error("Error fetching trail details:", error);
@@ -52,27 +70,41 @@ function TrailDetail() {
     setEnrolling(true);
     setMessage("");
 
-    // Update trail with new participant
-    const updatedParticipantsId = trail.participantsId
-      ? [...trail.participantsId, currentUser.id]
-      : [currentUser.id];
+    // Use trail.id (the actual database id) for enrollment requests
+    const actualTrailId = trail.id;
 
-    const updatedTrail = {
-      ...trail,
-      participantsId: updatedParticipantsId,
-      participantsEnrolled: trail.participantsEnrolled + 1,
-    };
-
+    // Check if there's already a pending request
     axios
-      .put(`http://localhost:5000/trailDetails/${trailId}`, updatedTrail)
+      .get(`http://localhost:5000/enrollmentRequests?trailId=${actualTrailId}&participantId=${currentUser.id}&status=pending`)
       .then((response) => {
-        setTrail(response.data);
-        setMessage("Successfully enrolled in the trail!");
-        setEnrolling(false);
+        if (response.data && response.data.length > 0) {
+          setMessage("You already have a pending enrollment request for this trail.");
+          setEnrolling(false);
+          return;
+        }
+
+        // Create enrollment request
+        const requestData = {
+          trailId: actualTrailId,
+          participantId: currentUser.id,
+          participantName: `${currentUser.firstName} ${currentUser.lastName}`,
+          participantEmail: currentUser.email,
+          status: 'pending',
+          requestDate: new Date().toISOString()
+        };
+
+        return axios.post('http://localhost:5000/enrollmentRequests', requestData);
+      })
+      .then((response) => {
+        if (response) {
+          setMessage("Enrollment request sent successfully! Waiting for admin approval.");
+          setEnrollmentRequest(response.data);
+          setEnrolling(false);
+        }
       })
       .catch((error) => {
-        console.error("Error enrolling in trail:", error);
-        setMessage("Failed to enroll. Please try again.");
+        console.error("Error sending enrollment request:", error);
+        setMessage("Failed to send enrollment request. Please try again.");
         setEnrolling(false);
       });
   };
@@ -234,6 +266,22 @@ function TrailDetail() {
                     Withdraw from Trail
                   </>
                 )}
+              </button>
+            ) : enrollmentRequest && enrollmentRequest.status === 'pending' ? (
+              <button
+                disabled
+                className="enroll-button requested"
+              >
+                <i className="bi bi-clock-history me-2" />
+                Requested
+              </button>
+            ) : enrollmentRequest && enrollmentRequest.status === 'approved' ? (
+              <button
+                disabled
+                className="enroll-button approved"
+              >
+                <i className="bi bi-check-circle me-2" />
+                Approved
               </button>
             ) : (
               <button
