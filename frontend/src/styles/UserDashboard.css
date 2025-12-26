@@ -10,7 +10,7 @@
   z-index: 999;
  
 }
-
+ 
 .dashboard-nav {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -18,12 +18,12 @@
   gap: 12px;
   padding: 12px 16px;
 }
-
+ 
 .dashboard-left .brand {
   font-weight: 600;
   font-size: 18px;
 }
-
+ 
 .nav-links {
   list-style: none;
   display: flex;
@@ -32,19 +32,19 @@
   margin: 0;
   justify-content: center;
 }
-
+ 
 .nav-links a {
   text-decoration: none;
   color: #333;
   padding: 8px 10px;
   border-radius: 8px;
 }
-
+ 
 .nav-links a.active {
   background: #e6f4ff;
   color: #0b74de;
 }
-
+ 
 /* Right side avatar button */
 .profile-button {
   justify-self: end;
@@ -59,7 +59,7 @@
   display: grid;
   place-items: center;
 }
-
+ 
 .profile-button:hover {
   background: #eef6ff;
   border-color: #cfe0ff;
@@ -68,3 +68,5 @@
 {
   margin-top: 5px;
 }
+ 
+ 

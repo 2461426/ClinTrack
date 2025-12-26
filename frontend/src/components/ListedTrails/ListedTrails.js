@@ -8,6 +8,7 @@ import createIcon from '../../assets/icons/add.png'
 import CreateTrailModal from '../CreateTrailModal/CreateTrailModal'
 import Lottie from 'lottie-react'
 import LoaderAnimation from '../../assets/animations/Loader.json'
+import utilityService from '../../services/UtilityService'
 
 function ListedTrails({ onLogout }) {
   const navigate = useNavigate();
@@ -206,6 +207,12 @@ function ListedTrails({ onLogout }) {
                     </h1>
                     <p className='trail-card__participants-label'>Participants</p>
                   </div>
+                </div>
+                <div className='trail-card__progress-bar-bottom'>
+                  <div 
+                    className='trail-card__progress-fill-bottom'
+                    style={{ width: `${utilityService.calculateTrailProgress(trail.phaseDates)}%` }}
+                  ></div>
                 </div>
               </div>
             </div>

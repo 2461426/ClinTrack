@@ -137,7 +137,7 @@
       "hasChronicIllnesses": false,
       "phase": "03",
       "participantsRequired": 100,
-      "participantsEnrolled": 1,
+      "participantsEnrolled": 3,
       "adverseEventsReported": 0,
       "adverseEventsHigh": 0,
       "adverseEventsMedium": 0,
@@ -154,7 +154,9 @@
         0
       ],
       "participantsId": [
-        "c0f7"
+        "c0f7",
+        "775a",
+        "775a"
       ],
       "phaseDates": {
         "1": "2025-12-12",
@@ -261,15 +263,6 @@
       "requestDate": "2025-12-25T14:56:31.178Z"
     },
     {
-      "id": "a84b",
-      "trailId": "86ee",
-      "participantId": null,
-      "participantName": "u1 u2",
-      "participantEmail": "u1@gmail.com",
-      "status": "approved",
-      "requestDate": "2025-12-25T16:35:32.032Z"
-    },
-    {
       "id": "bccc",
       "trailId": "86ee",
       "participantId": "6459",
@@ -297,13 +290,13 @@
       "requestDate": "2025-12-25T19:08:50.784Z"
     },
     {
-      "id": "efa7",
+      "id": "3773",
       "trailId": "a721",
-      "participantId": "c0f7",
-      "participantName": "UserTwo Two",
-      "participantEmail": "u2@gmail.com",
+      "participantId": "775a",
+      "participantName": "UserThree Participant",
+      "participantEmail": "u3@gmail.com",
       "status": "approved",
-      "requestDate": "2025-12-26T04:51:07.888Z"
+      "requestDate": "2025-12-26T07:15:52.784Z"
     }
   ]
 }

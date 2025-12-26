@@ -73,6 +73,14 @@ function CreateTrailModal({ isOpen, onClose, pharmaId }) {
 
   const PHASE_ITEM_HEIGHT = 60;
 
+  const getTodayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   const validate = (values) => {
     const errors = {};
     if (currentStep === 1) {
@@ -89,6 +97,16 @@ function CreateTrailModal({ isOpen, onClose, pharmaId }) {
       if (!values.diabetesStatus) errors.diabetesStatus = 'Please select diabetes status';
       if (!values.hasAsthma) errors.hasAsthma = 'Please select an option';
       if (!values.hasChronicIllnesses) errors.hasChronicIllnesses = 'Please select an option';
+    }
+    if (currentStep === 3) {
+      const today = getTodayDate();
+      if (!errors.phaseDates) errors.phaseDates = {};
+      for (let i = 1; i <= values.phase; i++) {
+        const phaseDate = values.phaseDates[i];
+        if (phaseDate && phaseDate < today) {
+          errors.phaseDates[i] = 'Cannot select past dates';
+        }
+      }
     }
     return errors;
   };
@@ -362,7 +380,13 @@ function CreateTrailModal({ isOpen, onClose, pharmaId }) {
                         {Array.from({ length: values.phase }, (_, i) => i + 1).map((phaseNum) => (
                           <div key={phaseNum} className='form-field'>
                             <label className='form-field__label'>Phase {phaseNum} Date</label>
-                            <Field type='date' name={`phaseDates.${phaseNum}`} className='form-field__input' />
+                            <Field 
+                              type='date' 
+                              name={`phaseDates.${phaseNum}`} 
+                              className='form-field__input'
+                              min={getTodayDate()}
+                            />
+                            <ErrorMessage name={`phaseDates.${phaseNum}`} component='div' className='form-field__error' />
                           </div>
                         ))}
                       </div>

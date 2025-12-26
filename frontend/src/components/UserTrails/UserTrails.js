@@ -11,6 +11,10 @@ import Menu from "../Menu";
 import PhaseDetailsOverlay from "../PhaseDetailsOverlay/PhaseDetailsOverlay";
 import ParticipantNavbar from "../ParticipantNavbar/ParticipantNavbar";
 
+// Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Usertrails() {
   const navigate = useNavigate();
   
@@ -52,23 +56,25 @@ function Usertrails() {
       })
       .catch(error => {
         console.error('Error fetching trails:', error);
+        toast.error('Unable to load trails. Please try again later.');
         setTrails([]);
         setLoadingTrails(false);
       });
   }, []);
 
-  // Get trails where user is enrolled OR has an enrollment request
+  // Get trails where user has a valid enrollment request (pending or approved)
   const registeredTrails = trails.filter(trail => {
     // Only show if user is logged in
     if (!currentUser || !currentUser.id) return false;
     
-    // Check if user is already enrolled
-    const isEnrolled = trail.participantsId?.includes(currentUser.id);
-    // Check if user has an enrollment request for THIS specific trail
-    const hasRequest = enrollmentRequests.some(req => 
-      req.trailId === trail.id && req.participantId === currentUser.id
+    // Check if user has a valid enrollment request for THIS specific trail
+    // Using loose equality (==) to handle string/number mismatches
+    const hasValidRequest = enrollmentRequests.some(req => 
+      req.trailId == trail.id && 
+      req.participantId == currentUser.id &&
+      (req.status === 'pending' || req.status === 'approved')
     );
-    return isEnrolled || hasRequest;
+    return hasValidRequest;
   });
 
   const exploreTrails = trails;
@@ -78,9 +84,91 @@ function Usertrails() {
   // Helper function to get enrollment status for a trail
   const getEnrollmentStatus = (trailId) => {
     const request = enrollmentRequests.find(req => 
-      req.trailId === trailId && req.participantId === currentUser?.id
+      req.trailId == trailId && req.participantId == currentUser?.id
     );
     return request ? request.status : null;
+  };
+
+  // Check if user has any enrollment (pending or approved)
+  const hasAnyEnrollment = enrollmentRequests.some(req => 
+    req.participantId == currentUser?.id && 
+    (req.status === 'pending' || req.status === 'approved')
+  );
+
+  // Get the enrolled trail ID
+  const enrolledTrailId = hasAnyEnrollment
+    ? enrollmentRequests.find(req => 
+        req.participantId == currentUser?.id && 
+        (req.status === 'pending' || req.status === 'approved')
+      )?.trailId
+    : null;
+
+  // Handle enrollment for a trail
+  const handleEnroll = (trailId) => {
+    if (!currentUser || !currentUser.id) {
+      toast.info('Please login to enroll in a trail.');
+      return;
+    }
+
+    if (hasAnyEnrollment) {
+      if (enrolledTrailId == trailId) {
+        toast.info('You are already enrolled in this trail.');
+      } else {
+        toast.warn(
+          'You can only enroll for one trail at a time. Please withdraw from your current trail before enrolling in another.'
+        );
+      }
+      return;
+    }
+
+    // Create enrollment request
+    axios.post('http://localhost:5000/enrollmentRequests', {
+      participantId: currentUser.id,
+      trailId: trailId,
+      status: 'pending'
+    })
+    .then(response => {
+      // Update enrollment requests list
+      setEnrollmentRequests(prev => [...prev, response.data]);
+      toast.success('Enrollment request submitted successfully! Awaiting admin approval.');
+    })
+    .catch(error => {
+      console.error('Enrollment error:', error);
+      toast.error('Enrollment failed. Please try again.');
+    });
+  };
+
+  // Handle withdrawal from a trail
+  const handleWithdraw = (trailId) => {
+    if (!currentUser || !currentUser.id) {
+      return;
+    }
+
+    const ok = window.confirm('Are you sure you want to withdraw from this trail?');
+    if (!ok) return;
+
+    // Find the enrollment request to delete
+    const enrollmentRequest = enrollmentRequests.find(req => 
+      req.trailId == trailId && req.participantId == currentUser.id
+    );
+
+    if (!enrollmentRequest) {
+      toast.error('Enrollment request not found.');
+      return;
+    }
+
+    axios.delete(`http://localhost:5000/enrollmentRequests/${enrollmentRequest.id}`)
+      .then(() => {
+        // Remove from enrollment requests list
+        setEnrollmentRequests(prev => 
+          prev.filter(req => req.id !== enrollmentRequest.id)
+        );
+        toast.success('You have successfully withdrawn from the trail.');
+      })
+      .catch(error => {
+        console.error('Withdrawal error:', error);
+        toast.error('Failed to withdraw. Please try again.');
+      });
   };
 
   // Handle trail card click
@@ -100,6 +188,17 @@ function Usertrails() {
   return (
     <>
         <ParticipantNavbar/>
+        <ToastContainer 
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
     <div className="user-trails-page">
   
       <div className='page-header'>
@@ -188,6 +287,18 @@ function Usertrails() {
         isOpen={showPhaseModal}
         onClose={() => setShowPhaseModal(false)}
         trail={selectedTrail}
+        onWithdraw={() => {
+          // Refresh enrollment requests after withdrawal
+          if (currentUser && currentUser.id) {
+            axios.get(`http://localhost:5000/enrollmentRequests?participantId=${currentUser.id}`)
+              .then(response => {
+                setEnrollmentRequests(response.data);
+              })
+              .catch(error => {
+                console.error('Error refreshing enrollment requests:', error);
+              });
+          }
+        }}
       />
     </div>
     </>

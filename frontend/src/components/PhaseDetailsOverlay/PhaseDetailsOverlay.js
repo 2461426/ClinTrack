@@ -1,8 +1,61 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import './PhaseDetailsOverlay.css';
 
-function PhaseDetailsOverlay({ isOpen, onClose, trail, currentPhase }) {
+function PhaseDetailsOverlay({ isOpen, onClose, trail, currentPhase, onWithdraw }) {
   const [completedPhases, setCompletedPhases] = useState(0);
+  const [withdrawing, setWithdrawing] = useState(false);
+
+  // Get current user from localStorage
+  const raw = localStorage.getItem("logged_in_user");
+  let currentUser = null;
+  try {
+    currentUser = raw ? JSON.parse(raw) : null;
+  } catch {
+    currentUser = null;
+  }
+
+  const handleWithdraw = () => {
+    if (!currentUser || !currentUser.id) {
+      toast.info('Please log in to withdraw from this trail.');
+      return;
+    }
+
+    if (!trail || !trail.id) {
+      toast.error('Trail information not found.');
+      return;
+    }
+
+    const ok = window.confirm('Are you sure you want to withdraw from this trail?');
+    if (!ok) return;
+
+    setWithdrawing(true);
+
+    // Find the enrollment request for this trail
+    axios.get(`http://localhost:5000/enrollmentRequests?trailId=${trail.id}&participantId=${currentUser.id}`)
+      .then((response) => {
+        if (response.data && response.data.length > 0) {
+          const enrollmentRequest = response.data[0];
+          return axios.delete(`http://localhost:5000/enrollmentRequests/${enrollmentRequest.id}`);
+        } else {
+          throw new Error('Enrollment request not found.');
+        }
+      })
+      .then(() => {
+        toast.success('You have successfully withdrawn from the trail.');
+        setWithdrawing(false);
+        if (onWithdraw) {
+          onWithdraw();
+        }
+        onClose();
+      })
+      .catch((error) => {
+        console.error('Withdrawal error:', error);
+        toast.error('Failed to withdraw. Please try again.');
+        setWithdrawing(false);
+      });
+  };
 
   useEffect(() => {
     if (trail && trail.phaseDates) {
@@ -92,8 +145,12 @@ function PhaseDetailsOverlay({ isOpen, onClose, trail, currentPhase }) {
         </div>
 
         <div className="phase-overlay__footer">
-          <button className="phase-overlay__btn phase-overlay__btn-close" onClick={onClose}>
-            Close
+          <button 
+            className="phase-overlay__btn phase-overlay__btn-close" 
+            onClick={handleWithdraw}
+            disabled={withdrawing}
+          >
+            {withdrawing ? 'Withdrawing...' : 'Withdraw'}
           </button>
           <button className="phase-overlay__btn phase-overlay__btn-done" onClick={onClose}>
             Done

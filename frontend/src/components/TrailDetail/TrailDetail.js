@@ -5,6 +5,12 @@ import axios from "axios";
 import Menu from "../Menu";
 import "./TrailDetail.css";
 
+// Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ParticipantNavbar from "../ParticipantNavbar/ParticipantNavbar";
+import utilityService from "../../services/UtilityService";
+
 function TrailDetail() {
   const { trailId } = useParams();
   const navigate = useNavigate();
@@ -14,6 +20,7 @@ function TrailDetail() {
   const [withdrawing, setWithdrawing] = useState(false);
   const [message, setMessage] = useState("");
   const [enrollmentRequest, setEnrollmentRequest] = useState(null);
+  const [allEnrollmentRequests, setAllEnrollmentRequests] = useState([]);
 
   // Get current user from localStorage
   const raw = localStorage.getItem("logged_in_user");
@@ -27,101 +34,126 @@ function TrailDetail() {
   useEffect(() => {
     // Reset enrollment request when trail changes
     setEnrollmentRequest(null);
+    setAllEnrollmentRequests([]);
     
     // Fetch trail details
     axios
       .get(`http://localhost:5000/trailDetails/${trailId}`)
       .then((response) => {
-        setTrail(response.data);
+        const fetchedTrail = response.data;
+        setTrail(fetchedTrail);
         
-        // Fetch enrollment request status if user is logged in
+        // Fetch ALL enrollment requests for this user (to check if enrolled in any trail)
         if (currentUser && currentUser.id) {
           return axios.get(
-            `http://localhost:5000/enrollmentRequests?trailId=${response.data.id}&participantId=${currentUser.id}`
-          );
+            `http://localhost:5000/enrollmentRequests?participantId=${currentUser.id}`
+          ).then(enrollmentResponse => ({
+            trail: fetchedTrail,
+            enrollments: enrollmentResponse.data
+          }));
         }
         setLoading(false);
         return null;
       })
-      .then((enrollmentResponse) => {
-        if (enrollmentResponse && enrollmentResponse.data && enrollmentResponse.data.length > 0) {
-          // Get the most recent enrollment request for THIS user and THIS trail
-          const sortedRequests = enrollmentResponse.data.sort(
-            (a, b) => new Date(b.requestDate) - new Date(a.requestDate)
+      .then((result) => {
+        if (result && result.enrollments) {
+          console.log('Fetched enrollments:', result.enrollments);
+          setAllEnrollmentRequests(result.enrollments);
+          
+          // Find enrollment request for THIS specific trail
+          // Using loose equality (==) to handle string/number mismatches
+          const thisTrailRequest = result.enrollments.find(
+            req => req.trailId == result.trail.id && req.participantId == currentUser?.id
           );
-          setEnrollmentRequest(sortedRequests[0]);
+          if (thisTrailRequest) {
+            console.log('Found enrollment for this trail:', thisTrailRequest);
+            setEnrollmentRequest(thisTrailRequest);
+          }
         }
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching trail details:", error);
+        toast.error("Unable to load trail details. Please try again later.");
         setLoading(false);
       });
   }, [trailId]);
 
   const handleEnroll = () => {
     if (!currentUser || !currentUser.id) {
-      setMessage("Please log in to enroll in this trail.");
+      toast.info("Please log in to enroll in this trail.");
       return;
     }
 
-    // Check if already enrolled
-    if (trail.participantsId && trail.participantsId.includes(currentUser.id)) {
-      setMessage("You are already enrolled in this trail.");
+    console.log('Current User ID:', currentUser.id);
+    console.log('All Enrollment Requests:', allEnrollmentRequests);
+
+    // Check if user has any enrollment (pending or approved) in ANY trail
+    // Using loose equality (==) to handle string/number mismatches
+    const hasAnyEnrollment = allEnrollmentRequests.some(req => {
+      const isMatch = req.participantId == currentUser.id && 
+                      (req.status === 'pending' || req.status === 'approved');
+      console.log(`Checking request:`, req, 'Match:', isMatch);
+      return isMatch;
+    });
+
+    console.log('Has Any Enrollment:', hasAnyEnrollment);
+
+    if (hasAnyEnrollment) {
+      // Check if it's this trail
+      const thisTrailEnrollment = allEnrollmentRequests.find(
+        req => req.trailId == trail.id && 
+               req.participantId == currentUser.id && 
+               (req.status === 'pending' || req.status === 'approved')
+      );
+      
+      if (thisTrailEnrollment) {
+        toast.info("You are already enrolled in this trail.");
+      } else {
+        toast.warn(
+          "You can only enroll for one trail at a time. Please withdraw from your current trail before enrolling in another."
+        );
+      }
       return;
     }
 
     setEnrolling(true);
     setMessage("");
 
-    // Use trail.id (the actual database id) for enrollment requests
     const actualTrailId = trail.id;
 
-    // Check if there's already a pending request
-    axios
-      .get(`http://localhost:5000/enrollmentRequests?trailId=${actualTrailId}&participantId=${currentUser.id}&status=pending`)
-      .then((response) => {
-        if (response.data && response.data.length > 0) {
-          setMessage("You already have a pending enrollment request for this trail.");
-          setEnrolling(false);
-          return;
-        }
+    // Create enrollment request
+    const requestData = {
+      trailId: actualTrailId,
+      participantId: currentUser.id,
+      participantName: `${currentUser.firstName} ${currentUser.lastName}`,
+      participantEmail: currentUser.email,
+      status: 'pending',
+      requestDate: new Date().toISOString()
+    };
 
-        // Create enrollment request
-        const requestData = {
-          trailId: actualTrailId,
-          participantId: currentUser.id,
-          participantName: `${currentUser.firstName} ${currentUser.lastName}`,
-          participantEmail: currentUser.email,
-          status: 'pending',
-          requestDate: new Date().toISOString()
-        };
-
-        return axios.post('http://localhost:5000/enrollmentRequests', requestData);
-      })
+    axios.post('http://localhost:5000/enrollmentRequests', requestData)
       .then((response) => {
-        if (response) {
-          setMessage("Enrollment request sent successfully! Waiting for admin approval.");
-          setEnrollmentRequest(response.data);
-          setEnrolling(false);
-        }
+        setEnrollmentRequest(response.data);
+        setAllEnrollmentRequests(prev => [...prev, response.data]);
+        toast.success("Enrollment request submitted successfully! Awaiting admin approval.");
+        setEnrolling(false);
       })
       .catch((error) => {
         console.error("Error sending enrollment request:", error);
-        setMessage("Failed to send enrollment request. Please try again.");
+        toast.error("Enrollment failed. Please try again.");
         setEnrolling(false);
       });
   };
 
   const handleWithdraw = () => {
     if (!currentUser || !currentUser.id) {
-      setMessage("Please log in to withdraw from this trail.");
+      toast.info("Please log in to withdraw from this trail.");
       return;
     }
 
-    // Check if not enrolled
-    if (!trail.participantsId || !trail.participantsId.includes(currentUser.id)) {
-      setMessage("You are not enrolled in this trail.");
+    if (!enrollmentRequest) {
+      toast.error("You are not enrolled in this trail.");
       return;
     }
 
@@ -132,38 +164,38 @@ function TrailDetail() {
     setWithdrawing(true);
     setMessage("");
 
-    // Remove participant from trail
-    const updatedParticipantsId = trail.participantsId.filter(
-      (id) => id !== currentUser.id
-    );
-
-    const updatedTrail = {
-      ...trail,
-      participantsId: updatedParticipantsId,
-      participantsEnrolled: trail.participantsEnrolled - 1,
-    };
-
+    // Delete the enrollment request
     axios
-      .put(`http://localhost:5000/trailDetails/${trailId}`, updatedTrail)
+      .delete(`http://localhost:5000/enrollmentRequests/${enrollmentRequest.id}`)
+      .then(() => {
+        // Refresh enrollment requests from server to ensure data is in sync
+        return axios.get(
+          `http://localhost:5000/enrollmentRequests?participantId=${currentUser.id}`
+        );
+      })
       .then((response) => {
-        setTrail(response.data);
-        setMessage("Successfully withdrawn from the trail.");
+        setEnrollmentRequest(null);
+        setAllEnrollmentRequests(response.data || []);
+        toast.success("You have successfully withdrawn from the trail.");
         setWithdrawing(false);
       })
       .catch((error) => {
         console.error("Error withdrawing from trail:", error);
-        setMessage("Failed to withdraw. Please try again.");
+        toast.error("Failed to withdraw. Please try again.");
         setWithdrawing(false);
       });
   };
 
-  const isEnrolled =
-    trail && trail.participantsId && trail.participantsId.includes(currentUser?.id);
+  const isEnrolled = enrollmentRequest && 
+    (enrollmentRequest.status === 'pending' || enrollmentRequest.status === 'approved');
+
+  // Calculate progress based on phase dates
+  const calculatedProgress = trail?.phaseDates ? utilityService.calculateTrailProgress(trail.phaseDates) : 0;
 
   if (loading) {
     return (
       <div>
-        <Menu />
+        <ParticipantNavbar />
         <div className="trail-detail-container">
           <p>Loading trail details...</p>
         </div>
@@ -174,10 +206,10 @@ function TrailDetail() {
   if (!trail) {
     return (
       <div>
-        <Menu />
+        <ParticipantNavbar />
         <div className="trail-detail-container">
           <p>Trail not found.</p>
-          <button onClick={() => navigate("/usertrails")} className="back-button">
+          <button onClick={() => navigate("/Trails")} className="back-button">
             Go Back
           </button>
         </div>
@@ -187,9 +219,20 @@ function TrailDetail() {
 
   return (
     <div>
-      <Menu />
+      <ParticipantNavbar />
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="trail-detail-container">
-        <button onClick={() => navigate("/usertrails")} className="back-button">
+        <button onClick={() => navigate("/trails")} className="back-button">
           <i className="bi bi-arrow-left me-2" />
           Back to Trails
         </button>
@@ -225,7 +268,7 @@ function TrailDetail() {
                 <i className="bi bi-graph-up" />
                 <div>
                   <strong>Progress</strong>
-                  <p>{trail.progress}% complete</p>
+                  <p>{calculatedProgress}% complete</p>
                 </div>
               </div>
 

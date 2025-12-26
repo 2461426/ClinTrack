@@ -6,6 +6,7 @@ import settings from '../../assets/icons/settingsIcon.png'
 import phaseIcon from '../../assets/icons/phaseIcon.png'
 import TrailNavBar from '../TrailNavBar/TrailNavBar';
 import BackIcon from '../../assets/icons/backIcon.png'
+import utilityService from '../../services/UtilityService'
 
 function TrailDashboard() {
   const { trailId } = useParams();
@@ -57,6 +58,9 @@ function TrailDashboard() {
       </div>
     );
   }
+
+  // Calculate progress based on phase dates
+  const calculatedProgress = utilityService.calculateTrailProgress(trail.phaseDates);
 
   return (
     <div>
@@ -151,12 +155,12 @@ function TrailDashboard() {
                       strokeWidth='12'
                       fill='none'
                       strokeDasharray={`${2 * Math.PI * 70}`}
-                      strokeDashoffset={`${2 * Math.PI * 70 * (1 - trail.progress / 100)}`}
+                      strokeDashoffset={`${2 * Math.PI * 70 * (1 - calculatedProgress / 100)}`}
                       strokeLinecap='round'
                     />
                   </svg>
                   <div className='circular-progress__label'>
-                    <span className='circular-progress__percentage'>{trail.progress}%</span>
+                    <span className='circular-progress__percentage'>{calculatedProgress}%</span>
                   </div>
                 </div>
               </div>

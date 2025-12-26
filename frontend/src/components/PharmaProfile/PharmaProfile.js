@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PharmaProfile.css';
+import utilityService from '../../services/UtilityService';
 
 function PharmaProfile() {
     const [pharmaData, setPharmaData] = useState(null);
@@ -167,7 +168,7 @@ function PharmaProfile() {
                                             </div>
                                             <div className="pharma-profile__trail-stat">
                                                 <div className="pharma-profile__trail-stat-value">
-                                                    {trail.progress || 0}%
+                                                    {utilityService.calculateTrailProgress(trail.phaseDates)}%
                                                 </div>
                                                 <div className="pharma-profile__trail-stat-label">Progress</div>
                                             </div>
@@ -176,8 +177,8 @@ function PharmaProfile() {
                                         <div className="pharma-profile__progress-bar">
                                             <div 
                                                 className="pharma-profile__progress-fill"
-                                                style={{ width: `${trail.progress || 0}%` }}
-                                            />
+                                                style={{ width: `${utilityService.calculateTrailProgress(trail.phaseDates)}%` }}
+                                            ></div>
                                         </div>
                                     </div>
                                 ))}
