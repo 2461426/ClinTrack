@@ -3,20 +3,24 @@ import './Home.css'
 import docImg from '../../assets/images/docImg.png'
 import backgroundImage from '../../assets/images/background-image.png';
 import Menu from '../Menu';
+import ParticipantNavbar from '../ParticipantNavbar/ParticipantNavbar';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
-    <Menu/>
-    <div className='home-page' style={{ backgroundImage: `url(${backgroundImage})`, height: '647px' }}>
+    <ParticipantNavbar/>
+    <div className='home-page' style={{ backgroundImage: `url(${backgroundImage})`, height: '647px'  }}>
       <div className='home-hero'>
         <div className='home-hero__content'>
           <h1 className='home-hero__title'>Enroll for your</h1>
           <h1 className='home-hero__title-highlight'>Trails!!</h1>
           <p className='home-hero__description'>ClinTrack is a system designed for pharmaceutical companies and research organizations to manage clinical trials through a single, integrated platform.</p>
           <div className='home-hero__buttons'>
-            <button className='home-hero__button home-hero__button--primary'>Explore</button>
-            <button className='home-hero__button home-hero__button--secondary'>Contact</button>
+            <button onClick={() => navigate('/trails')} className='home-hero__button home-hero__button--primary'>Explore</button>
+            <button onClick={() => navigate('/contact')} className='home-hero__button home-hero__button--secondary'>Contact</button>
           </div>
         </div>
         <div className='home-hero__card'>
@@ -57,7 +61,7 @@ function Home() {
                 <img className="home-enrollment__gallery-image" src='https://img.freepik.com/free-photo/young-joyful-man-black-shirt-with-optical-glasses-points-side-looks-isolated-pink-wall_141793-35301.jpg' alt='participant' />
               </div>
             </div>
-            <button className="home-enrollment__button">Get Started</button>
+            <button onClick={() => navigate('/trails')} className="home-enrollment__button">Get Started</button>
           </div>
         </div>
       </div>

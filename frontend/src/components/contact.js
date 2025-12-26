@@ -2,6 +2,7 @@
 // src/components/user/UserContact.jsx
 import React, { useState } from "react";
 import Menu from "./Menu";
+import ParticipantNavbar from "./ParticipantNavbar/ParticipantNavbar";
 
 const UserContact = () => {
   const [form, setForm] = useState({ subject: "", message: "" });
@@ -20,7 +21,7 @@ const UserContact = () => {
 
   return (
    <div>
-    <Menu/>
+    <ParticipantNavbar/>
 
   <div style={{
       display: "flex",
@@ -28,7 +29,7 @@ const UserContact = () => {
       alignItems: "center",
       minHeight: "50vh",
       marginBottom:"100px",
-      marginTop:"60px"
+      paddingTop:"70px"
     }}>
       <div style={{
        

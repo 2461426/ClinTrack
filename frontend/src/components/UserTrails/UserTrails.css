@@ -1,5 +1,6 @@
 /* Listed Trails Page */
-.listed-trails-page {
+.user-trails-page {
+  padding-top: 70px;
   min-height: 100vh;
   background-color: #f9fafb;
 }

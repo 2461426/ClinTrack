@@ -125,11 +125,22 @@
 
 
 
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/ClinTrackPage.css";
 import Menu from "./Menu";
+import UtilityService from "../services/UtilityService";
 
 const ClinTrackPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in as admin and redirect to ListedTrails
+    if (UtilityService.isLoggedIn() && UtilityService.isAdmin()) {
+      navigate("/listedtrails");
+    }
+  }, [navigate]);
+
   return (
     <div className="clintrack-page">
       {/* NAVBAR */}

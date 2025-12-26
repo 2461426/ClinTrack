@@ -1,8 +1,10 @@
 .about__grid {
+  
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
-  margin-top: 10px;
+
+  padding-top: 70px;
   margin-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;

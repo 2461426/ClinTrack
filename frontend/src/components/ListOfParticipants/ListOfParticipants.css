@@ -9,12 +9,11 @@
   margin: 0 0 2rem 0;
   padding: 1.5rem;
   border-radius: 0.75rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #f4f4f4;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .participants-header__text {
@@ -26,14 +25,14 @@
 .participants-header__subtitle {
   font-size: 0.875rem;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.9);
+  color: #3c3c3c;
   margin: 0;
 }
 
 .participants-header__title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: white;
+  color: #5041FF;
   margin: 0;
 }
 
@@ -41,7 +40,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
+  background-color: #5041FF;
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
   min-width: 80px;
@@ -50,7 +49,7 @@
 .participants-header__count-label {
   font-size: 0.75rem;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.9);
+  color: white;
   margin: 0 0 0.25rem 0;
 }
 

@@ -2,7 +2,9 @@
 import "../styles/About.css";
 import { Link } from "react-router-dom";
 import Menu from "./Menu";
+import ParticipantNavbar from "./ParticipantNavbar/ParticipantNavbar";
 const UserAbout = () => (
+  <><ParticipantNavbar/>
   <section className="about" aria-labelledby="about-title">
     {/* <header className="about__header">
       <p className="about__lead">
@@ -11,7 +13,7 @@ const UserAbout = () => (
         execution, and reporting.
       </p>
     </header> */}
-     <Menu/>
+     
     <div className="about__grid">
       <article className="about-card" aria-labelledby="who-we-are-title">
         <figure className="about-card__media">
@@ -73,6 +75,7 @@ const UserAbout = () => (
         </div>
         </div>
   </section>
+  </>
 );
 export default UserAbout;
 

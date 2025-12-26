@@ -60,7 +60,7 @@ const LoginForm = () => {
         if (UtilityService.isAdmin()) {
           navigate("/listedtrails");
         } else {
-          navigate("/dashboard");
+          navigate("/home");
         }
 
         setSubmitting(false);

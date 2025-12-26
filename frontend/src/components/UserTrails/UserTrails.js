@@ -9,6 +9,7 @@ import Lottie from 'lottie-react';
 import LoaderAnimation from '../../assets/animations/Loader.json';
 import Menu from "../Menu";
 import PhaseDetailsOverlay from "../PhaseDetailsOverlay/PhaseDetailsOverlay";
+import ParticipantNavbar from "../ParticipantNavbar/ParticipantNavbar";
 
 function Usertrails() {
   const navigate = useNavigate();
@@ -97,8 +98,10 @@ function Usertrails() {
   };
 
   return (
-    <div className="listed-trails-page">
-      <Menu/>
+    <>
+        <ParticipantNavbar/>
+    <div className="user-trails-page">
+  
       <div className='page-header'>
         <div className='page-header__text'>
           <h1 className='page-header__subtitle'>
@@ -187,6 +190,7 @@ function Usertrails() {
         trail={selectedTrail}
       />
     </div>
+    </>
   );
 }
 

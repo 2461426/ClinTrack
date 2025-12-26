@@ -148,7 +148,7 @@ function ListOfParticipants() {
           cursor: 'pointer'
         }}
       >
-        ← Back to Trail Dashboard
+        ← Back
       </button>
 
       <div className='participants-header'>
