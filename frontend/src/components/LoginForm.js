@@ -1,27 +1,21 @@
-
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "../styles/LoginForm.css";
-
-// Use a runtime require to avoid test-time failures when `react-router-dom` is
-// not available (e.g., in minimal test environments). If it's not present,
-// we'll fall back to a plain anchor.
-let RouterLink = null;
-try {
-  const rr = require("react-router-dom");
-  RouterLink = rr && rr.Link ? rr.Link : null;
-} catch (e) {
-  RouterLink = null;
-}
+import UtilityService from "../services/UtilityService";
+import participantService from "../services/ParticipantService";
+import { Link, useNavigate } from "react-router-dom";
+import Menu from "./Menu";
 
 const LoginForm = () => {
-  // Load remembered credentials (demo only; don't store passwords in production)
+  // Restore remembered values
   const rememberedEmail = localStorage.getItem("remembered_email") || "";
   const rememberedPassword = localStorage.getItem("remembered_password") || "";
   const rememberedRole = localStorage.getItem("remembered_role") || "user";
+  // Turn stored string into boolean; default to false if not set
   const rememberedRemember = localStorage.getItem("remember_me") === "true";
 
-  // Manual validation function
+  const navigate = useNavigate();
+
   const validate = (values) => {
     const errors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,27 +28,47 @@ const LoginForm = () => {
     }
     return errors;
   };
-
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, { setSubmitting, setStatus }) => {
+    setSubmitting(true);
+    setStatus(undefined);
     const { email, password, role, rememberMe } = values;
+    participantService.findByEmailAndPassword(email, password)
+      .then((matchedUser) => {
+        if (!matchedUser) {
+          setSubmitting(false);
+          setStatus(
+            "Invalid email or password. Please use the credentials you registered with."
+          );
+          return;
+        }
 
-    // Persist credentials if rememberMe is checked
-    localStorage.setItem("remember_me", rememberMe ? "true" : "false");
-    localStorage.setItem("remembered_role", role);
-    if (rememberMe) {
-      localStorage.setItem("remembered_email", email);
-      localStorage.setItem("remembered_password", password); // ⚠️ insecure; demo only
-    } else {
-      localStorage.removeItem("remembered_email");
-      localStorage.removeItem("remembered_password");
-    }
+        // Store token + user info
+        localStorage.setItem("auth_token", "demo_token");
+        localStorage.setItem("logged_in_user", JSON.stringify(matchedUser));
+        UtilityService.storeInforation(
+          matchedUser.id,
+          matchedUser.email,
+          matchedUser.role.toUpperCase()
+        );
+        if (UtilityService.isAdmin()) {
+          navigate("/admin/dashboard");
 
-    alert(`Login successful as ${role === "admin" ? "Admin" : "User"}!`);
-    // Example redirect:
-    // window.location.href = role === "admin" ? "/admin/dashboard" : "/dashboard";
+        } else {
+          navigate("/dashboard");
+        }
+
+        setSubmitting(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setStatus("Login failed due to server error.");
+        setSubmitting(false);
+      });
   };
-
-  return (
+ 
+return (
+  <div className="clintrack-page">
+   <Menu/>
     <section className="login">
       <Formik
         initialValues={{
@@ -66,12 +80,13 @@ const LoginForm = () => {
         validate={validate}
         onSubmit={handleSubmit}
       >
-        {({ values, setFieldValue }) => (
+        {({ values, setFieldValue, isSubmitting, status }) => (
+    
           <Form className="login-form" noValidate>
             <h2>Login</h2>
 
-            {/* User/Admin segmented toggle */}
-            <div className="segmented" role="tablist" aria-label="Select login role">
+            {/* Role segmented toggle */}
+            {/* <div className="segmented" role="tablist" aria-label="Select login role">
               <button
                 type="button"
                 className={`segment ${values.role === "user" ? "active" : ""}`}
@@ -92,7 +107,7 @@ const LoginForm = () => {
               >
                 Admin
               </button>
-            </div>
+            </div> */}
 
             {/* Email */}
             <div className="form-control">
@@ -102,14 +117,9 @@ const LoginForm = () => {
                 name="email"
                 type="email"
                 placeholder="Enter your email"
-                autoComplete="email"
+                autoComplete="new-email"
               />
-              <ErrorMessage
-                name="email"
-                component="span"
-                className="error"
-                id="email-error"
-              />
+              <ErrorMessage name="email" component="span" className="error" id="email-error" />
             </div>
 
             {/* Password */}
@@ -120,55 +130,57 @@ const LoginForm = () => {
                 name="password"
                 type="password"
                 placeholder="Enter your password"
-                autoComplete="current-password"
+                autoComplete="new-password"
               />
-              <ErrorMessage
-                name="password"
-                component="span"
-                className="error"
-                id="password-error"
-              />
+              <ErrorMessage name="password" component="span" className="error" id="password-error" />
             </div>
 
-            {/* Actions: Remember & Forgot */}
+            {/* Actions */}
             <div className="form-actions">
-              <label className="remember">
+              {/* <label className="remember">
                 <Field type="checkbox" name="rememberMe" />
                 <span>Remember me</span>
-              </label>
+              </label> */}
 
               <a
-                className="link"
-                href="/forgot-password"
+                href="#"
                 onClick={(e) => e.preventDefault()}
               >
                 Forgot password?
               </a>
             </div>
 
-            {/* Submit (text reflects role) */}
-            <button className="primary" type="submit">
-              {values.role === "admin" ? "Login as Admin" : "Login as User"}
+            {/* Submit */}
+            <button className="primary" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Logging in..." : "Login"}
             </button>
+
+            {/* Global login error */}
+            {status && <div className="error" style={{ marginTop: 10 }}>{status}</div>}
 
             {/* Footer */}
             <div className="footer-links">
               <span className="muted">Don’t have an account?</span>
-              {RouterLink ? (
-                <RouterLink className="link" to="/register">
-                  Register here
-                </RouterLink>
-              ) : (
-                <a className="link" href="/register">
-                  Register here
-                </a>
-              )}
+              <Link className="link" to="/register">
+                Register here
+              </Link>
             </div>
           </Form>
         )}
       </Formik>
     </section>
-  );
-};
+    <div className="clintrack-page__banner">
+          <div className="container py-3 text-center">
+            <p className="m-0 clintrack-page__banner-text">
+              All the trials are conducted according to FDA and ICH-GCP guidelines.
+            </p>
+          </div>
+          <div className="container-copyright">
+          <small>© {new Date().getFullYear()} Clin Track. All rights reserved.</small>
+        </div>
+        </div>
+  </div>
+);
 
+}
 export default LoginForm;

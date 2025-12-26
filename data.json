@@ -1,0 +1,142 @@
+{
+  "participants": [
+    {
+      "id": "9999",
+      "firstName": "admin",
+      "lastName": "admin",
+      "email": "admin@gmail.com",
+      "mobile": "1265126512",
+      "dateOfBirth": "2000-12-12",
+      "password": "admin@12651265",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "NORMAL",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true,
+      "role": "ADMIN"
+    },
+    {
+      "id": "7d64",
+      "firstName": "u1",
+      "lastName": "u2",
+      "email": "u1@gmail.com",
+      "mobile": "4444444449",
+      "dateOfBirth": "2003-06-10",
+      "password": "Userone@123",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true,
+      "role": "USER"
+    },
+    {
+      "id": "7d65",
+      "firstName": "mahith",
+      "lastName": "tumpala",
+      "email": "u2@gmail.com",
+      "mobile": "7896543210",
+      "dateOfBirth": "2003-06-10",
+      "password": "Userone@123",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true,
+      "role": "USER"
+    }
+  ],
+  "trials": [
+    {
+      "id": "COVID_19_VACCINE",
+      "code": "COVID_19_VACCINE",
+      "name": "COVID‑19 Vaccine",
+      "startDate": "2026-01-10",
+      "location": "Chennai",
+      "description": "Phase IV follow-up assessing booster efficacy and long-term safety."
+    },
+    {
+      "id": "HYPERTENSION_TRIAL",
+      "code": "HYPERTENSION_TRIAL",
+      "name": "Hypertension Trial",
+      "startDate": "2026-02-05",
+      "location": "Bengaluru",
+      "description": "Lifestyle and medication adherence program for stage 1–2 hypertension."
+    },
+    {
+      "id": "ONCOLOGY_THERAPY",
+      "code": "ONCOLOGY_THERAPY",
+      "name": "Oncology Therapy Trial",
+      "startDate": "2026-03-15",
+      "location": "Mumbai",
+      "description": "Targeted therapy evaluation for solid tumors with biomarker-driven cohorts."
+    }
+  ],
+  "schedules": [
+    {
+      "id": "SCH-001",
+      "ScheduleID": "SCH-001",
+      "ParticipantID": "f72f",
+      "Phase": "Phase II",
+      "VisitDate": "2025-12-28",
+      "Status": "PLANNED"
+    },
+    {
+      "id": "SCH-20251220-920456",
+      "ScheduleID": "SCH-20251220-920456",
+      "ParticipantID": "f72f",
+      "Phase": "phase-3",
+      "VisitDate": "2025-12-31",
+      "Status": "PLANNED"
+    },
+    {
+      "id": "SCH-20251220-807826",
+      "ScheduleID": "SCH-20251220-807826",
+      "ParticipantID": "ccc4",
+      "Phase": "phase 1",
+      "VisitDate": "2025-12-27",
+      "Status": "PLANNED"
+    },
+    {
+      "id": "SCH-20251221-644050",
+      "ScheduleID": "SCH-20251221-644050",
+      "ParticipantID": "7d64",
+      "Phase": "phase-3",
+      "VisitDate": "2026-02-02",
+      "Status": "COMPLETED"
+    },
+    {
+      "id": "SCH-20251221-681018",
+      "ScheduleID": "SCH-20251221-681018",
+      "ParticipantID": "7d64",
+      "Phase": "phase-2",
+      "VisitDate": "2026-12-12",
+      "Status": "COMPLETED"
+    },
+    {
+      "id": "SCH-20251223-403095",
+      "ScheduleID": "SCH-20251223-403095",
+      "ParticipantID": "7d65",
+      "Phase": "FGHFNB",
+      "VisitDate": "2025-12-24",
+      "Status": "PLANNED"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": "a18d",
+      "participantId": "7d64",
+      "trialId": "COVID_19_VACCINE",
+      "enrolledAt": "2025-12-24T15:35:28.764Z"
+    },
+    {
+      "id": "c61e",
+      "participantId": "7d65",
+      "trialId": "COVID_19_VACCINE",
+      "enrolledAt": "2025-12-24T15:55:02.738Z"
+    }
+  ]
+}

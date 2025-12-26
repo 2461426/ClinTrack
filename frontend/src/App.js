@@ -1,37 +1,37 @@
 import ClinTrackPage from './components/ClinTrackPage';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
-
-// Attempt to load react-router-dom at runtime; if it's not available (for
-// lightweight test environments), fall back to simple passthrough components
-// so the app still renders.
-let BrowserRouterComp = ({ children }) => <>{children}</>;
-let RoutesComp = ({ children }) => <>{children}</>;
-let RouteComp = ({ element }) => element;
-try {
-  const rr = require('react-router-dom');
-  if (rr) {
-    BrowserRouterComp = rr.BrowserRouter;
-    RoutesComp = rr.Routes;
-    RouteComp = rr.Route;
-  }
-} catch (e) {
-  // keep fallbacks
-}
-
-
-
+import UserDashboard from './components/UserDashboard';
+import { BrowserRouter,Route,Routes } from 'react-router-dom';
+import Contact from './components/Contact';
+import About from './components/About';
+import { Navigate } from 'react-router-dom';
+import AdminDashboard from './components/Admindashboard';
+import Usertrails from './components/UserTrials';
+import Logout from './components/Logout';
+import AdminSchedule from './components/AdminSchedule';
 function App() {
   return (
-    <>
-      <BrowserRouterComp>
-        <RoutesComp>
-          <RouteComp path="/" element={<ClinTrackPage />} />
-          <RouteComp path="/login" element={<LoginForm />} />
-          <RouteComp path="/register" element={<RegistrationForm />} />
-        </RoutesComp>
-      </BrowserRouterComp>
-    </>
+<BrowserRouter>
+      <Routes>
+        {/* Public routes */}
+        <Route path="/" element={<ClinTrackPage />} />
+        <Route path="/register" element={<RegistrationForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="dashboard" element={<UserDashboard />} />
+        <Route path="admindashboard" element={<AdminDashboard />} />
+        <Route path='adminschedule' element={<AdminSchedule/>}/>
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path='trails' element={<Usertrails/>}/>
+          <Route path="logout" element={<Logout />} />
+       
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+       </BrowserRouter>
+
+
   );
 }
 
