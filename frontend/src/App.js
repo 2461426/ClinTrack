@@ -15,15 +15,17 @@ import TrailDashboard from './components/TrailDashboard/TrailDashboard';
 import TrailDetail from './components/TrailDetail/TrailDetail';
 import ListOfParticipants from './components/ListOfParticipants/ListOfParticipants';
 import Home from './components/Home/Home';
+import PharmaProfile from './components/PharmaProfile/PharmaProfile';
 function App() {
   return (
 <BrowserRouter>
       <Routes>
         {/* Public routes */}
-        <Route path="/" element={<ClinTrackPage />} />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="dashboard" element={<UserDashboard />} />
+        <Route path='pharmaprofile' element={<PharmaProfile/>}/>
         <Route path="home" element={<Home />} />
         <Route path="admindashboard" element={<AdminDashboard />} />
         <Route path='adminschedule' element={<AdminSchedule/>}/>

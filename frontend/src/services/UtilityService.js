@@ -23,6 +23,8 @@ class UtilityService {
         localStorage.removeItem('userid'); 
         localStorage.removeItem('email'); 
         localStorage.removeItem('role'); 
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('logged_in_user');
     }   
 
 }

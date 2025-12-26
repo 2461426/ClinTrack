@@ -51,8 +51,18 @@ function ListedTrails({ onLogout }) {
   const pharmaTrails = trails.filter(trail => Number(trail.pharmaId) === Number(userPharmaId));
 
   const handleLogout = () => {
+    // Clear all user information
+    localStorage.removeItem('userid');
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('logged_in_user');
+    
+    // Call parent logout if provided
     if (onLogout) onLogout();
-    navigate('/Home');
+    
+    // Redirect to login page
+    navigate('/login', { replace: true });
   };
 
   const handleTrailCreated = (newTrail) => {

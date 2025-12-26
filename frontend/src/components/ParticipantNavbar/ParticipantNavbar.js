@@ -1,11 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './ParticipantNavbar.css';
 import user from '../../assets/icons/user.png';
 import UtilityService from '../../services/UtilityService';
 
 function ParticipantNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const navigate = useNavigate();
   const isLoggedIn = UtilityService.isLoggedIn();
 
   // Get logged-in user's profile picture and name from localStorage
@@ -32,6 +34,18 @@ function ParticipantNavbar() {
       return 'User';
     }
   }, [isLoggedIn]);
+
+  const handleLogout = () => {
+    // Clear all user information
+    localStorage.removeItem('userid');
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('logged_in_user');
+    
+    // Redirect to login page
+    navigate('/login', { replace: true });
+  };
 
   return (
     <nav className='participant-navbar'>
@@ -82,12 +96,36 @@ function ParticipantNavbar() {
                 <div className='participant-navbar__greeting-hello'>Hello!</div>
                 <div className='participant-navbar__greeting-name'>{userName}</div>
               </div>
-              <NavLink
-                to="/Profile"
-                className={({isActive}) => `participant-navbar__profile-link ${isActive ? 'participant-navbar__profile-link--active' : ''}`}
-              >
-                <img src={userProfilePicture} alt="User Profile" className='participant-navbar__profile-pic' />
-              </NavLink>
+              <div className='participant-navbar__profile-wrapper'>
+                <button
+                  onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+                  className='participant-navbar__profile-btn'
+                >
+                  <img src={userProfilePicture} alt="User Profile" className='participant-navbar__profile-pic' />
+                </button>
+                {profileDropdownOpen && (
+                  <div className='participant-navbar__profile-dropdown'>
+                    <button
+                      onClick={() => {
+                        setProfileDropdownOpen(false);
+                        navigate('/Profile');
+                      }}
+                      className='participant-navbar__dropdown-item'
+                    >
+                      Profile
+                    </button>
+                    <button
+                      onClick={() => {
+                        setProfileDropdownOpen(false);
+                        handleLogout();
+                      }}
+                      className='participant-navbar__dropdown-item participant-navbar__dropdown-item--logout'
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
             </>
           )}
           

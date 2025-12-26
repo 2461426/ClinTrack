@@ -1,18 +1,21 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import utilityService from "../services/UtilityService"
 
-const Logout=()=>{
+const Logout = () => {
     const navigate = useNavigate();
-   console.log('dfdfsdfsdf');
-    utilityService.clearInformation();
-    localStorage.removeItem("auth_token");
-    localStorage.removeItem("logged_in_user");
-    window.location.href="/login";  
+   
+    useEffect(() => {
+        // Clear all user information
+        utilityService.clearInformation();
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("logged_in_user");
+        
+        // Redirect to login page
+        navigate("/login", { replace: true });
+    }, [navigate]);
     
-    return <>
-      {/* navigate("/login"); */}
-    </>
-
+    return null;
 }
 
 export default Logout;
