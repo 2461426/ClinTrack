@@ -265,7 +265,7 @@ const Menu = ({ onOpenProfile, avatarLetter: avatarProp }) => {
               </>
             )}
 
-            <li>
+            {/* <li>
               <NavLink to="/about">
                 <i className="bi bi-info-circle-fill" /> About
               </NavLink>
@@ -279,7 +279,7 @@ const Menu = ({ onOpenProfile, avatarLetter: avatarProp }) => {
               <NavLink to="/adminschedule">
                 <i className="bi bi-calendar" /> Schedule
               </NavLink>
-            </li>
+            </li> */}
 
             {isLoggedIn && isAdmin && (
               <li>

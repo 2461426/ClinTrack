@@ -47,6 +47,7 @@ const RegistrationForm = () => {
       email: "",
       mobile: "",
       dateOfBirth: "",
+      gender: "",
       password: "",
       confirmPassword: "",
 
@@ -90,6 +91,8 @@ const RegistrationForm = () => {
         const age = Math.abs(ageDate.getUTCFullYear() - 1970);
         if (age < 18) errors.dateOfBirth = "You must be at least 18 years old";
       }
+
+      if (!values.gender) errors.gender = "Please select your gender";
 
       // Password validations
       if (!values.password) {
@@ -253,6 +256,33 @@ onSubmit: (values, { resetForm }) => {
                     onChange={formik.handleChange}
                   />
                   {formik.errors.dateOfBirth && <span className="error">{formik.errors.dateOfBirth}</span>}
+                </div>
+
+                <div className="formRow">
+                  <label>Gender</label>
+                  <div className="radioGroup">
+                    <label className="radioItem">
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="Male"
+                        checked={formik.values.gender === "Male"}
+                        onChange={formik.handleChange}
+                      />
+                      Male
+                    </label>
+                    <label className="radioItem">
+                      <input
+                        type="radio"
+                        name="gender"
+                        value="Female"
+                        checked={formik.values.gender === "Female"}
+                        onChange={formik.handleChange}
+                      />
+                      Female
+                    </label>
+                  </div>
+                  {formik.errors.gender && <span className="error">{formik.errors.gender}</span>}
                 </div>
 
                 {/* Passwords with eye toggles */}

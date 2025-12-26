@@ -58,6 +58,23 @@
       "hasAsthma": true,
       "hasChronicIllnesses": true,
       "acknowledgment": true
+    },
+    {
+      "id": "775a",
+      "firstName": "UserThree",
+      "lastName": "Participant",
+      "email": "u3@gmail.com",
+      "mobile": "1234567891",
+      "dateOfBirth": "2002-12-12",
+      "gender": "Male",
+      "password": "user@123",
+      "profilePicture": "",
+      "obesityCategory": "OVERWEIGHT",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "UNKNOWN",
+      "hasAsthma": true,
+      "hasChronicIllnesses": true,
+      "acknowledgment": true
     }
   ],
   "trailDetails": [
@@ -102,6 +119,47 @@
         "2": "2026-02-02",
         "3": "2026-03-03",
         "4": "2026-04-04"
+      },
+      "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg"
+    },
+    {
+      "id": "a721",
+      "trailId": 1766724632714,
+      "pharmaId": 1,
+      "title": "wheiuhw",
+      "description": "wneiohd",
+      "gender": "MALE",
+      "minAge": 19,
+      "obesityCategory": "OVERWEIGHT",
+      "bpCategory": "STAGE_1",
+      "diabetesStatus": "TYPE_2",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "phase": "03",
+      "participantsRequired": 100,
+      "participantsEnrolled": 1,
+      "adverseEventsReported": 0,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 0,
+      "progress": 0,
+      "negativeImpacts": [
+        0,
+        0,
+        0
+      ],
+      "positiveImpacts": [
+        0,
+        0,
+        0
+      ],
+      "participantsId": [
+        "c0f7"
+      ],
+      "phaseDates": {
+        "1": "2025-12-12",
+        "2": "2025-12-31",
+        "3": "2026-01-02"
       },
       "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg"
     }
@@ -237,6 +295,15 @@
       "participantEmail": "u2@gmail.com",
       "status": "approved",
       "requestDate": "2025-12-25T19:08:50.784Z"
+    },
+    {
+      "id": "efa7",
+      "trailId": "a721",
+      "participantId": "c0f7",
+      "participantName": "UserTwo Two",
+      "participantEmail": "u2@gmail.com",
+      "status": "approved",
+      "requestDate": "2025-12-26T04:51:07.888Z"
     }
   ]
 }
