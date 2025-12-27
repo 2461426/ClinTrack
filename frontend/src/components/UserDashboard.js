@@ -1,5 +1,5 @@
  
-// src/components/UserDashboard.js
+// src/components/UserDashboard.js - for reference  
 import React, { useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import "../styles/UserDashboard.css";
