@@ -16,6 +16,7 @@ import TrailDetail from './components/TrailDetail/TrailDetail';
 import ListOfParticipants from './components/ListOfParticipants/ListOfParticipants';
 import Home from './components/Home/Home';
 import PharmaProfile from './components/PharmaProfile/PharmaProfile';
+import ParticipantProfile from './components/ParticipantProfile/ParticipantProfile';
 function App() {
   return (
 <BrowserRouter>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="dashboard" element={<UserDashboard />} />
         <Route path='pharmaprofile' element={<PharmaProfile/>}/>
+        <Route path='profile' element={<ParticipantProfile/>}/>
         <Route path="home" element={<Home />} />
         <Route path="admindashboard" element={<AdminDashboard />} />
         <Route path='adminschedule' element={<AdminSchedule/>}/>

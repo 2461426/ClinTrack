@@ -108,7 +108,7 @@ function ParticipantNavbar() {
                     <button
                       onClick={() => {
                         setProfileDropdownOpen(false);
-                        navigate('/Profile');
+                        navigate('/profile');
                       }}
                       className='participant-navbar__dropdown-item'
                     >

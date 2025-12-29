@@ -7,7 +7,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import scheduleService from "../services/ScheduleService";
 import participantService from "../services/ParticipantService";
 import trialService from "../services/TrialService";
-import UserProfile from "./userprofile";
+import UserProfile from "./userprofile"; 
 import Menu from "./Menu";
  
 // Toastify

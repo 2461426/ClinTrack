@@ -100,10 +100,10 @@ function CreateTrailModal({ isOpen, onClose, pharmaId }) {
     }
     if (currentStep === 3) {
       const today = getTodayDate();
-      if (!errors.phaseDates) errors.phaseDates = {};
       for (let i = 1; i <= values.phase; i++) {
         const phaseDate = values.phaseDates[i];
         if (phaseDate && phaseDate < today) {
+          if (!errors.phaseDates) errors.phaseDates = {};
           errors.phaseDates[i] = 'Cannot select past dates';
         }
       }
