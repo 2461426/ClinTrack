@@ -1,7 +1,18 @@
 /* Main Container */
+.participants-layout {
+  display: flex;
+  padding-top: 70px;
+}
+
+.participants-with-navbar {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+}
+
 .participants-page { 
   width: 100%;
   padding: 1rem;
+  padding-top: 1rem;
 }
 
 /* Header Section */

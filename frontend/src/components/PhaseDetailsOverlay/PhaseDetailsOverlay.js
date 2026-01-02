@@ -78,6 +78,7 @@ function PhaseDetailsOverlay({ isOpen, onClose, trail, currentPhase, onWithdraw 
 
   const totalPhases = parseInt(trail.phase) || 4;
   const phaseDates = trail.phaseDates || {};
+  const hospitals = trail.hospitals || ['Apollo Hospital', 'KMCH', 'AIMS'];
 
   const formatDate = (dateString) => {
     if (!dateString) return 'TBD';
@@ -100,11 +101,13 @@ function PhaseDetailsOverlay({ isOpen, onClose, trail, currentPhase, onWithdraw 
             <p className="phase-overlay__subtitle">Scheduled dates for each phase</p>
           </div>
           <div className="phase-overlay__header-right">
-            <h3 className="phase-overlay__partner-title">Partner Hospital</h3>
+            <h3 className="phase-overlay__partner-title">Partner Hospital{hospitals.length > 1 ? 's' : ''}</h3>
             <div className="phase-overlay__hospital-tabs">
-              <button className="hospital-tab active">Apollo Hospital</button>
-              <button className="hospital-tab">KMCH</button>
-              <button className="hospital-tab">AIMS</button>
+              {hospitals.map((hospital, index) => (
+                <button key={index} className={`hospital-tab ${index === 0 ? 'active' : ''}`}>
+                  {hospital}
+                </button>
+              ))}
             </div>
           </div>
         </div>

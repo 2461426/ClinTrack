@@ -25,6 +25,7 @@ function CreateTrailModal({ isOpen, onClose, pharmaId }) {
     phase: 1,
     participantsRequired: '100',
     image: '',
+    hospitals: [],
     phaseDates: {}
   };
 
@@ -71,6 +72,15 @@ function CreateTrailModal({ isOpen, onClose, pharmaId }) {
     { value: 'ANY', label: 'Any' },
   ];
 
+  const HOSPITAL_OPTIONS = [
+    { value: 'Apollo Hospital', label: 'Apollo Hospital' },
+    { value: 'Max Hospital', label: 'Max Hospital' },
+    { value: 'Fortis Hospital', label: 'Fortis Hospital' },
+    { value: 'AIIMS Hospital', label: 'AIIMS Hospital' },
+    { value: 'KMCH', label: 'KMCH' },
+    { value: 'AIMS', label: 'AIMS' },
+  ];
+
   const PHASE_ITEM_HEIGHT = 60;
 
   const getTodayDate = () => {
@@ -97,6 +107,11 @@ function CreateTrailModal({ isOpen, onClose, pharmaId }) {
       if (!values.diabetesStatus) errors.diabetesStatus = 'Please select diabetes status';
       if (!values.hasAsthma) errors.hasAsthma = 'Please select an option';
       if (!values.hasChronicIllnesses) errors.hasChronicIllnesses = 'Please select an option';
+      if (!values.hospitals || values.hospitals.length === 0) {
+        errors.hospitals = 'Please select at least one hospital';
+      } else if (values.hospitals.length > 3) {
+        errors.hospitals = 'You can select maximum 3 hospitals';
+      }
     }
     if (currentStep === 3) {
       const today = getTodayDate();
@@ -158,8 +173,9 @@ function CreateTrailModal({ isOpen, onClose, pharmaId }) {
       negativeImpacts: [0, 0, 0],
       positiveImpacts: [0, 0, 0],
       participantsId: [],
+      hospitals: values.hospitals,
       phaseDates: values.phaseDates,
-      image: values.image || 'https://img.freepik.com/free-photo/scientist-using-microscope-medical-research_23-2149084779.jpg'
+      image: values.image || 'https://img.freepik.com/free-photo/international-nurses-day-concept_23-2150204832.jpg'
     };
 
     axios.post('http://localhost:5000/trailDetails', trailData)
@@ -318,6 +334,27 @@ function CreateTrailModal({ isOpen, onClose, pharmaId }) {
                           </label>
                         </div>
                         <ErrorMessage name='hasChronicIllnesses' component='div' className='form-field__error' />
+                      </div>
+
+                      <div className='form-field'>
+                        <label className='form-field__label'>
+                          Partner Hospitals <span className='form-field__required'>*</span>
+                        </label>
+                        <small style={{ display: 'block', marginBottom: '8px', color: '#64748b' }}>Select up to 3 hospitals</small>
+                        <div className='checkbox-group'>
+                          {HOSPITAL_OPTIONS.map((hospital) => (
+                            <label key={hospital.value} className='checkbox-label'>
+                              <Field
+                                type='checkbox'
+                                name='hospitals'
+                                value={hospital.value}
+                                disabled={values.hospitals.length >= 3 && !values.hospitals.includes(hospital.value)}
+                              />
+                              {hospital.label}
+                            </label>
+                          ))}
+                        </div>
+                        <ErrorMessage name='hospitals' component='div' className='form-field__error' />
                       </div>
 
                       <div className='form-field'>
