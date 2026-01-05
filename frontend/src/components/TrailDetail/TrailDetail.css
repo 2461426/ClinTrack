@@ -1,0 +1,367 @@
+
+/* src/components/TrailDetail/TrailDetail.css */
+
+.trail-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  padding-top: 90px;
+  min-height: calc(100vh - 200px);
+}
+
+.back-button {
+  background: transparent;
+  border: 1px solid #e9ecef;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 24px;
+  transition: all 0.2s;
+}
+
+.back-button:hover {
+  background: #f8f9fa;
+  color: #0b74de;
+  border-color: #0b74de;
+}
+
+.trail-detail-card {
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.trail-detail-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.trail-detail-content {
+  padding: 32px;
+}
+
+.trail-detail-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 16px 0;
+}
+
+.trail-detail-badges {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.badge-phase {
+  background: #e6f4ff;
+  color: #0b74de;
+}
+
+.badge-category {
+  background: #f0f0f0;
+  color: #64748b;
+}
+
+/* Optional status badges near title */
+.badge-approved {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.badge-pending {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #f59e0b;
+}
+
+.badge-rejected {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.trail-detail-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 32px;
+}
+
+.trail-detail-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.info-item i {
+  font-size: 24px;
+  color: #0b74de;
+  margin-top: 4px;
+}
+
+.info-item strong {
+  display: block;
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.info-item p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Small status pill used inside the info grid */
+.status-pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.status-pill--approved {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.status-pill--pending {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #f59e0b;
+}
+
+.status-pill--rejected {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.trail-detail-phases {
+  margin-bottom: 32px;
+}
+
+.trail-detail-phases h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+
+.phases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.phase-item {
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.phase-item strong {
+  font-size: 14px;
+  color: #0b74de;
+}
+
+.phase-item span {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.message.success {
+  background: #d1f4e0;
+  color: #137333;
+  border: 1px solid #34a853;
+}
+
+.message.error {
+  background: #fce8e6;
+  color: #c5221f;
+  border: 1px solid #ea4335;
+}
+
+/* Primary enroll button */
+.enroll-button {
+  width: 100%;
+  padding: 16px 24px;
+  background: #0b74de;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enroll-button:hover:not(:disabled) {
+  background: #0960b8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(11, 116, 222, 0.3);
+}
+
+.enroll-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Withdraw button */
+.withdraw-button {
+  width: 100%;
+  padding: 16px 24px;
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.withdraw-button:hover:not(:disabled) {
+  background: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.withdraw-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* State variants for enroll button */
+.enroll-button.enrolled {
+  background: #34a853;
+}
+
+.enroll-button.enrolled:hover {
+  background: #34a853;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Pending (Requested) */
+.enroll-button.requested {
+  background: #f59e0b;
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+.enroll-button.requested:hover {
+  background: #f59e0b;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Approved */
+.enroll-button.approved {
+  background: #10b981;
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+.enroll-button.approved:hover {
+  background: #10b981;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Rejected */
+.enroll-button.rejected {
+  background: #ef4444;
+  opacity: 0.9;
+  cursor: not-allowed;
+  color: #fff;
+}
+
+.enroll-button.rejected:hover {
+  background: #ef4444;
+  transform: none;
+  box-shadow: none;
+}
+
+.clintrack-page__banner {
+  background-color: #0b74de;
+  color: #fff;
+  margin-top: 48px;
+}
+
+.clintrack-page__banner-text {
+  font-size: 14px;
+}
+
+.container-copyright {
+  text-align: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .trail-detail-image {
+    height: 250px;
+  }
+
+  .trail-detail-content {
+    padding: 24px;
+  }
+
+  .trail-detail-title {
+    font-size: 24px;
+  }
+
+  .trail-detail-info {
+    grid-template-columns: 1fr;
+  }
+
+  .phases-grid {
+    grid-template-columns: 1fr;
+  }
+}

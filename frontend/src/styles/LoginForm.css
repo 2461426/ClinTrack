@@ -1,0 +1,169 @@
+
+/* ===== Login (scoped to .login) ===== */
+
+/* Component container: centers the login card without touching global <body> */
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* avoid forcing page-wide vertical centering */
+  padding: 24px 0;
+  background: transparent; /* keep page bg in index.css if needed */
+  font-family: Arial, sans-serif;
+}
+
+/* Card */
+.login .login-form {
+  width: 100%;
+  max-width: 400px; /* responsive */
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.login .login-form h2 {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Segmented control (User/Admin) */
+.login .segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 8px 0 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #cfcfcf;
+  background: #e6e6e6; /* grey backdrop */
+}
+
+.login .segmented .segment {
+  appearance: none;
+  border: none;
+  background: #e6e6e6;      /* light grey for inactive */
+  color: #555;
+  padding: 12px 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.login .segmented .segment.active {
+  background: #007bff; /* blue (same as login button) */
+  color: #fff;
+}
+
+.login .segmented .segment:not(.active):hover {
+  background: #d9d9d9; /* slightly darker grey on hover */
+}
+
+.login .segmented .segment.active:hover {
+  background: #0069d9; /* slightly darker blue on hover */
+}
+
+/* Inputs */
+.login .form-control {
+  margin-bottom: 20px;
+}
+
+.login .form-control label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #444;
+}
+
+.login .form-control input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+}
+
+.login .form-control input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+  outline: none;
+}
+
+/* Actions row: Remember me & Forgot password */
+.login .form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0 18px;
+}
+
+.login .remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  font-size: 14px;
+  user-select: none;
+}
+
+/* Links */
+.login .link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.login .link:hover {
+  text-decoration: underline;
+}
+
+/* Primary submit button (scoped; replaces global button[type="submit"]) */
+.login .primary {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login .primary:hover {
+  background: #0056b3;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.login .primary:focus-visible {
+  outline: 2px solid #0056b3;
+}
+
+/* Error messages: align left */
+.login .error {
+  color: #d93025; /* accessible red */
+  font-size: 13px;
+  margin-top: 6px;
+  display: block;
+  text-align: left; /* ensure left alignment */
+}
+
+/* Footer section */
+.login .footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.login .muted {
+  color: #666;
+}
+
