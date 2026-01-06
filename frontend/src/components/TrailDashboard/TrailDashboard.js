@@ -14,6 +14,19 @@ function TrailDashboard() {
   const [trail, setTrail] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const handleNavigation = (page) => {
+    if (page === 'dashboard') {
+      // Already on dashboard
+      return;
+    } else if (page === 'participants') {
+      navigate(`/ListOfParticipants/${trailId}`);
+    } else if (page === 'events') {
+      navigate(`/updateevents/${trailId}`);
+    } else if (page === 'report') {
+      navigate(`/generatereport/${trailId}`);
+    }
+  };
+
   useEffect(() => {
     // Fetch trail details from backend using axios
     axios.get(`http://localhost:5000/trailDetails?trailId=${trailId}`)
@@ -63,30 +76,11 @@ function TrailDashboard() {
   const calculatedProgress = utilityService.calculateTrailProgress(trail.phaseDates);
 
   return (
-    <div>
-      <nav className='dashboard-navbar'>
-        <div className='dashboard-navbar__left'>
-          <button 
-            onClick={() => navigate('/ListedTrails')}
-            className='dashboard-navbar__back-btn'
-          >
-            <img src={BackIcon} alt='back' className='dashboard-navbar__back-icon' />
-          </button>
-          <img src={trail.image} alt={trail.title} className='dashboard-navbar__trail-image' />
-          <div className='dashboard-navbar__trail-info'>
-            <h1 className='dashboard-navbar__trail-title'>{trail.title}</h1>
-            <p className='dashboard-navbar__trail-subtitle'>Dashboard</p>
-          </div>
-        </div>
-        <div className='dashboard-navbar__right'>
-          <div className='dashboard-navbar__support'>Support</div>
-          <img src={settings} alt="setting" className='dashboard-navbar__settings-icon' />
-        </div>
-      </nav>
+    <div className='dashboard-layout'>
+      <TrailNavBar trailId={trailId} onNavigate={handleNavigation} trailInfo={trail} />
       
+      <div className='dashboard-with-navbar'>
       <div className='dashboard-content'>
-        <TrailNavBar trailId={trailId} />
-        
         <div className='dashboard-main'>
           <div className='dashboard-grid'>
             <div className='dashboard-card'>
@@ -205,6 +199,7 @@ function TrailDashboard() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

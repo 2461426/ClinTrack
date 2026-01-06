@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './ListOfParticipants.css'
 import image from '../../assets/images/docImg.png'
+import TrailNavBar from '../TrailNavBar/TrailNavBar'
 
 function ListOfParticipants() {
   const { trailId } = useParams();
@@ -11,6 +12,19 @@ function ListOfParticipants() {
   const [pendingRequests, setPendingRequests] = useState([]);
   const [trail, setTrail] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const handleNavigation = (page) => {
+    if (page === 'dashboard') {
+      navigate(`/TrailDashboard/${trailId}`);
+    } else if (page === 'participants') {
+      // Already on participants
+      return;
+    } else if (page === 'events') {
+      navigate(`/updateevents/${trailId}`);
+    } else if (page === 'report') {
+      navigate(`/generatereport/${trailId}`);
+    }
+  };
 
   const fetchData = () => {
     setLoading(true);
@@ -135,22 +149,11 @@ function ListOfParticipants() {
   }
 
   return (
-    <div className='participants-page'>
-      <button 
-        onClick={() => navigate(`/TrailDashboard/${trailId}`)}
-        style={{
-          marginBottom: '20px',
-          padding: '10px 20px',
-          background: '#5041FF',
-          color: 'white',
-          border: 'none',
-          borderRadius: '8px',
-          cursor: 'pointer'
-        }}
-      >
-        ← Back
-      </button>
-
+    <div className='participants-layout'>
+      <TrailNavBar trailId={trailId} onNavigate={handleNavigation} trailInfo={trail} />
+      
+      <div className='participants-with-navbar'>
+      <div className='participants-page'>
       <div className='participants-header'>
         <div className='participants-header__text'>
           <h1 className='participants-header__subtitle'>{trail.title}</h1>
@@ -252,6 +255,8 @@ function ListOfParticipants() {
           ))}
         </div>
       )}
+      </div>
+      </div>
     </div>
   )
 }

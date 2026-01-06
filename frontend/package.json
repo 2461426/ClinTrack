@@ -11,6 +11,8 @@
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
     "formik": "^2.4.9",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.2",
     "lottie-react": "^2.4.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",

@@ -34,6 +34,7 @@
       "email": "u1@gmail.com",
       "mobile": "1234567899",
       "dateOfBirth": "2000-12-25",
+      "profilePicture": "https://img.freepik.com/free-photo/indoor-shot-attractive-young-woman-with-glasses-posing-against-white-wall_273609-20347.jpg",
       "password": "user@123",
       "trialType": "HYPERTENSION_TRIAL",
       "obesityCategory": "OBESITY_CLASS_1",
@@ -68,7 +69,7 @@
       "dateOfBirth": "2002-12-12",
       "gender": "Male",
       "password": "user@123",
-      "profilePicture": "",
+      "profilePicture": "https://img.freepik.com/free-photo/indoor-shot-attractive-young-woman-with-glasses-posing-against-white-wall_273609-20347.jpg",
       "obesityCategory": "OVERWEIGHT",
       "bpCategory": "ELEVATED",
       "diabetesStatus": "UNKNOWN",
@@ -93,26 +94,29 @@
       "hasChronicIllnesses": false,
       "phase": "04",
       "participantsRequired": 10,
-      "participantsEnrolled": 3,
-      "adverseEventsReported": 0,
-      "adverseEventsHigh": 0,
+      "participantsEnrolled": 4,
+      "adverseEventsReported": 10,
+      "adverseEventsHigh": 2,
       "adverseEventsMedium": 0,
       "adverseEventsLow": 0,
       "progress": 0,
       "negativeImpacts": [
-        0,
+        8,
+        2,
         0,
         0
       ],
       "positiveImpacts": [
-        0,
+        7,
+        3,
         0,
         0
       ],
       "participantsId": [
         "7d64",
         "6459",
-        "c0f7"
+        "c0f7",
+        "775a"
       ],
       "phaseDates": {
         "1": "2026-01-01",
@@ -138,18 +142,18 @@
       "phase": "03",
       "participantsRequired": 100,
       "participantsEnrolled": 4,
-      "adverseEventsReported": 0,
-      "adverseEventsHigh": 0,
-      "adverseEventsMedium": 0,
+      "adverseEventsReported": 2,
+      "adverseEventsHigh": 1,
+      "adverseEventsMedium": 1,
       "adverseEventsLow": 0,
       "progress": 0,
       "negativeImpacts": [
-        0,
+        2,
         0,
         0
       ],
       "positiveImpacts": [
-        0,
+        11,
         0,
         0
       ],
@@ -165,43 +169,6 @@
         "3": "2026-01-02"
       },
       "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg"
-    },
-    {
-      "id": "3208",
-      "trailId": 1766751481380,
-      "pharmaId": 1,
-      "title": "woiehf",
-      "description": "whi",
-      "gender": "MALE",
-      "minAge": 19,
-      "obesityCategory": "OVERWEIGHT",
-      "bpCategory": "STAGE_2",
-      "diabetesStatus": "TYPE_1",
-      "hasAsthma": false,
-      "hasChronicIllnesses": false,
-      "phase": "01",
-      "participantsRequired": 100,
-      "participantsEnrolled": 0,
-      "adverseEventsReported": 0,
-      "adverseEventsHigh": 0,
-      "adverseEventsMedium": 0,
-      "adverseEventsLow": 0,
-      "progress": 0,
-      "negativeImpacts": [
-        0,
-        0,
-        0
-      ],
-      "positiveImpacts": [
-        0,
-        0,
-        0
-      ],
-      "participantsId": [],
-      "phaseDates": {
-        "1": "2025-12-26"
-      },
-      "image": "https://img.freepik.com/free-photo/scientist-using-microscope-medical-research_23-2149084779.jpg"
     },
     {
       "id": "09a8",
@@ -241,6 +208,89 @@
         "3": "2026-01-29"
       },
       "image": "https://img.freepik.com/free-photo/scientist-using-microscope-medical-research_23-2149084779.jpg"
+    },
+    {
+      "id": "a94a",
+      "trailId": 1767077106394,
+      "pharmaId": 1,
+      "title": "Cancer Trail Two",
+      "description": "Descriptio",
+      "gender": "FEMALE",
+      "minAge": 18,
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "PREDIABETES",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "phase": "02",
+      "participantsRequired": 10,
+      "participantsEnrolled": 1,
+      "adverseEventsReported": 0,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 0,
+      "progress": 0,
+      "negativeImpacts": [
+        0,
+        0,
+        0
+      ],
+      "positiveImpacts": [
+        0,
+        0,
+        0
+      ],
+      "participantsId": [
+        "775a"
+      ],
+      "phaseDates": {
+        "1": "2025-12-31",
+        "2": "2026-01-07"
+      },
+      "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg"
+    },
+    {
+      "id": "062d",
+      "trailId": 1767370930794,
+      "pharmaId": 1,
+      "title": "New Test Trail",
+      "description": "Sample",
+      "gender": "MALE",
+      "minAge": 19,
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "PREDIABETES",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "phase": "02",
+      "participantsRequired": 100,
+      "participantsEnrolled": 0,
+      "adverseEventsReported": 0,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 0,
+      "progress": 0,
+      "negativeImpacts": [
+        0,
+        0,
+        0
+      ],
+      "positiveImpacts": [
+        0,
+        0,
+        0
+      ],
+      "participantsId": [],
+      "hospitals": [
+        "Max Hospital",
+        "Apollo Hospital",
+        "AIIMS Hospital"
+      ],
+      "phaseDates": {
+        "1": "2026-01-08",
+        "2": "2026-01-20"
+      },
+      "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg"
     }
   ],
   "schedules": [
@@ -354,7 +404,7 @@
       "participantId": "0f45",
       "participantName": "User One",
       "participantEmail": "u1@gmail.com",
-      "status": "pending",
+      "status": "rejected",
       "requestDate": "2025-12-25T18:57:06.634Z"
     },
     {
@@ -365,15 +415,6 @@
       "participantEmail": "u2@gmail.com",
       "status": "approved",
       "requestDate": "2025-12-25T19:08:50.784Z"
-    },
-    {
-      "id": "9470",
-      "trailId": "a721",
-      "participantId": "775a",
-      "participantName": "UserThree Participant",
-      "participantEmail": "u3@gmail.com",
-      "status": "approved",
-      "requestDate": "2025-12-26T12:11:19.978Z"
     }
   ]
 }

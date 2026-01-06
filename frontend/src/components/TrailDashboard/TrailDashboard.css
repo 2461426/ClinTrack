@@ -7,6 +7,16 @@
   height: 100vh;
 }
 
+.dashboard-layout {
+  display: flex;
+  padding-top: 70px;
+}
+
+.dashboard-with-navbar {
+  margin-left: 80px;
+  width: calc(100% - 80px);
+}
+
 .dashboard-loading__content,
 .dashboard-error__content {
   text-align: center;
@@ -79,6 +89,7 @@
   object-fit: cover;
 }
 
+
 .dashboard-navbar__trail-image {
   border: 1px solid #e5e7eb;
   border-radius: 0.25rem;
@@ -102,6 +113,7 @@
 .dashboard-navbar__trail-subtitle {
   font-size: 0.875rem;
   font-weight: 400;
+  line-height: 0%;
   color: #5041FF;
 }
 
@@ -124,9 +136,10 @@
 .dashboard-content {
   display: flex;
   align-items: flex-start;
-  padding-top: 6rem;
+  padding-top: 1.5rem;
   padding-right: 1.5rem;
   padding-bottom: 1.5rem;
+  padding-left: 1.5rem;
 }
 
 /* Dashboard Main */
