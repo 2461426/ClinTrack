@@ -28,8 +28,8 @@ const LoginForm = () => {
     if (!emailRegex.test(values.email)) {
       errors.email = "Please enter a valid email.";
     }
-    if (!values.password || values.password.length < 8) {
-      errors.password = "Password must be at least 8 characters.";
+    if (!values.password || values.password.length < 6) {
+      errors.password = "Password must be at least 6 characters.";
     }
     return errors;
   };
