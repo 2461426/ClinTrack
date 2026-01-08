@@ -1,0 +1,135 @@
+/* Top Navbar */
+.trail-top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  color: #6b7280;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 100;
+}
+
+.trail-top-navbar__left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trail-top-navbar__back-btn {
+  color: #5041FF;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.trail-top-navbar__back-btn:hover {
+  color: #4032cc;
+}
+
+.trail-top-navbar__back-icon {
+  height: auto;
+  width: 2rem;
+  object-fit: cover;
+}
+
+.trail-top-navbar__trail-image {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  object-fit: cover;
+}
+
+.trail-top-navbar__trail-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.trail-top-navbar__trail-title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #353535;
+  margin: 0;
+}
+
+.trail-top-navbar__trail-subtitle {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #5041FF;
+  margin: 0;
+}
+
+.trail-top-navbar__right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.trail-top-navbar__support {
+  display: none;
+}
+
+.trail-top-navbar__settings-icon {
+  height: 1.75rem;
+  width: auto;
+  cursor: pointer;
+}
+
+/* Side Navbar */
+.trail-navbar {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px);
+  width: 80px;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  background-color: white;
+  border-right: 1px solid #e5e7eb;
+  position: fixed;
+  left: 0;
+  top: 70px;
+}
+
+.trail-navbar__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 48px;
+  height: 48px;
+  position: relative;
+}
+
+.trail-navbar__button:hover {
+  background-color: #e2e8f0;
+}
+
+.trail-navbar__button--active {
+  background-color: #5041FF;
+}
+
+.trail-navbar__button--active .trail-navbar__icon {
+  filter: brightness(0) invert(1);
+}
+
+.trail-navbar__icon {
+  height: 1.8rem;
+  width: 1.8rem;
+  object-fit: cover;
+}

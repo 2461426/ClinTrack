@@ -1,0 +1,349 @@
+/* Home Page */
+.home-page {
+  background-size: cover;
+  background-position: center;
+  min-height: 64px;
+}
+
+/* Hero Section */
+.home-hero {
+  padding: 5rem 1rem 1.25rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.home-hero__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: center;
+}
+
+.home-hero__title {
+  font-size: 1.875rem;
+  font-weight: 800;
+}
+
+.home-hero__title-highlight {
+  font-size: 1.875rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: #5041FF;
+}
+
+.home-hero__description {
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  font-weight: 300;
+  color: #6b7280;
+  max-width: 28rem;
+}
+
+.home-hero__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.home-hero__button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: 1px solid transparent;
+}
+
+.home-hero__button--primary {
+  background-color: #5041FF;
+  color: white;
+  border-color: #5041FF;
+}
+
+.home-hero__button--primary:hover {
+  background-color: #4032cc;
+}
+
+.home-hero__button--secondary {
+  background-color: white;
+  color: #6b7280;
+  border-color: #d1d5db;
+}
+
+.home-hero__button--secondary:hover {
+  background-color: #f3f4f6;
+}
+
+.home-hero__card {
+  border: 1px solid #e5e7eb;
+  width: 100%;
+  max-width: 350px;
+  height: 200px;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.home-hero__card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.home-hero__card-image {
+  height: 250px;
+  width: auto;
+  margin: 0 auto;
+}
+
+.home-hero__card-footer {
+  display: flex;
+  border-radius: 0 0 0.5rem 0.5rem;
+  width: 100%;
+  justify-content: center;
+  background-color: #5041FF;
+  align-items: flex-start;
+  padding: 0 1rem;
+}
+
+.home-hero__card-text {
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+}
+
+/* Divider Section */
+.home-divider {
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.home-divider__line {
+  border: 1px solid #d1d5db;
+  width: 100%;
+}
+
+.home-divider__text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Enrollment Section */
+.home-enrollment {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.home-enrollment__wrapper {
+  margin-top: 1.25rem;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  border-radius: 0.75rem;
+}
+
+.home-enrollment__content {
+  padding: 1rem;
+}
+
+.home-enrollment__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.home-enrollment__title {
+  font-weight: 300;
+  font-size: 1.5rem;
+  display: block;
+}
+
+.home-enrollment__subtitle {
+  font-size: 1.5rem;
+  color: #5041FF;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.home-enrollment__description {
+  padding: 0.75rem;
+  margin: 0;
+  color: #9ca3af;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 0.875rem;
+}
+
+.home-enrollment__gallery-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.home-enrollment__gallery {
+  margin: 0 2.5rem;
+  max-width: fit-content;
+  border: 1px solid #e5e7eb;
+  background-color: #f5f5f5;
+  color: #262626;
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.home-enrollment__gallery-image {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+.home-enrollment__button {
+  margin-top: 4rem;
+  background-color: white;
+  border: 1px solid #5041FF;
+  color: #5041FF;
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.home-enrollment__button:hover {
+  background-color: #5041FF;
+  color: white;
+}
+
+/* Responsive Styles */
+@media (min-width: 640px) {
+  .home-hero {
+    padding: 8rem 3rem 1.25rem;
+  }
+
+  .home-hero__title,
+  .home-hero__title-highlight {
+    font-size: 2.25rem;
+  }
+
+  .home-hero__description {
+    font-size: 0.875rem;
+  }
+
+  .home-hero__buttons {
+    flex-direction: row;
+    width: auto;
+  }
+
+  .home-hero__button {
+    width: auto;
+  }
+
+  .home-hero__card {
+    height: 220px;
+  }
+
+  .home-hero__card-image {
+    height: 300px;
+  }
+
+  .home-hero__card-text {
+    font-size: 0.875rem;
+  }
+
+  .home-divider {
+    height: 12rem;
+    gap: 1.5rem;
+  }
+
+  .home-divider__text {
+    font-size: 1.5rem;
+  }
+
+  .home-enrollment__content {
+    padding: 1.5rem;
+  }
+
+  .home-enrollment__title {
+    font-size: 1.875rem;
+  }
+
+  .home-enrollment__subtitle {
+    font-size: 1.875rem;
+  }
+
+  .home-enrollment__description {
+    font-size: 1rem;
+  }
+
+  .home-enrollment__gallery {
+    gap: 2rem;
+  }
+
+  .home-enrollment__gallery-image {
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-hero {
+    padding: 10rem 5rem 1.25rem;
+  }
+
+  .home-hero__title,
+  .home-hero__title-highlight {
+    font-size: 3rem;
+  }
+
+  .home-enrollment__wrapper {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-hero {
+    padding: 13rem 7rem 1.25rem;
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .home-hero__content {
+    text-align: left;
+  }
+
+  .home-hero__title,
+  .home-hero__title-highlight {
+    font-size: 3rem;
+  }
+}

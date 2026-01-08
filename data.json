@@ -1,0 +1,446 @@
+{
+  "participants": [
+    {
+      "pharmaId": "1",
+      "name": "Sun Pharma",
+      "email": "admin@gmail.com",
+      "mobile": "6789655353",
+      "password": "admin@123",
+      "profilePicture": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg",
+      "role": "ADMIN",
+      "id": "9043",
+      "firstName": "Sun Pharma",
+      "lastName": "2"
+    },
+    {
+      "id": "7b3f",
+      "firstName": "Kaju",
+      "lastName": "kahhhh",
+      "email": "raju@gmail.com",
+      "mobile": "8888888888",
+      "dateOfBirth": "2000-01-22",
+      "gender": "Male",
+      "password": "Raju@123",
+      "profilePicture": "",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "NORMAL",
+      "diabetesStatus": "NONE",
+      "hasAsthma": true,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true
+    },
+    {
+      "id": "b069",
+      "firstName": "Ram",
+      "lastName": "r",
+      "email": "ram@gmail.com",
+      "mobile": "9878999999",
+      "dateOfBirth": "2000-12-22",
+      "gender": "Male",
+      "password": "Ram@123",
+      "profilePicture": "",
+      "obesityCategory": "OVERWEIGHT",
+      "bpCategory": "NORMAL",
+      "diabetesStatus": "PREDIABETES",
+      "hasAsthma": true,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true
+    },
+    {
+      "id": "8688",
+      "firstName": "user12",
+      "lastName": "u12",
+      "email": "user1@gmail.com",
+      "mobile": "9898989898",
+      "dateOfBirth": "2003-01-08",
+      "gender": "Male",
+      "password": "User@123",
+      "profilePicture": "",
+      "obesityCategory": "OVERWEIGHT",
+      "bpCategory": "STAGE_1",
+      "diabetesStatus": "TYPE_2",
+      "hasAsthma": true,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true
+    },
+    {
+      "id": "447e",
+      "firstName": "mahith",
+      "lastName": "Tumpala",
+      "email": "mahith@gmail.com",
+      "mobile": "7777777777",
+      "dateOfBirth": "2001-12-12",
+      "gender": "Male",
+      "password": "Mahith@2003",
+      "profilePicture": "",
+      "obesityCategory": "NORMAL",
+      "bpCategory": "NORMAL",
+      "diabetesStatus": "NONE",
+      "hasAsthma": true,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true
+    },
+    {
+      "id": "f87a",
+      "firstName": "Rahul",
+      "lastName": "R",
+      "email": "rahul.rajkumar@cognizant.com",
+      "mobile": "9876543210",
+      "dateOfBirth": "2003-11-17",
+      "gender": "Male",
+      "password": "rahul@123",
+      "profilePicture": "https://img.freepik.com/free-photo/lifestyle-beauty-fashion-people-emotions-concept-young-asian-female-office-manager-ceo-with-pleased-expression-standing-white-background-smiling-with-arms-crossed-chest_1258-59329.jpg",
+      "obesityCategory": "OVERWEIGHT",
+      "bpCategory": "STAGE_1",
+      "diabetesStatus": "TYPE_2",
+      "hasAsthma": true,
+      "hasChronicIllnesses": true,
+      "acknowledgment": true
+    },
+    {
+      "id": "8cbb",
+      "firstName": "User",
+      "lastName": "Two",
+      "email": "u2@gmail.com",
+      "mobile": "9876543210",
+      "dateOfBirth": "2000-12-12",
+      "gender": "Female",
+      "password": "user@123",
+      "profilePicture": "",
+      "obesityCategory": "OVERWEIGHT",
+      "bpCategory": "STAGE_2",
+      "diabetesStatus": "GESTATIONAL",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true
+    },
+    {
+      "id": "86db",
+      "firstName": "User",
+      "lastName": "One",
+      "email": "u1@gmail.com",
+      "mobile": "9876543210",
+      "dateOfBirth": "2000-01-16",
+      "gender": "Female",
+      "password": "user@123",
+      "profilePicture": "https://img.freepik.com/free-photo/lifestyle-beauty-fashion-people-emotions-concept-young-asian-female-office-manager-ceo-with-pleased-expression-standing-white-background-smiling-with-arms-crossed-chest_1258-59329.jpg",
+      "obesityCategory": "OBESITY_CLASS_1",
+      "bpCategory": "STAGE_1",
+      "diabetesStatus": "TYPE_1",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "acknowledgment": true
+    }
+  ],
+  "trailDetails": [
+    {
+      "id": "062d",
+      "trailId": 1767370930794,
+      "pharmaId": 1,
+      "title": "New Test Trail",
+      "description": "Sample",
+      "gender": "MALE",
+      "minAge": 19,
+      "obesityCategory": "NORMAL",
+      "bpCategory": "ELEVATED",
+      "diabetesStatus": "PREDIABETES",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "phase": "02",
+      "participantsRequired": 100,
+      "participantsEnrolled": 3,
+      "adverseEventsReported": 2,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 2,
+      "progress": 0,
+      "negativeImpacts": [
+        2,
+        0,
+        0
+      ],
+      "positiveImpacts": [
+        2,
+        0,
+        0
+      ],
+      "participantsId": [
+        "775a",
+        "8688",
+        "f87a"
+      ],
+      "hospitals": [
+        "Max Hospital",
+        "Apollo Hospital",
+        "AIIMS Hospital"
+      ],
+      "phaseDates": {
+        "1": "2026-01-08",
+        "2": "2026-01-20"
+      },
+      "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg"
+    },
+    {
+      "id": "886f",
+      "trailId": 1767538350083,
+      "pharmaId": 1,
+      "title": "Test trial 2",
+      "description": "abcd",
+      "gender": "ANY",
+      "minAge": 45,
+      "obesityCategory": "OVERWEIGHT",
+      "bpCategory": "NORMAL",
+      "diabetesStatus": "PREDIABETES",
+      "hasAsthma": true,
+      "hasChronicIllnesses": false,
+      "phase": "01",
+      "participantsRequired": 100,
+      "participantsEnrolled": 1,
+      "adverseEventsReported": 0,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 0,
+      "progress": 0,
+      "negativeImpacts": [
+        0,
+        0,
+        0
+      ],
+      "positiveImpacts": [
+        0,
+        0,
+        0
+      ],
+      "participantsId": [
+        "8cbb"
+      ],
+      "hospitals": [
+        "KMCH",
+        "Fortis Hospital",
+        "AIIMS Hospital"
+      ],
+      "phaseDates": {
+        "1": "2026-01-12"
+      },
+      "image": "https://img.freepik.com/free-photo/international-nurses-day-concept_23-2150204832.jpg"
+    },
+    {
+      "id": "6a4c",
+      "trailId": 1767624490538,
+      "pharmaId": 1,
+      "title": "Test trial 3",
+      "description": "This for testing purpose",
+      "gender": "MALE",
+      "minAge": 18,
+      "obesityCategory": "NORMAL",
+      "bpCategory": "NORMAL",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "phase": "02",
+      "participantsRequired": 100,
+      "participantsEnrolled": 2,
+      "adverseEventsReported": 0,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 0,
+      "progress": 0,
+      "negativeImpacts": [
+        0,
+        0,
+        0
+      ],
+      "positiveImpacts": [
+        0,
+        0,
+        0
+      ],
+      "participantsId": [
+        "447e",
+        "8688"
+      ],
+      "hospitals": [
+        "Apollo Hospital",
+        "KMCH",
+        "AIMS"
+      ],
+      "phaseDates": {
+        "1": "2026-01-24",
+        "2": "2026-01-31"
+      },
+      "image": "https://img.freepik.com/free-photo/international-nurses-day-concept_23-2150204832.jpg"
+    },
+    {
+      "id": "e9d9",
+      "trailId": 1767846919593,
+      "pharmaId": 1,
+      "title": "Sample Test Trail",
+      "description": "Sample description",
+      "gender": "MALE",
+      "minAge": 19,
+      "obesityCategory": "OBESITY_CLASS_1",
+      "bpCategory": "NORMAL",
+      "diabetesStatus": "NONE",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "phase": "01",
+      "participantsRequired": 1,
+      "participantsEnrolled": 1,
+      "adverseEventsReported": 0,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 0,
+      "progress": 0,
+      "negativeImpacts": [
+        0,
+        0,
+        0
+      ],
+      "positiveImpacts": [
+        0,
+        0,
+        0
+      ],
+      "participantsId": [
+        "f87a"
+      ],
+      "hospitals": [
+        "Apollo Hospital",
+        "KMCH",
+        "AIMS"
+      ],
+      "phaseDates": {
+        "1": "2026-01-16"
+      },
+      "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg"
+    },
+    {
+      "id": "a863",
+      "trailId": 1767848226045,
+      "pharmaId": 1,
+      "title": "Sample Trail Two",
+      "description": "Sample",
+      "gender": "ANY",
+      "minAge": 19,
+      "obesityCategory": "OBESITY_CLASS_1",
+      "bpCategory": "STAGE_1",
+      "diabetesStatus": "PREDIABETES",
+      "hasAsthma": false,
+      "hasChronicIllnesses": false,
+      "phase": "01",
+      "participantsRequired": 1,
+      "participantsEnrolled": 1,
+      "adverseEventsReported": 0,
+      "adverseEventsHigh": 0,
+      "adverseEventsMedium": 0,
+      "adverseEventsLow": 0,
+      "progress": 0,
+      "negativeImpacts": [
+        0,
+        0,
+        0
+      ],
+      "positiveImpacts": [
+        0,
+        0,
+        0
+      ],
+      "participantsId": [
+        "86db"
+      ],
+      "hospitals": [
+        "Apollo Hospital",
+        "Fortis Hospital",
+        "KMCH"
+      ],
+      "phaseDates": {
+        "1": "2026-01-23"
+      },
+      "image": "https://img.freepik.com/free-psd/realistic-cancer-ribbon_23-2150755649.jpg"
+    }
+  ],
+  "schedules": [],
+  "enrollmentRequests": [
+    {
+      "id": "55b8",
+      "trailId": "886f",
+      "participantId": "8688",
+      "participantName": "user1 u",
+      "participantEmail": "user1@gmail.com",
+      "status": "rejected",
+      "requestDate": "2026-01-04T14:56:20.705Z"
+    },
+    {
+      "id": "49b6",
+      "trailId": "886f",
+      "participantId": "7b3f",
+      "participantName": "Raju k",
+      "participantEmail": "raju@gmail.com",
+      "status": "rejected",
+      "requestDate": "2026-01-05T09:27:49.716Z"
+    },
+    {
+      "id": "3ddd",
+      "trailId": "062d",
+      "participantId": "7b3f",
+      "participantName": "Kaju kahhhh",
+      "participantEmail": "raju@gmail.com",
+      "status": "rejected",
+      "requestDate": "2026-01-05T12:55:41.578Z"
+    },
+    {
+      "id": "bb6a",
+      "trailId": "6a4c",
+      "participantId": "6459",
+      "participantName": "Rahul R",
+      "participantEmail": "rahul.rajkumar@cognizant.com",
+      "status": "pending",
+      "requestDate": "2026-01-06T11:36:53.058Z"
+    },
+    {
+      "id": "327e",
+      "trailId": "6a4c",
+      "participantId": "8688",
+      "participantName": "user12 u12",
+      "participantEmail": "user1@gmail.com",
+      "status": "approved",
+      "requestDate": "2026-01-06T11:46:10.922Z"
+    },
+    {
+      "id": "6eb1",
+      "trailId": "e9d9",
+      "participantId": "f87a",
+      "participantName": "Rahul R",
+      "participantEmail": "rahul.rajkumar@cognizant.com",
+      "status": "approved",
+      "requestDate": "2026-01-08T04:35:41.822Z"
+    },
+    {
+      "id": "a8c8",
+      "trailId": "e9d9",
+      "participantId": "8cbb",
+      "participantName": "User Two",
+      "participantEmail": "u2@gmail.com",
+      "status": "rejected",
+      "requestDate": "2026-01-08T04:38:11.972Z"
+    },
+    {
+      "id": "47b6",
+      "trailId": "886f",
+      "participantId": "8cbb",
+      "participantName": "User Two",
+      "participantEmail": "u2@gmail.com",
+      "status": "approved",
+      "requestDate": "2026-01-08T04:55:15.796Z"
+    },
+    {
+      "id": "0316",
+      "trailId": "a863",
+      "participantId": "86db",
+      "participantName": "User One",
+      "participantEmail": "u1@gmail.com",
+      "status": "approved",
+      "requestDate": "2026-01-08T05:00:52.537Z"
+    }
+  ]
+}

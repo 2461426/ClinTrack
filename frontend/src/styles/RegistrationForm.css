@@ -1,0 +1,487 @@
+
+/* ===== Registration Form - Modern Design ===== */
+
+/* Component container */
+.registration {
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  color: #1f2937;
+}
+
+/* Outer container */
+.registration .registrationForm {
+  width: 100%;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.registration .registration-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.registration .registration-header__subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #1f2937;
+  margin: 0;
+}
+
+.registration .registration-header__title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #5041FF;
+  margin: 0;
+}
+
+/* ========== Two-Pane Layout (Equal Alignment) ========== */
+.registration .formBody {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 25px;
+  padding: 2.5rem 2rem;
+  overflow: hidden;
+}
+
+.registration .pane {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Consistent row spacing and label formatting */
+.registration .formRow {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.registration .formRow:last-child {
+  margin-bottom: 0;
+}
+
+.registration .formRow > label:first-child {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: default;
+  user-select: none;
+}
+
+/* ========== Read-only description (Medical History) ========== */
+.registration .readonlyText {
+  padding: 0.75rem 1rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 0;
+  user-select: none;
+  cursor: default;
+}
+
+/* ========== Prevent I-beam outside inputs/selects/textareas ========== */
+/* Static text inside the form should NOT show I-beam nor be selectable */
+.registration .registrationForm :where(p, span, div, h1, h2, h3, h4, h5, h6) {
+  user-select: none;
+  cursor: pointer;
+}
+
+/* BUT keep interactive elements behaving normally */
+.registration .registrationForm input[type="text"],
+.registration .registrationForm input[type="date"],
+.registration .registrationForm input[type="password"],
+.registration .registrationForm select,
+.registration .registrationForm textarea {
+  user-select: text;
+  cursor: text;
+}
+
+.registration .registrationForm input[type="checkbox"],
+.registration .registrationForm input[type="radio"],
+.registration .registrationForm button,
+.registration .registrationForm .eyeIcon {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ========== Inputs & Selects — equal widths ========== */
+.registration .formInput {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background-color: white;
+  outline: none;
+  transition: all 0.2s;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.registration .formInput:focus {
+  border-color: #5041FF;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(80, 65, 255, 0.1);
+}
+
+.registration .formInput::placeholder {
+  color: #9ca3af;
+}
+
+/* ========== Password Field (keep eye icon) ========== */
+.registration .passwordField {
+  position: relative;
+  width: 100%;
+}
+
+.registration .passwordField .formInput {
+  width: 100%;
+  padding-right: 3rem;
+}
+
+.registration .eyeIcon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.25rem;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.registration .eyeIcon:hover {
+  color: #374151;
+}
+
+/* ========== Radio Group ========== */
+.registration .radioGroup {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.registration .radioItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #374151;
+  cursor: pointer;
+  margin: 0;
+}
+
+.registration .radioItem input[type="radio"] {
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.registration .radioItem span {
+  line-height: 1rem;
+  user-select: none;
+}
+
+/* ========== Acknowledgment (Right end) ========== */
+.registration .acknowledgment {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #374151;
+  cursor: pointer;
+  margin: 0;
+}
+
+.registration .acknowledgment input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  margin: 0;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.registration .acknowledgment span {
+  line-height: 1.5;
+  padding-left: 0.25rem;
+  user-select: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.registration .acknowledgment-right {
+  margin-top: 1rem;
+}
+
+/* ========== Error Text ========== */
+.registration .error {
+  display: block;
+  color: #ef4444;
+  font-size: 0.75rem;
+  font-weight: 400;
+  margin-top: 0.25rem;
+  user-select: none;
+  cursor: default;
+}
+
+/* ========== Actions Row ========== */
+.registration .actions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+/* Back button styling */
+.registration .btn-back {
+  border: 1px solid #d1d5db;
+  font-weight: 400;
+  color: #6b7280;
+  padding: 0.5rem 1.5rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registration .btn-back:hover {
+  background-color: #5041FF;
+  color: white;
+  border-color: #5041FF;
+  transform: translateY(-1px);
+}
+
+.registration .btn-back:active {
+  transform: translateY(0);
+}
+
+/* Submit button */
+.registration .submit {
+  padding: 0.5rem 2rem;
+  height: 2.75rem;
+  border: none;
+  border-radius: 9999px;
+  background: #5041FF;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registration .submit:hover {
+  background: #4032cc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(80, 65, 255, 0.3);
+}
+
+.registration .submit:active {
+  transform: translateY(0);
+}
+
+.registration .submit:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========== Responsive (Mobile) ========== */
+@media (max-width: 768px) {
+  .registration {
+    padding: 1rem 0.5rem;
+  }
+
+  .registration .registrationForm {
+    max-width: 100%;
+  }
+
+  .registration .registration-header__subtitle {
+    font-size: 1.25rem;
+  }
+
+  .registration .registration-header__title {
+    font-size: 1.5rem;
+  }
+
+  .registration .formBody {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .registration .actions-row {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+
+  .registration .submit,
+  .registration .btn-back {
+    width: 100%;
+  }
+}
+
+/* Responsive Design - Tablet and Up (md: 768px) */
+@media (min-width: 768px) {
+  .registration .registration-header__subtitle {
+    font-size: 1.875rem;
+  }
+
+  .registration .registration-header__title {
+    font-size: 2.25rem;
+  }
+}
+
+
+/* ---------- ClinTrack Navbar ---------- */
+.clintrack-navbar {
+  position: sticky;            /* stays at top on scroll */
+  top: 0;
+  z-index: 50;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.75rem 1rem;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+}
+
+.clintrack-navbar .nav-inner {
+  max-width: 1000px;           /* matches your form max width */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clintrack-navbar .brand {
+  font-weight: 700;
+  color: #1e40af;              /* blue-800 */
+  letter-spacing: 0.2px;
+}
+
+.clintrack-navbar .links {
+  display: flex;
+  gap: 1rem;
+}
+
+.clintrack-navbar .link {
+  color: #111827;              /* gray-900 */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.clintrack-navbar .link.active {
+  color: #2563eb;              /* blue-600 */
+}
+
+/* adds a bit of spacing below sticky navbar */
+.has-sticky-navbar {
+  margin-top: 0.75rem;
+}
+
+/* ---------- ClinTrack Footer ---------- */
+.clintrack-footer {
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+  margin-top: 2rem;
+  padding: 1rem 1rem 2rem;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+}
+
+.clintrack-footer .footer-inner {
+  max-width: 1000px;           /* matches your form width */
+  margin: 0 auto;
+  color: #6b7280;              /* muted */
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clintrack-footer .footer-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.clintrack-footer a {
+  color: #374151;              /* gray-700 */
+  text-decoration: none;
+}
+
+.clintrack-footer a:hover {
+  color: #111827;              /* gray-900 */
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .clintrack-navbar .nav-inner,
+  .clintrack-footer .footer-inner {
+    padding: 0 0.25rem;
+  }
+}
+
+
+/* ---- Reuse ClinTrack navbar styles ---- */
+.clintrack-page__navbar {
+  background-color: #1e6ee5; /* var(--ct-blue) */
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 0;
+}
+
+.clintrack-page__title {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: 0.2px;
+  font-family:'Lucida Sans','Lucida Sans Regular','Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@media (min-width: 576px) { .clintrack-page__title { font-size: 1.6rem; } }
+@media (min-width: 768px) { .clintrack-page__title { font-size: 1.8rem; } }
+@media (min-width: 992px) { .clintrack-page__title { font-size: 2rem; } }
+@media (min-width: 1200px){ .clintrack-page__title { font-size: 2.2rem; } }
+
