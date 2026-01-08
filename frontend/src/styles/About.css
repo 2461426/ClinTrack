@@ -1,15 +1,15 @@
 .about__grid {
-  
+ 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
-
+ 
   padding-top: 70px;
   margin-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
 }
-
+ 
 .about-card {
   border: 1px solid #eee;
   border-radius: 8px;
@@ -17,7 +17,7 @@
   background: #fff;
   box-shadow: inset 10px 10px 30px 3px rgba(0, 0, 0, 0.1);
 }
-
+ 
 .about-card__body {
   padding: 12px 16px;
 }
@@ -38,7 +38,7 @@
   margin-top: 10px;
   padding-left: 30px;
 }
-
+ 
 .about-card__media{
   margin-top: 1px;
 }
@@ -52,4 +52,200 @@
   height: 400px;
   object-fit: cover;
 }
-
+ 
+ 
+/* ===== Base / Tokens ===== */
+:root {
+  --about-bg: #ffffff;
+  --about-surface: #f7f9fc;
+  --about-border: #e6edf5;
+  --about-text: #1f2937;           /* dark neutral */
+  --about-muted: #4b5563;          /* subtitle */
+  --about-primary: #0b6efd;        /* brand blue */
+  --about-primary-600: #0a58ca;
+  --about-accent: #22c55e;         /* green accent (success) */
+  --about-radius: 14px;
+  --about-radius-sm: 10px;
+  --about-shadow: 0 8px 24px rgba(2, 18, 46, 0.08);
+}
+ 
+/* ===== About wrapper ===== */
+.about {
+  background: var(--about-bg);
+  color: var(--about-text);
+  padding: 24px 16px 48px;
+}
+ 
+/* ===== Existing grid/cards (kept minimal) ===== */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+ 
+.about-card {
+  background: var(--about-surface);
+  border: 1px solid var(--about-border);
+  border-radius: var(--about-radius);
+  box-shadow: var(--about-shadow);
+  overflow: hidden;
+}
+ 
+.about-card__media {
+  margin: 0;
+}
+ 
+.about-card__title {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  font-weight: 700;
+  margin: 16px 16px 8px;
+  color: var(--about-primary);
+}
+ 
+.about-card__text {
+  margin: 0 16px 12px;
+  color: var(--about-muted);
+  line-height: 1.65;
+}
+ 
+.about-card__list {
+  margin: 0 16px 16px;
+  padding-left: 20px;
+}
+ 
+.about-card__list li {
+  margin-bottom: 6px;
+}
+ 
+/* ===== NEW: GCP Section ===== */
+.about-gcp {
+  margin-top: 8px;
+  background: linear-gradient(180deg, #f9fbff 0%, #f6f9fe 100%);
+  border: 1px solid var(--about-border);
+  border-radius: var(--about-radius);
+  box-shadow: var(--about-shadow);
+  padding: 20px 16px;
+}
+ 
+.about-gcp__header {
+  margin-bottom: 12px;
+}
+ 
+.about-gcp__title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+  color: var(--about-primary-600);
+}
+ 
+.about-gcp__lead {
+  margin: 0;
+  color: var(--about-muted);
+  line-height: 1.7;
+}
+ 
+/* Grid for the two GCP cards */
+.about-gcp__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+ 
+/* GCP Card */
+.gcp-card {
+  background: #ffffff;
+  border: 1px solid var(--about-border);
+  border-radius: var(--about-radius-sm);
+  padding: 16px;
+}
+ 
+.gcp-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: var(--about-primary);
+}
+ 
+.gcp-card__list {
+  margin: 0;
+  padding-left: 18px;
+}
+ 
+.gcp-card__list li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+ 
+/* Compact ordered list of 13 principles */
+.gcp-principles__list {
+  margin: 0;
+  padding-left: 18px;
+  column-gap: 24px;
+}
+ 
+.gcp-principles__list > li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+ 
+/* Note line */
+.about-gcp__note {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--about-muted);
+}
+ 
+/* ===== Banner ===== */
+.clintrack-page__banner {
+  margin-top: 18px;
+  border-top: 1px solid var(--about-border);
+  padding-top: 12px;
+}
+ 
+.clintrack-page__banner-text {
+  color: var(--about-text);
+}
+ 
+/* ===== Responsive ===== */
+@media (min-width: 640px) {
+  .about {
+    padding: 32px 20px 56px;
+  }
+ 
+  .about__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+ 
+  .about-gcp {
+    padding: 24px 18px;
+  }
+}
+ 
+@media (min-width: 960px) {
+  .about {
+    padding: 40px 24px 64px;
+  }
+ 
+  .about-gcp__grid {
+    grid-template-columns: 1fr 1fr; /* two columns on desktop */
+    gap: 20px;
+  }
+ 
+  .gcp-principles__list {
+    columns: 2; /* two-column list for 13 principles on wider screens */
+  }
+}
+ 
+/* ===== Optional: hover & subtle accents ===== */
+.gcp-card:hover {
+  border-color: #d7e3f4;
+  box-shadow: 0 10px 28px rgba(2, 18, 46, 0.08);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+ 
+ 

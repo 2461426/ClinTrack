@@ -1,8 +1,8 @@
  
 // src/components/user/UserContact.jsx
 import React, { useState } from "react";
-import Menu from "./Menu";
-import ParticipantNavbar from "./ParticipantNavbar/ParticipantNavbar";
+import ParticipantNavbar from "./ParticipantNavbar";
+import Footer from "./Footer";
  
 const UserContact = () => {
   const [form, setForm] = useState({ subject: "", message: "" });
@@ -137,16 +137,7 @@ const UserContact = () => {
       </section>
  
       {/* Banner / Footer */}
-      <footer className="bg-white border-top">
-        <div className="container py-3 text-center">
-          <p className="mb-1 text-muted">
-            All the trials are conducted according to FDA and ICH-GCP guidelines.
-          </p>
-          <small className="text-muted">
-            © {new Date().getFullYear()} Clin Track. All rights reserved.
-          </small>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

@@ -1,0 +1,49 @@
+/* Footer Component */
+.clintrack-footer {
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  padding: 1rem 1rem 0.75rem;
+  margin-top: auto;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+}
+
+.clintrack-footer__content {
+  max-width: 68rem;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+
+.clintrack-footer__text {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.clintrack-footer__copyright {
+  max-width: 68rem;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 0.5rem;
+}
+
+.clintrack-footer__copyright small {
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .clintrack-footer {
+    padding: 0.75rem 1rem 0.5rem;
+  }
+
+  .clintrack-footer__text {
+    font-size: 0.75rem;
+  }
+
+  .clintrack-footer__copyright small {
+    font-size: 0.7rem;
+  }
+}

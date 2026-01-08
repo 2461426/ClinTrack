@@ -1,9 +1,15 @@
 
 import { useFormik } from "formik";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ add navigate
 import "../styles/RegistrationForm.css";
 import participantService from "../services/ParticipantService";
-import Menu from "./Menu";
+import ParticipantNavbar from "./ParticipantNavbar";
+import Footer from "./Footer";
+
+// ✅ Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 /** Controlled dropdown vocabularies */
 const OBESITY_CATEGORIES = [
@@ -36,6 +42,7 @@ const DIABETES_STATUS = [
 ];
 
 const RegistrationForm = () => {
+  const navigate = useNavigate(); // ✅ init navigate
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -78,8 +85,9 @@ const RegistrationForm = () => {
 
       if (!values.mobile) {
         errors.mobile = "Mobile number is required";
-      } else if (!/^\d{10}$/.test(values.mobile)) {
-        errors.mobile = "Mobile number must be exactly 10 digits";
+      } else if (!/^[6-9]{1}\d{9}$/.test(values.mobile)) {
+        errors.mobile =
+          "Mobile number must be exactly 10 digits and should be starts with 6-9 numbers only ";
       }
 
       if (!values.dateOfBirth) {
@@ -128,35 +136,42 @@ const RegistrationForm = () => {
       return errors;
     },
 
-   
-onSubmit: (values, { resetForm }) => {
-  const normalizedEmail = (values.email || '').trim().toLowerCase();
+    onSubmit: (values, { resetForm }) => {
+      const normalizedEmail = (values.email || "").trim().toLowerCase();
 
-  // 1) Check if email already exists
-  participantService.getParticipantByEmail(normalizedEmail)
-    .then(existing => {
-      if (existing && existing.length > 0) {
-        alert("Email is already registered. Please use a different email or login.");
-        return; // Stop further execution
-      }
+      // 1) Check if email already exists
+      participantService
+        .getParticipantByEmail(normalizedEmail)
+        .then((existing) => {
+          if (existing && existing.length > 0) {
+            toast.info("Email is already registered. Please use a different email or login.", {
+              icon: "ℹ️",
+            });
+            return; // Stop further execution
+          }
 
-      // 2) Proceed with registration
-      participantService.postParticipant(values)
-        .then(() => {
-          alert("Registration successful!");
-          resetForm();
+          // 2) Proceed with registration
+          participantService
+            .postParticipant(values)
+            .then(() => {
+              toast.success("Registration successful!", { icon: "✅" });
+              resetForm();
+
+              // ✅ Redirect to login after a short delay (1.5s)
+              setTimeout(() => {
+                navigate("/login", { replace: true });
+              }, 1500);
+            })
+            .catch((error) => {
+              console.error("Error during registration:", error);
+              toast.error("Registration failed. Please try again.", { icon: "❌" });
+            });
         })
-        .catch(error => {
-          console.error("Error during registration:", error);
-          alert("Registration failed. Please try again.");
+        .catch((error) => {
+          console.error("Error checking email:", error);
+          toast.error("Could not verify email. Please try again.", { icon: "⚠️" });
         });
-    })
-    .catch(error => {
-      console.error("Error checking email:", error);
-      alert("Could not verify email. Please try again.");
-    });
-},
-
+    },
   });
 
   // Helper to set boolean from radios (yes/no)
@@ -166,29 +181,32 @@ onSubmit: (values, { resetForm }) => {
 
   return (
     <>
-      {/* === ClinTrack Navbar (same as ClinTrackPage) === */}
       <div className="clintrack-page">
-        {/* <header className="clintrack-page__header">
-          <nav className="navbar clintrack-page__navbar">
-            <div className="container d-flex align-items-center justify-content-center">
-              <h1
-                className="clintrack-page__title text-center m-0"
-                aria-label="Clinical Trial Management and Compliance Management System"
-              >
-                Clinical Trial Management and Compliance Management System
-              </h1>
-            </div>
-          </nav>
-        </header> */}
-        <Menu/>
-        <section className="registration">
-          {/* IMPORTANT: Let Formik control submit with its validation */}
-          <form className="registrationForm" onSubmit={formik.handleSubmit} noValidate>
-            <h2>Clinical Trial Registration Form</h2>
+        <ParticipantNavbar />
 
-            {/* TWO-PANE layout — aligned equally */}
+        {/* Toast container */}
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+
+        <section className="registration">
+          <form className="registrationForm" onSubmit={formik.handleSubmit} noValidate>
+            <div className="registration-header">
+              <h1 className="registration-header__subtitle">Register</h1>
+              <h1 className="registration-header__title">To Participate</h1>
+            </div>
+
             <div className="formBody">
-              {/* LEFT PANE — Details + Passwords */}
+              {/* LEFT PANE */}
               <div className="pane leftPane">
                 <div className="formRow">
                   <label htmlFor="firstName">First Name</label>
@@ -304,7 +322,9 @@ onSubmit: (values, { resetForm }) => {
                       aria-label={showPassword ? "Hide password" : "Show password"}
                       role="button"
                       tabIndex={0}
-                      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setShowPassword(!showPassword)}
+                      onKeyDown={(e) =>
+                        (e.key === "Enter" || e.key === " ") && setShowPassword(!showPassword)
+                      }
                     >
                       👁
                     </span>
@@ -343,7 +363,7 @@ onSubmit: (values, { resetForm }) => {
                 </div>
               </div>
 
-              {/* RIGHT PANE — Medical History + Acknowledgment at end */}
+              {/* RIGHT PANE */}
               <div className="pane rightPane">
                 <div className="formRow">
                   <label htmlFor="profilePicture">Profile Picture URL (Optional)</label>
@@ -356,7 +376,9 @@ onSubmit: (values, { resetForm }) => {
                     value={formik.values.profilePicture}
                     onChange={formik.handleChange}
                   />
-                  {formik.errors.profilePicture && <span className="error">{formik.errors.profilePicture}</span>}
+                  {formik.errors.profilePicture && (
+                    <span className="error">{formik.errors.profilePicture}</span>
+                  )}
                 </div>
 
                 <div className="formRow">
@@ -439,7 +461,7 @@ onSubmit: (values, { resetForm }) => {
                         checked={formik.values.hasAsthma === true}
                         onChange={(e) => setBool("hasAsthma", e)}
                       />
-                      Yes
+                      <span>Yes</span>
                     </label>
                     <label className="radioItem">
                       <input
@@ -449,7 +471,7 @@ onSubmit: (values, { resetForm }) => {
                         checked={formik.values.hasAsthma === false}
                         onChange={(e) => setBool("hasAsthma", e)}
                       />
-                      No
+                      <span>No</span>
                     </label>
                   </div>
                   {formik.errors.hasAsthma && <span className="error">{formik.errors.hasAsthma}</span>}
@@ -467,7 +489,7 @@ onSubmit: (values, { resetForm }) => {
                         checked={formik.values.hasChronicIllnesses === true}
                         onChange={(e) => setBool("hasChronicIllnesses", e)}
                       />
-                      Yes
+                      <span>Yes</span>
                     </label>
                     <label className="radioItem">
                       <input
@@ -477,7 +499,7 @@ onSubmit: (values, { resetForm }) => {
                         checked={formik.values.hasChronicIllnesses === false}
                         onChange={(e) => setBool("hasChronicIllnesses", e)}
                       />
-                      No
+                      <span>No</span>
                     </label>
                   </div>
                   {formik.errors.hasChronicIllnesses && (
@@ -486,59 +508,51 @@ onSubmit: (values, { resetForm }) => {
                 </div>
 
                 {/* Acknowledgment checkbox */}
-                <div className="formRow acknowledgment acknowledgment-right">
-                  <input
-                    type="checkbox"
-                    name="acknowledgment"
-                    checked={formik.values.acknowledgment}
-                    onChange={formik.handleChange}
-                    id="acknowledgment"
-                  />
-                  <label htmlFor="acknowledgment">The above information is true</label>
+                <div className="formRow acknowledgment-right">
+                  <label className="acknowledgment">
+                    <input
+                      type="checkbox"
+                      name="acknowledgment"
+                      checked={formik.values.acknowledgment}
+                      onChange={formik.handleChange}
+                      id="acknowledgment"
+                    />
+                    <span>The above information is true</span>
+                  </label>
+                  {formik.errors.acknowledgment && (
+                    <span className="error">{formik.errors.acknowledgment}</span>
+                  )}
                 </div>
-                {formik.errors.acknowledgment && (
-                  <div className="error">{formik.errors.acknowledgment}</div>
-                )}
               </div>
             </div>
 
-            {/* Actions row: Back + Register */}
+            {/* Actions row: Login + Register */}
             <div className="actions-row">
               <button
                 type="button"
                 className="btn-back"
-                onClick={() => window.location.assign("/")}
-                aria-label="Go back to ClinTrack main page"
+                onClick={() => navigate("/login")}
+                aria-label="Go to login page"
               >
-                ← Back
+                Login
               </button>
 
               <button
                 type="submit"
                 className="submit"
-                disabled={
-                  !formik.values.acknowledgment ||
-                  Object.keys(formik.errors).length > 0
-                }
+                disabled={!formik.values.acknowledgment || Object.keys(formik.errors).length > 0}
               >
                 Register
               </button>
             </div>
           </form>
         </section>
-        <div className="clintrack-page__banner">
-          <div className="container py-3 text-center">
-            <p className="m-0 clintrack-page__banner-text">
-              All the trials are conducted according to FDA and ICH-GCP guidelines.
-            </p>
-          </div>
-          <div className="container-copyright">
-          <small>© {new Date().getFullYear()} Clin Track. All rights reserved.</small>
-        </div>
-        </div>
+
+        <Footer />
       </div>
     </>
   );
 };
+
 export default RegistrationForm;
 

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "../styles/LoginForm.css";
 import UtilityService from "../services/UtilityService";
 import participantService from "../services/ParticipantService";
 import { Link, useNavigate } from "react-router-dom";
-import Menu from "./Menu";
+import Lottie from 'lottie-react';
+import pharmaLoginAnimation from '../assets/animations/pharmaLoginAnimation.json';
+import ParticipantNavbar from "./ParticipantNavbar";
+import Footer from "./Footer";
 
 const LoginForm = () => {
   // Restore remembered values
@@ -15,6 +18,7 @@ const LoginForm = () => {
   const rememberedRemember = localStorage.getItem("remember_me") === "true";
 
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const validate = (values) => {
     const errors = {};
@@ -23,11 +27,12 @@ const LoginForm = () => {
     if (!emailRegex.test(values.email)) {
       errors.email = "Please enter a valid email.";
     }
-    if (!values.password || values.password.length < 8) {
-      errors.password = "Password must be at least 8 characters.";
+    if (!values.password || values.password.length < 6) {
+      errors.password = "Password must be at least 6 characters.";
     }
     return errors;
   };
+  
   const handleSubmit = (values, { setSubmitting, setStatus }) => {
     setSubmitting(true);
     setStatus(undefined);
@@ -38,7 +43,7 @@ const LoginForm = () => {
         if (!matchedUser) {
           setSubmitting(false);
           setStatus(
-            "Invalid email or password. Please use the credentials you registered with."
+            "Invalid email or password."
           );
           return;
         }
@@ -72,133 +77,99 @@ const LoginForm = () => {
       });
   };
  
-return (
-  <div className="clintrack-page">
-    {/* <header className="clintrack-page__header">
-      <nav className="navbar clintrack-page__navbar">
-        <div className="container d-flex align-items-center justify-content-center">
-          <h1
-            className="clintrack-page__title text-center m-0"
-            aria-label="Clinical Trial Management and Compliance Management System"
-          >
-            Clinical Trial Management and Compliance Management System
-          </h1>
-        </div>
-      </nav>
-    </header> */}
-   <Menu/>
-    <section className="login">
-      <Formik
-        initialValues={{
-          role: rememberedRole,
-          email: rememberedEmail,
-          password: rememberedPassword,
-          rememberMe: rememberedRemember,
-        }}
-        validate={validate}
-        onSubmit={handleSubmit}
-      >
-        {({ values, setFieldValue, isSubmitting, status }) => (
-    
-          <Form className="login-form" noValidate>
-            <h2>Login</h2>
-
-            {/* Role segmented toggle */}
-            {/* <div className="segmented" role="tablist" aria-label="Select login role">
-              <button
-                type="button"
-                className={`segment ${values.role === "user" ? "active" : ""}`}
-                onClick={() => setFieldValue("role", "user")}
-                aria-pressed={values.role === "user"}
-                aria-selected={values.role === "user"}
-                role="tab"
-              >
-                User
-              </button>
-              <button
-                type="button"
-                className={`segment ${values.role === "admin" ? "active" : ""}`}
-                onClick={() => setFieldValue("role", "admin")}
-                aria-pressed={values.role === "admin"}
-                aria-selected={values.role === "admin"}
-                role="tab"
-              >
-                Admin
-              </button>
-            </div> */}
-
-            {/* Email */}
-            <div className="form-control">
-              <label htmlFor="email">Email</label>
-              <Field
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                autoComplete="new-email"
-              />
-              <ErrorMessage name="email" component="span" className="error" id="email-error" />
-            </div>
-
-            {/* Password */}
-            <div className="form-control">
-              <label htmlFor="password">Password</label>
-              <Field
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Enter your password"
-                autoComplete="new-password"
-              />
-              <ErrorMessage name="password" component="span" className="error" id="password-error" />
-            </div>
-
-            {/* Actions */}
-            <div className="form-actions">
-              {/* <label className="remember">
-                <Field type="checkbox" name="rememberMe" />
-                <span>Remember me</span>
-              </label> */}
-
-              <a
-                href="#"
-                onClick={(e) => e.preventDefault()}
-              >
-                Forgot password?
-              </a>
-            </div>
-
-            {/* Submit */}
-            <button className="primary" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Logging in..." : "Login"}
-            </button>
-
-            {/* Global login error */}
-            {status && <div className="error" style={{ marginTop: 10 }}>{status}</div>}
-
-            {/* Footer */}
-            <div className="footer-links">
-              <span className="muted">Don’t have an account?</span>
-              <Link className="link" to="/register">
-                Register here
-              </Link>
-            </div>
-          </Form>
-        )}
-      </Formik>
-    </section>
-    <div className="clintrack-page__banner">
-          <div className="container py-3 text-center">
-            <p className="m-0 clintrack-page__banner-text">
-              All the trials are conducted according to FDA and ICH-GCP guidelines.
-            </p>
+  return (
+    <div className="clintrack-page">
+      <ParticipantNavbar />
+      <div className="login-page">
+        <div className="login-container">
+          <div className="login-header">
+            <h1 className="login-header__subtitle">Login as</h1>
+            <h1 className="login-header__title">Pharma or Participant...</h1>
           </div>
-          <div className="container-copyright">
-          <small>© {new Date().getFullYear()} Clin Track. All rights reserved.</small>
-        </div>
-        </div>
-  </div>
-);
 
+          <div className="login-card">
+            <Formik
+              initialValues={{
+                role: rememberedRole,
+                email: rememberedEmail,
+                password: rememberedPassword,
+                rememberMe: rememberedRemember,
+              }}
+              validate={validate}
+              onSubmit={handleSubmit}
+            >
+              {({ values, setFieldValue, isSubmitting, status }) => (
+                <Form className="login-card__content" noValidate>
+                  <div className="login-animation">
+                    <Lottie animationData={pharmaLoginAnimation} className="login-animation__lottie" />
+                  </div>
+                  
+                  <div className="login-divider"></div>
+
+                  <div className="login-form">
+                    <div className="login-form__fields">
+                      {/* Email */}
+                      <div className="form-field">
+                        <label htmlFor="email" className="form-field__label">Email ID</label>
+                        <Field
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder="Enter Email"
+                          className="form-field__input"
+                          autoComplete="new-email"
+                        />
+                        <ErrorMessage name="email" component="span" className="form-field__error" id="email-error" />
+                      </div>
+
+                      {/* Password with Show/Hide toggle */}
+                      <div className="form-field">
+                        <label htmlFor="password" className="form-field__label">Password</label>
+                        <div className="form-field__password-wrapper">
+                          <Field
+                            id="password"
+                            name="password"
+                            type={showPassword ? 'text' : 'password'}
+                            placeholder="Enter Password"
+                            className="form-field__input form-field__input--password"
+                            autoComplete="new-password"
+                          />
+                          <button
+                            type="button"
+                            className="form-field__toggle"
+                            onClick={() => setShowPassword(prev => !prev)}
+                            aria-label={showPassword ? 'Hide password' : 'Show password'}
+                            aria-pressed={showPassword}
+                          >
+                            {showPassword ? 'Hide' : 'Show'}
+                          </button>
+                        </div>
+                        <ErrorMessage name="password" component="span" className="form-field__error" id="password-error" />
+                      </div>
+
+                      {/* Global login error */}
+                      {status && <div className="form-field__error form-field__error--auth">{status}</div>}
+
+                      {/* Submit */}
+                      <button className="login-form__submit" type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? "Logging in..." : "Login"}
+                      </button>
+                    </div>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
+
+          <button onClick={() => navigate('/register')} className="login-goback">
+            Register
+          </button>
+        </div>
+      </div>
+      
+      <Footer />
+    </div>
+  );
 }
+
 export default LoginForm;

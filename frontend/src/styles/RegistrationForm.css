@@ -1,79 +1,106 @@
 
-/* ===== Registration (scoped to .registration) ===== */
+/* ===== Registration Form - Modern Design ===== */
 
-/* Component container: keep layout isolated from global body/html */
+/* Component container */
 .registration {
-  padding: 24px 0;
-  background: transparent; /* page-wide background can live in index.css */
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
-  color: #111827; /* gray-900 */
-  line-height: 1.4;
+  color: #1f2937;
 }
 
 /* Outer container */
 .registration .registrationForm {
-  max-width: 1000px;
-  margin: 24px auto;
-  padding: 0 12px;
+  width: 100%;
+  max-width: 68rem;
+  margin: 0 auto;
 }
 
-.registration .registrationForm h2 {
-  margin: 0 0 16px 0;
-  font-weight: 600;
-  font-size: 22px;
+/* Header Section */
+.registration .registration-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.registration .registration-header__subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #1f2937;
+  margin: 0;
+}
+
+.registration .registration-header__title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #5041FF;
+  margin: 0;
 }
 
 /* ========== Two-Pane Layout (Equal Alignment) ========== */
 .registration .formBody {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* equal columns */
-  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
   align-items: start;
-}
-.submitRow .submit{
-  margin-top:50px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 25px;
+  padding: 2.5rem 2rem;
+  overflow: hidden;
 }
 
 .registration .pane {
-  background: #ffffff;
-  border: 1px solid #e5e7eb; /* gray-200 */
-  border-radius: 10px;
-  padding: 28px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-  min-height: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 /* Consistent row spacing and label formatting */
 .registration .formRow {
-  margin-bottom: 14px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 .registration .formRow:last-child {
   margin-bottom: 0;
 }
 
-.registration .formRow label {
+.registration .formRow > label:first-child {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 0.25rem;
   font-weight: 600;
-  font-size: 14px;
-  color: #374151; /* gray-700 */
-  cursor: pointer;   /* prevent I-beam cursor on labels */
-  user-select: none; /* prevent selecting label text */
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: default;
+  user-select: none;
 }
 
 /* ========== Read-only description (Medical History) ========== */
 .registration .readonlyText {
-  padding: 10px 12px;
-  background-color: #f9fafb;     /* light gray */
-  border: 1px solid #d1d5db;     /* gray border */
-  border-radius: 8px;
-  color: #6b7280;                /* muted text color */
-  font-size: 14px;
-  margin-top: 6px;
-
-  /* Prevent text selection and I-beam cursor */
+  padding: 0.75rem 1rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 0;
   user-select: none;
-  cursor: pointer;
+  cursor: default;
 }
 
 /* ========== Prevent I-beam outside inputs/selects/textareas ========== */
@@ -104,120 +131,244 @@
 /* ========== Inputs & Selects — equal widths ========== */
 .registration .formInput {
   width: 100%;
-  max-width: 480px;          /* cap so both sides look similar */
-  padding: 10px 5px;
-  border: 1px solid #d1d5db; /* gray-300 */
-  border-radius: 8px;
-  background-color: #fafafa;
+  height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background-color: white;
   outline: none;
-  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-  font-size: 14px;
+  transition: all 0.2s;
+  font-size: 1rem;
+  color: #1f2937;
 }
 
 .registration .formInput:focus {
-  border-color: #2563eb;     /* blue-600 */
+  border-color: #5041FF;
   background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+  box-shadow: 0 0 0 3px rgba(80, 65, 255, 0.1);
+}
+
+.registration .formInput::placeholder {
+  color: #9ca3af;
 }
 
 /* ========== Password Field (keep eye icon) ========== */
 .registration .passwordField {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  max-width: 480px; /* align with inputs */
+  position: relative;
+  width: 100%;
 }
 
 .registration .passwordField .formInput {
-  flex: 1;
+  width: 100%;
+  padding-right: 3rem;
 }
 
 .registration .eyeIcon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
   user-select: none;
-  font-size: 18px;
-  line-height: 1;
+  font-size: 1.25rem;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.registration .eyeIcon:hover {
+  color: #374151;
 }
 
 /* ========== Radio Group ========== */
 .registration .radioGroup {
   display: flex;
-  gap: 20px;
+  gap: 1.5rem;
   flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0.25rem;
 }
 
 .registration .radioItem {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #374151;
+  cursor: pointer;
+  margin: 0;
+}
+
+.registration .radioItem input[type="radio"] {
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.registration .radioItem span {
+  line-height: 1rem;
+  user-select: none;
 }
 
 /* ========== Acknowledgment (Right end) ========== */
 .registration .acknowledgment {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #374151;
+  cursor: pointer;
+  margin: 0;
+}
+
+.registration .acknowledgment input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  margin: 0;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.registration .acknowledgment span {
+  line-height: 1.5;
+  padding-left: 0.25rem;
+  user-select: none;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .registration .acknowledgment-right {
-  margin-top: 10px; /* ensure it's visually at the end of right pane */
+  margin-top: 1rem;
 }
 
 /* ========== Error Text ========== */
 .registration .error {
-  display: inline-block;
-  color: #b91c1c; /* red-700 */
-  font-size: 13px;
-  margin-top: 4px;
-
-  /* prevent I-beam on errors as well */
+  display: block;
+  color: #ef4444;
+  font-size: 0.75rem;
+  font-weight: 400;
+  margin-top: 0.25rem;
   user-select: none;
   cursor: default;
 }
 
-/* ========== Centered Submit Button ========== */
-.registration .submitRow {
+/* ========== Actions Row ========== */
+.registration .actions-row {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 18px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  width: 100%;
 }
 
+/* Back button styling */
+.registration .btn-back {
+  border: 1px solid #d1d5db;
+  font-weight: 400;
+  color: #6b7280;
+  padding: 0.5rem 1.5rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registration .btn-back:hover {
+  background-color: #5041FF;
+  color: white;
+  border-color: #5041FF;
+  transform: translateY(-1px);
+}
+
+.registration .btn-back:active {
+  transform: translateY(0);
+}
+
+/* Submit button */
 .registration .submit {
-  padding: 10px 18px;
+  padding: 0.5rem 2rem;
+  height: 2.75rem;
   border: none;
-  border-radius: 8px;
-  background: #2563eb; /* blue-600 */
+  border-radius: 9999px;
+  background: #5041FF;
   color: #ffffff;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-  transition: background-color 0.2s ease, transform 0.06s ease;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .registration .submit:hover {
-  background: #1e40af; /* blue-800 */
+  background: #4032cc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(80, 65, 255, 0.3);
 }
 
 .registration .submit:active {
-  transform: translateY(1px);
+  transform: translateY(0);
 }
 
 .registration .submit:disabled {
-  background: #93c5fd; /* blue-300 */
+  background: #9ca3af;
   cursor: not-allowed;
+  transform: none;
 }
 
 /* ========== Responsive (Mobile) ========== */
 @media (max-width: 768px) {
-  .registration .formBody {
-    grid-template-columns: 1fr; /* stack panes equally */
-    gap: 16px;
+  .registration {
+    padding: 1rem 0.5rem;
   }
-   .registration .formInput,
-  .registration .passwordField {
+
+  .registration .registrationForm {
     max-width: 100%;
+  }
+
+  .registration .registration-header__subtitle {
+    font-size: 1.25rem;
+  }
+
+  .registration .registration-header__title {
+    font-size: 1.5rem;
+  }
+
+  .registration .formBody {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .registration .actions-row {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+
+  .registration .submit,
+  .registration .btn-back {
+    width: 100%;
+  }
+}
+
+/* Responsive Design - Tablet and Up (md: 768px) */
+@media (min-width: 768px) {
+  .registration .registration-header__subtitle {
+    font-size: 1.875rem;
+  }
+
+  .registration .registration-header__title {
+    font-size: 2.25rem;
   }
 }
 
@@ -328,35 +479,6 @@
   font-family:'Lucida Sans','Lucida Sans Regular','Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
-/* Two-ended actions row */
-.registration .actions-row {
-  display: flex;
-  justify-content: space-between; /* back on left, register on right */
-  align-items: center;
-  margin-top: 18px;
-}
-
-/* Back button styling */
-.btn-back {
-  background: #f3f4f6;        /* light gray */
-  color: #111827;             /* gray-900 */
-  border: 1px solid #e5e7eb;  /* gray-200 */
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.06s ease, box-shadow 0.2s ease;
-}
-
-.btn-back:hover {
-  background: #e5e7eb;        /* gray-300 */
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-}
-
-
-
 
 @media (min-width: 576px) { .clintrack-page__title { font-size: 1.6rem; } }
 @media (min-width: 768px) { .clintrack-page__title { font-size: 1.8rem; } }
