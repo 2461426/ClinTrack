@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import './ListedTrails.css'
-import settings from '../../assets/icons/settingsIcon.png'
-import phaseIcon from '../../assets/icons/phaseIcon.png'
-import createIcon from '../../assets/icons/add.png'
-import CreateTrailModal from '../CreateTrailModal/CreateTrailModal'
+import '../styles/ListedTrails.css'
+import settings from '../assets/icons/settingsIcon.png'
+import phaseIcon from '../assets/icons/phaseIcon.png'
+import createIcon from '../assets/icons/add.png'
+import CreateTrailModal from './CreateTrailModal'
 import Lottie from 'lottie-react'
-import LoaderAnimation from '../../assets/animations/Loader.json'
-import utilityService from '../../services/UtilityService'
+import LoaderAnimation from '../assets/animations/Loader.json'
+import utilityService from '../services/UtilityService'
 
 function ListedTrails({ onLogout }) {
   const navigate = useNavigate();

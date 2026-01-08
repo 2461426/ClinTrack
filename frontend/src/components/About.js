@@ -1,9 +1,8 @@
  
 import "../styles/About.css";
 import { Link } from "react-router-dom";
-import Menu from "./Menu";
-import ParticipantNavbar from "./ParticipantNavbar/ParticipantNavbar";
-import Footer from "./Footer/Footer";
+import ParticipantNavbar from "./ParticipantNavbar";
+import Footer from "./Footer";
  
 const UserAbout = () => (
   <>

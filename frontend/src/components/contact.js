@@ -1,9 +1,8 @@
  
 // src/components/user/UserContact.jsx
 import React, { useState } from "react";
-import Menu from "./Menu";
-import ParticipantNavbar from "./ParticipantNavbar/ParticipantNavbar";
-import Footer from "./Footer/Footer";
+import ParticipantNavbar from "./ParticipantNavbar";
+import Footer from "./Footer";
  
 const UserContact = () => {
   const [form, setForm] = useState({ subject: "", message: "" });

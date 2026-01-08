@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ add navigate
 import "../styles/RegistrationForm.css";
 import participantService from "../services/ParticipantService";
-import ParticipantNavbar from "./ParticipantNavbar/ParticipantNavbar";
-import Footer from "./Footer/Footer";
+import ParticipantNavbar from "./ParticipantNavbar";
+import Footer from "./Footer";
 
 // ✅ Toastify
 import { ToastContainer, toast } from "react-toastify";

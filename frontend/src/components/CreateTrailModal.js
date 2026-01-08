@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
-import './CreateTrailModal.css';
+import '../styles/CreateTrailModal.css';
 import Lottie from 'lottie-react';
-import editText from '../../assets/icons/editText.png';
-import closeIcon from '../../assets/icons/close.png';
-import thumbsUpAnimation from '../../assets/animations/ThumbsUp.json';
+import editText from '../assets/icons/editText.png';
+import closeIcon from '../assets/icons/close.png';
+import thumbsUpAnimation from '../assets/animations/ThumbsUp.json';
 
 function CreateTrailModal({ isOpen, onClose, pharmaId }) {
   const [currentStep, setCurrentStep] = useState(1);

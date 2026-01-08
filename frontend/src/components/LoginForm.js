@@ -4,11 +4,10 @@ import "../styles/LoginForm.css";
 import UtilityService from "../services/UtilityService";
 import participantService from "../services/ParticipantService";
 import { Link, useNavigate } from "react-router-dom";
-import Menu from "./Menu";
 import Lottie from 'lottie-react';
 import pharmaLoginAnimation from '../assets/animations/pharmaLoginAnimation.json';
-import ParticipantNavbar from "./ParticipantNavbar/ParticipantNavbar";
-import Footer from "./Footer/Footer";
+import ParticipantNavbar from "./ParticipantNavbar";
+import Footer from "./Footer";
 
 const LoginForm = () => {
   // Restore remembered values

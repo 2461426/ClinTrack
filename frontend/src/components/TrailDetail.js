@@ -3,15 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./TrailDetail.css";
+import "../styles/TrailDetail.css";
 
 // Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import ParticipantNavbar from "../ParticipantNavbar/ParticipantNavbar";
-import utilityService from "../../services/UtilityService";
-import Footer from "../Footer/Footer";
+import ParticipantNavbar from "./ParticipantNavbar";
+import utilityService from "../services/UtilityService";
+import Footer from "./Footer";
 
 function TrailDetail() {
   const { trailId } = useParams();

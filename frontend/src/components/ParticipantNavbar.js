@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import './ParticipantNavbar.css';
-import user from '../../assets/icons/user.png';
-import UtilityService from '../../services/UtilityService';
+import '../styles/ParticipantNavbar.css';
+import user from '../assets/icons/user.png';
+import UtilityService from '../services/UtilityService';
 
 function ParticipantNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

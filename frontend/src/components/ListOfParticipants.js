@@ -2,9 +2,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import './ListOfParticipants.css';
-import TrailNavBar from '../TrailNavBar/TrailNavBar';
-import participantService from '../../services/ParticipantService';
+import '../styles/ListOfParticipants.css';
+import TrailNavBar from './TrailNavBar';
+import participantService from '../services/ParticipantService';
 
 /** Enum → Label maps for friendly display */
 const OBESITY_MAP = {

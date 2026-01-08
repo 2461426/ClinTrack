@@ -3,18 +3,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./UserTrails.css";
-import phaseIcon from '../../assets/icons/phaseIcon.png';
+import "../styles/UserTrails.css";
+import phaseIcon from '../assets/icons/phaseIcon.png';
 import Lottie from 'lottie-react';
-import LoaderAnimation from '../../assets/animations/Loader.json';
-import Menu from "../Menu";
-import PhaseDetailsOverlay from "../PhaseDetailsOverlay/PhaseDetailsOverlay";
-import ParticipantNavbar from "../ParticipantNavbar/ParticipantNavbar";
+import LoaderAnimation from '../assets/animations/Loader.json';
+import PhaseDetailsOverlay from "./PhaseDetailsOverlay";
+import ParticipantNavbar from "./ParticipantNavbar";
 
 // Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "../Footer/Footer";
+import Footer from "./Footer";
 
 function Usertrails() {
   const navigate = useNavigate();

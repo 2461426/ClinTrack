@@ -3,17 +3,19 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
-import './GenerateReport.css'
-import TrailNavBar from '../TrailNavBar/TrailNavBar'
+import '../styles/GenerateReport.css'
+import TrailNavBar from './TrailNavBar'
 
 function GenerateReport() {
   const { trailId } = useParams();
   const navigate = useNavigate();
   const [trail, setTrail] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [participants, setParticipants] = useState([]);
 
   useEffect(() => {
     if (trailId) {
+      // Fetch trail details first
       axios.get(`http://localhost:5000/trailDetails?trailId=${trailId}`)
         .then(response => {
           if (response.data && response.data.length > 0) {
@@ -22,6 +24,44 @@ function GenerateReport() {
         })
         .catch(error => {
           console.error('Error fetching trail:', error);
+        });
+
+      // Fetch enrollment requests and participant details
+      axios.get(`http://localhost:5000/enrollmentRequests?trailId=${trailId}`)
+        .then(enrollmentResponse => {
+          if (enrollmentResponse && enrollmentResponse.data) {
+            // Filter for approved enrollments only
+            const approvedEnrollments = enrollmentResponse.data.filter(req => req.status === 'approved');
+            
+            console.log('Approved enrollments:', approvedEnrollments);
+            
+            if (approvedEnrollments.length === 0) {
+              setParticipants([]);
+              return;
+            }
+            
+            // Fetch full participant details for all approved participants
+            const participantPromises = approvedEnrollments.map(enrollment => 
+              axios.get(`http://localhost:5000/participants/${enrollment.participantId}`)
+                .then(res => {
+                  console.log(`Fetched participant ${enrollment.participantId}:`, res.data);
+                  return res.data;
+                })
+                .catch(err => {
+                  console.error(`Error fetching participant ${enrollment.participantId}:`, err);
+                  return null;
+                })
+            );
+            
+            Promise.all(participantPromises).then(participantsData => {
+              const validParticipants = participantsData.filter(p => p !== null);
+              console.log('All valid participants:', validParticipants);
+              setParticipants(validParticipants);
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching enrollments:', error);
         });
     }
   }, [trailId]);
@@ -51,6 +91,9 @@ function GenerateReport() {
       return;
     }
 
+    console.log('Generating PDF with participants:', participants);
+    console.log('Participants count:', participants.length);
+
     setLoading(true);
 
     // Use setTimeout to ensure state updates
@@ -62,7 +105,7 @@ function GenerateReport() {
         let yPosition = 20;
 
         // Header
-        doc.setFillColor(41, 128, 185);
+        doc.setFillColor(80, 65, 255);
         doc.rect(0, 0, pageWidth, 30, 'F');
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(22);
@@ -91,7 +134,7 @@ function GenerateReport() {
         // Basic Information Section
         doc.setFontSize(14);
         doc.setFont('helvetica', 'bold');
-        doc.setTextColor(41, 128, 185);
+        doc.setTextColor(80, 65, 255);
         doc.text('Trial Information', 14, yPosition);
         doc.setTextColor(0, 0, 0);
         yPosition += 8;
@@ -110,7 +153,7 @@ function GenerateReport() {
           head: [],
           body: basicInfo,
           theme: 'striped',
-          headStyles: { fillColor: [41, 128, 185] },
+          headStyles: { fillColor: [80, 65, 255] },
           margin: { left: 14, right: 14 },
           styles: { fontSize: 10 },
           columnStyles: {
@@ -129,7 +172,7 @@ function GenerateReport() {
 
         doc.setFontSize(14);
         doc.setFont('helvetica', 'bold');
-        doc.setTextColor(41, 128, 185);
+        doc.setTextColor(80, 65, 255);
         doc.text('Description', 14, yPosition);
         doc.setTextColor(0, 0, 0);
         yPosition += 8;
@@ -149,7 +192,7 @@ function GenerateReport() {
 
         doc.setFontSize(14);
         doc.setFont('helvetica', 'bold');
-        doc.setTextColor(41, 128, 185);
+        doc.setTextColor(80, 65, 255);
         doc.text('Eligibility Criteria', 14, yPosition);
         doc.setTextColor(0, 0, 0);
         yPosition += 8;
@@ -167,7 +210,7 @@ function GenerateReport() {
           head: [],
           body: eligibilityInfo,
           theme: 'striped',
-          headStyles: { fillColor: [41, 128, 185] },
+          headStyles: { fillColor: [80, 65, 255] },
           margin: { left: 14, right: 14 },
           styles: { fontSize: 10 },
           columnStyles: {
@@ -186,7 +229,7 @@ function GenerateReport() {
 
         doc.setFontSize(14);
         doc.setFont('helvetica', 'bold');
-        doc.setTextColor(41, 128, 185);
+        doc.setTextColor(80, 65, 255);
         doc.text('Enrollment & Events', 14, yPosition);
         doc.setTextColor(0, 0, 0);
         yPosition += 8;
@@ -206,7 +249,7 @@ function GenerateReport() {
           head: [],
           body: enrollmentInfo,
           theme: 'striped',
-          headStyles: { fillColor: [41, 128, 185] },
+          headStyles: { fillColor: [80, 65, 255] },
           margin: { left: 14, right: 14 },
           styles: { fontSize: 10 },
           columnStyles: {
@@ -225,7 +268,7 @@ function GenerateReport() {
 
         doc.setFontSize(14);
         doc.setFont('helvetica', 'bold');
-        doc.setTextColor(41, 128, 185);
+        doc.setTextColor(80, 65, 255);
         doc.text('Impact Analysis', 14, yPosition);
         doc.setTextColor(0, 0, 0);
         yPosition += 8;
@@ -251,7 +294,7 @@ function GenerateReport() {
           head: [],
           body: impactData,
           theme: 'striped',
-          headStyles: { fillColor: [41, 128, 185] },
+          headStyles: { fillColor: [80, 65, 255] },
           margin: { left: 14, right: 14 },
           styles: { fontSize: 10 },
           columnStyles: {
@@ -271,7 +314,7 @@ function GenerateReport() {
 
           doc.setFontSize(14);
           doc.setFont('helvetica', 'bold');
-          doc.setTextColor(41, 128, 185);
+          doc.setTextColor(80, 65, 255);
           doc.text('Phase Timeline', 14, yPosition);
           doc.setTextColor(0, 0, 0);
           yPosition += 8;
@@ -286,7 +329,7 @@ function GenerateReport() {
             head: [],
             body: phaseData,
             theme: 'striped',
-            headStyles: { fillColor: [41, 128, 185] },
+            headStyles: { fillColor: [80, 65, 255] },
             margin: { left: 14, right: 14 },
             styles: { fontSize: 10 },
             columnStyles: {
@@ -299,7 +342,10 @@ function GenerateReport() {
         }
 
         // Participants List
-        if (trail.participantsId && trail.participantsId.length > 0) {
+        if (participants && participants.length > 0) {
+          console.log('Adding participants to PDF. Count:', participants.length);
+          console.log('Sample participant data:', participants[0]);
+          
           if (yPosition > pageHeight - 60) {
             doc.addPage();
             yPosition = 20;
@@ -307,7 +353,105 @@ function GenerateReport() {
 
           doc.setFontSize(14);
           doc.setFont('helvetica', 'bold');
-          doc.setTextColor(41, 128, 185);
+          doc.setTextColor(80, 65, 255);
+          doc.text('Enrolled Participants Details', 14, yPosition);
+          doc.setTextColor(0, 0, 0);
+          yPosition += 8;
+
+          const participantData = participants.map((participant, index) => {
+            console.log(`Mapping participant ${index + 1}:`, participant);
+            
+            const firstName = participant.firstName || participant.name || '';
+            const lastName = participant.lastName || '';
+            const fullName = `${firstName} ${lastName}`.trim() || 'N/A';
+            const email = participant.email || 'N/A';
+            const mobile = participant.mobile || participant.phone || 'N/A';
+            const gender = participant.gender || 'N/A';
+            const dob = participant.dateOfBirth ? formatDate(participant.dateOfBirth) : 'N/A';
+            
+            return [
+              String(index + 1),
+              fullName,
+              email,
+              mobile,
+              gender,
+              dob
+            ];
+          });
+
+          console.log('Participant table data:', participantData);
+
+          autoTable(doc, {
+            startY: yPosition,
+            head: [['#', 'Name', 'Email', 'Mobile', 'Gender', 'Date of Birth']],
+            body: participantData,
+            theme: 'striped',
+            headStyles: { fillColor: [80, 65, 255], fontSize: 9 },
+            margin: { left: 14, right: 14 },
+            styles: { fontSize: 8, cellPadding: 2 },
+            columnStyles: {
+              0: { cellWidth: 10 },
+              1: { cellWidth: 35 },
+              2: { cellWidth: 45 },
+              3: { cellWidth: 30 },
+              4: { cellWidth: 20 },
+              5: { cellWidth: 30 }
+            }
+          });
+
+          yPosition = doc.lastAutoTable.finalY + 15;
+
+          // Participants Medical Information
+          if (yPosition > pageHeight - 60) {
+            doc.addPage();
+            yPosition = 20;
+          }
+
+          doc.setFontSize(14);
+          doc.setFont('helvetica', 'bold');
+          doc.setTextColor(80, 65, 255);
+          doc.text('Participants Medical Information', 14, yPosition);
+          doc.setTextColor(0, 0, 0);
+          yPosition += 8;
+
+          const medicalData = participants.map((participant, index) => [
+            String(index + 1),
+            `${participant.firstName || ''} ${participant.lastName || ''}`.trim(),
+            String(participant.obesityCategory || 'N/A'),
+            String(participant.bpCategory || 'N/A'),
+            String(participant.diabetesStatus || 'N/A'),
+            participant.hasAsthma ? 'Yes' : 'No',
+            participant.hasChronicIllnesses ? 'Yes' : 'No'
+          ]);
+
+          autoTable(doc, {
+            startY: yPosition,
+            head: [['#', 'Name', 'Obesity', 'BP', 'Diabetes', 'Asthma', 'Chronic']],
+            body: medicalData,
+            theme: 'striped',
+            headStyles: { fillColor: [80, 65, 255], fontSize: 8 },
+            margin: { left: 14, right: 14 },
+            styles: { fontSize: 7, cellPadding: 2 },
+            columnStyles: {
+              0: { cellWidth: 10 },
+              1: { cellWidth: 35 },
+              2: { cellWidth: 25 },
+              3: { cellWidth: 22 },
+              4: { cellWidth: 25 },
+              5: { cellWidth: 18 },
+              6: { cellWidth: 18 }
+            }
+          });
+        } else if (trail.participantsId && trail.participantsId.length > 0) {
+          // Fallback to old format if no participant details available
+          if (yPosition > pageHeight - 60) {
+            doc.addPage();
+            yPosition = 20;
+          }
+
+          doc.setFontSize(14);
+          doc.setFont('helvetica', 'bold');
+          doc.setTextColor(80, 65, 255);
           doc.text('Enrolled Participants', 14, yPosition);
           doc.setTextColor(0, 0, 0);
           yPosition += 8;
@@ -322,7 +466,7 @@ function GenerateReport() {
             head: [['#', 'Participant ID']],
             body: participantData,
             theme: 'striped',
-            headStyles: { fillColor: [41, 128, 185] },
+            headStyles: { fillColor: [80, 65, 255] },
             margin: { left: 14, right: 14 },
             styles: { fontSize: 10 }
           });
@@ -446,7 +590,7 @@ function GenerateReport() {
                       <svg className='report-info__icon' fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <span>Enrolled Participants List</span>
+                      <span>Participants Details & Medical Info ({participants.length} enrolled)</span>
                     </div>
                   </div>
                 </div>

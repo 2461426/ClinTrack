@@ -1,11 +1,11 @@
 import React from 'react'
-import './TrailNavBar.css'
-import DashboardIcon from '../../assets/icons/dashboardIcon.png'
-import ScheduleIcon from '../../assets/icons/scheduleIcon.png'
-import ReportIcon from '../../assets/icons/reportIcon.png'
-import BackIcon from '../../assets/icons/backIcon.png'
-import settingsIcon from '../../assets/icons/settingsIcon.png'
-import participantsIcon from '../../assets/icons/participantsIcon.png'
+import '../styles/TrailNavBar.css'
+import DashboardIcon from '../assets/icons/dashboardIcon.png'
+import ScheduleIcon from '../assets/icons/scheduleIcon.png'
+import ReportIcon from '../assets/icons/reportIcon.png'
+import BackIcon from '../assets/icons/backIcon.png'
+import settingsIcon from '../assets/icons/settingsIcon.png'
+import participantsIcon from '../assets/icons/participantsIcon.png'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 function TrailNavBar({ trailId, onNavigate, trailInfo }) {

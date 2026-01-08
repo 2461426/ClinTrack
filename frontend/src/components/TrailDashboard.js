@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import './TrailDashboard.css'
-import settings from '../../assets/icons/settingsIcon.png'
-import phaseIcon from '../../assets/icons/phaseIcon.png'
-import TrailNavBar from '../TrailNavBar/TrailNavBar';
-import BackIcon from '../../assets/icons/backIcon.png'
-import utilityService from '../../services/UtilityService'
+import '../styles/TrailDashboard.css'
+import settings from '../assets/icons/settingsIcon.png'
+import phaseIcon from '../assets/icons/phaseIcon.png'
+import TrailNavBar from './TrailNavBar';
+import BackIcon from '../assets/icons/backIcon.png'
+import utilityService from '../services/UtilityService'
 
 function TrailDashboard() {
   const { trailId } = useParams();

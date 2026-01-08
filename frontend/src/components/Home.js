@@ -1,11 +1,10 @@
 import React from 'react'
-import './Home.css'
-import docImg from '../../assets/images/docImg.png'
-import backgroundImage from '../../assets/images/background-image.png';
-import Menu from '../Menu';
-import ParticipantNavbar from '../ParticipantNavbar/ParticipantNavbar';
+import '../styles/Home.css'
+import docImg from '../assets/images/docImg.png'
+import backgroundImage from '../assets/images/background-image.png';
+import ParticipantNavbar from './ParticipantNavbar';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../Footer/Footer';
+import Footer from './Footer';
 
 function Home() {
   const navigate = useNavigate();

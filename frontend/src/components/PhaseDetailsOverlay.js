@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import './PhaseDetailsOverlay.css';
+import '../styles/PhaseDetailsOverlay.css';
 
 function PhaseDetailsOverlay({ isOpen, onClose, trail, currentPhase, onWithdraw }) {
   const [completedPhases, setCompletedPhases] = useState(0);

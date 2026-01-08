@@ -1,9 +1,9 @@
 
 // src/components/ParticipantProfile/ParticipantProfile.jsx
 import React, { useState, useEffect } from 'react';
-import './ParticipantProfile.css';
-import ParticipantNavbar from '../ParticipantNavbar/ParticipantNavbar';
-import participantService from '../../services/ParticipantService'; // <-- adjust path if needed
+import '../styles/ParticipantProfile.css';
+import ParticipantNavbar from './ParticipantNavbar';
+import participantService from '../services/ParticipantService'; // <-- adjust path if needed
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

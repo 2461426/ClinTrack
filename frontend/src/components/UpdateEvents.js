@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './UpdateEvents.css';
+import '../styles/UpdateEvents.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import TrailNavBar from '../TrailNavBar/TrailNavBar';
+import TrailNavBar from './TrailNavBar';
 
 function UpdateEvents() {
   const { trailId } = useParams();

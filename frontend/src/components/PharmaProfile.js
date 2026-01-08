@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './PharmaProfile.css';
-import utilityService from '../../services/UtilityService';
+import '../styles/PharmaProfile.css';
+import utilityService from '../services/UtilityService';
 
 function PharmaProfile() {
     const [pharmaData, setPharmaData] = useState(null);
